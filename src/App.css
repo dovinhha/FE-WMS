@@ -1,0 +1,74 @@
+.button-style {
+  /* 
+    1rem is the size of the spinner-width-sm in bootstrap 4
+    https://github.com/twbs/bootstrap/blob/master/scss/_variables.scss#L1078
+  */
+  left: calc(50% - calc(1rem / 2));
+}
+
+.span-style {
+  /* 
+    we have to offset the inner child or else 
+    the spinner width will offset the center
+    of the child text 
+  */
+  margin-right: 1rem;
+}
+
+.select-muti > div {
+  min-height: 114px;
+}
+.custom-file-input-css::-webkit-file-upload-button {
+  visibility: hidden;
+}
+.custom-file-input-css::before {
+  content: "Chọn file";
+  display: inline-block;
+  background: linear-gradient(top, #f9f9f9, #e3e3e3);
+  border: 1px solid #999;
+  border-radius: 3px;
+  padding: 5px 8px;
+  outline: none;
+  white-space: nowrap;
+  -webkit-user-select: none;
+  cursor: pointer;
+  text-shadow: 1px 1px #fff;
+  font-weight: 700;
+  font-size: 10pt;
+}
+.custom-file-input-css:hover::before {
+  border-color: black;
+}
+.custom-file-input-css:active::before {
+  background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
+}
+
+.table td {
+  white-space: initial;
+}
+
+/* .select-custom > div {
+  background-color: #eee;
+}
+
+.select-custom > div > div > div {
+  color: #11cdef;
+} */
+td {
+  vertical-align: middle !important;
+}
+
+.nplError > div {
+  border: 1px solid #fb6340;
+}
+
+.btn-none {
+  border: none;
+  background-color: transparent;
+  padding: 0;
+  margin-right: 0.5rem;
+}
+
+.border-bottom-search {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2) !important;
+}
