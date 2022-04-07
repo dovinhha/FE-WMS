@@ -2,7 +2,7 @@ import TypeActions from "../TypeActions";
 
 const initialState = {
   orderPlans: {
-    results: [],
+    items: [],
   },
   orderPlanById: {},
   isGetOrderPlans: false,
@@ -25,21 +25,21 @@ export const orderPlanReducer = (state = initialState, actions) => {
       return {
         ...state,
         isGetOrderPlans: true,
-        orderPlans: { results: [] },
+        orderPlans: { items: [] },
         errors: { ...state.errors, isGetOrderPlans: "" },
       };
     case TypeActions.GET_ORDER_PLANS_SUCCESS:
       return {
         ...state,
         isGetOrderPlans: false,
-        orderPlans: actions.data || { results: [] },
+        orderPlans: actions.data || { items: [] },
         errors: { ...state.errors, getOrderPlans: "" },
       };
     case TypeActions.GET_ORDER_PLANS_FAILED:
       return {
         ...state,
         isGetOrderPlans: false,
-        orderPlans: { results: [] },
+        orderPlans: { items: [] },
         errors: { ...state.errors, getOrderPlans: actions.error },
       };
 

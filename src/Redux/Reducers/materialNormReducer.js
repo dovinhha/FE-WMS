@@ -2,11 +2,11 @@ import TypeActions from "../TypeActions";
 
 const initialState = {
   materialNorms: {
-    results: [],
+    items: [],
   },
   materialNormById: {},
   allProductInOrder: {
-    results: [],
+    items: [],
   },
   isGetMaterialNorms: false,
   isGetMaterialNormById: false,
@@ -30,7 +30,7 @@ export const materialNormReducer = (state = initialState, actions) => {
       return {
         ...state,
         isGetMaterialNorms: true,
-        materialNorms: { results: [] },
+        materialNorms: { items: [] },
         errors: {
           ...state.errors,
           isGetMaterialNorms: "",
@@ -39,7 +39,7 @@ export const materialNormReducer = (state = initialState, actions) => {
     case TypeActions.GET_MATERIAL_NORMS_SUCCESS:
       return {
         ...state,
-        materialNorms: actions.data || { results: [] },
+        materialNorms: actions.data || { items: [] },
         isGetMaterialNorms: false,
         errors: {
           ...state.errors,
@@ -50,7 +50,7 @@ export const materialNormReducer = (state = initialState, actions) => {
       return {
         ...state,
         isGetMaterialNorms: false,
-        materialNorms: { results: [] },
+        materialNorms: { items: [] },
         errors: {
           ...state.errors,
           getMaterialNorm: actions.error,
@@ -176,7 +176,7 @@ export const materialNormReducer = (state = initialState, actions) => {
       return {
         ...state,
         isGetAllProductInOrder: true,
-        allProductInOrder: { results: [] },
+        allProductInOrder: { items: [] },
         errors: {
           ...state.errors,
           getAllProductInOrder: "",
@@ -185,7 +185,7 @@ export const materialNormReducer = (state = initialState, actions) => {
     case TypeActions.GET_ALL_PRODUCT_IN_ORDER_SUCCESS:
       return {
         ...state,
-        allProductInOrder: actions.data || { results: [] },
+        allProductInOrder: actions.data || { items: [] },
         isGetAllProductInOrder: false,
         errors: {
           ...state.errors,
@@ -196,7 +196,7 @@ export const materialNormReducer = (state = initialState, actions) => {
       return {
         ...state,
         isGetAllProductInOrder: false,
-        allProductInOrder: { results: [] },
+        allProductInOrder: { items: [] },
         errors: {
           ...state.errors,
           getAllProductInOrder: actions.error,

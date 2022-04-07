@@ -1,6 +1,6 @@
 // import axiosClient from "./axiosClient";
 
-const {axiosClient} = require("./axiosClient");
+const { axiosClient } = require("./axiosClient");
 export const GET = (url, params) => {
   return axiosClient.get(url, params);
 };
@@ -13,8 +13,12 @@ export const PATCH = (url, body) => {
   return axiosClient.patch(url, body);
 };
 
+export const PUT = (url, body) => {
+  return axiosClient.put(url, body);
+};
+
 export const DELETE = (url, params) => {
   return axiosClient.delete(url, params);
 };
 
-export default { GET, POST, PATCH, DELETE };
+export default { GET, POST, PATCH, PUT, DELETE };

@@ -176,7 +176,7 @@ const DialogFormUpdateOrder = ({
                           manager: e ? e.value : "",
                         });
                       }}
-                      options={customers.results.map((item) => ({
+                      options={customers.items.map((item) => ({
                         label: item.name,
                         value: item.id,
                       }))}
@@ -218,7 +218,7 @@ const DialogFormUpdateOrder = ({
                                   ],
                                 });
                               }}
-                              options={productTypes.results.map((item) => ({
+                              options={productTypes.items.map((item) => ({
                                 value: item.id,
                                 label: item.name,
                               }))}

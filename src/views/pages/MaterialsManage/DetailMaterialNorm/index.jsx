@@ -68,7 +68,7 @@ const FormMaterialNorm = () => {
           }),
           {
             success: (data) => {
-              setArrConfigNorm(data.results || { results: [] });
+              setArrConfigNorm(data.items || { items: [] });
             },
             failed: () => {},
           }
@@ -83,8 +83,8 @@ const FormMaterialNorm = () => {
   }, [orderId]);
 
   useEffect(() => {
-    if (!_.isEmpty(allProductInOrder.results)) {
-      setSelectProduct(allProductInOrder.results[0]._id);
+    if (!_.isEmpty(allProductInOrder.items)) {
+      setSelectProduct(allProductInOrder.items[0]._id);
     }
   }, [allProductInOrder]);
 
@@ -106,7 +106,7 @@ const FormMaterialNorm = () => {
                 <Row>
                   <Col style={{ borderRight: "1px solid gray" }} md="2">
                     <h3>Danh mục sản phẩm</h3>
-                    {allProductInOrder.results.map((item, index) => (
+                    {allProductInOrder.items.map((item, index) => (
                       <h5
                         key={index}
                         style={{
@@ -224,7 +224,7 @@ const RowTable = ({ item, allProductInOrder, selectProduct }) => {
   }, [item]);
 
   useEffect(() => {
-    allProductInOrder.results.every((val) => {
+    allProductInOrder.items.every((val) => {
       if (val._id === selectProduct) {
         setTotalQuota(val.totalQuota);
         return false;

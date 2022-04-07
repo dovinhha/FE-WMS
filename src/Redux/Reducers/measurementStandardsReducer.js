@@ -2,7 +2,7 @@ import TypeActions from "../TypeActions";
 
 const initialState = {
   measurementStandards: {
-    results: [],
+    items: [],
   },
   measurementStandardById: {},
   isGetMeasurementStandards: false,
@@ -25,7 +25,7 @@ export const measurementStandardsReducer = (state = initialState, actions) => {
       return {
         ...state,
         isGetMeasurementStandards: true,
-        measurementStandards: { results: [] },
+        measurementStandards: { items: [] },
         errors: {
           ...state.errors,
           getMeasurementStandards: "",
@@ -34,7 +34,7 @@ export const measurementStandardsReducer = (state = initialState, actions) => {
     case TypeActions.GET_MEASUREMENT_STANDARDS_SUCCESS:
       return {
         ...state,
-        measurementStandards: actions.data || { results: [] },
+        measurementStandards: actions.data || { items: [] },
         isGetMeasurementStandards: false,
         errors: {
           ...state.errors,
@@ -44,7 +44,7 @@ export const measurementStandardsReducer = (state = initialState, actions) => {
     case TypeActions.GET_MEASUREMENT_STANDARDS_FAILED:
       return {
         ...state,
-        measurementStandards: { results: [] },
+        measurementStandards: { items: [] },
         isGetMeasurementStandards: false,
         errors: {
           ...state.errors,
@@ -66,7 +66,7 @@ export const measurementStandardsReducer = (state = initialState, actions) => {
       return {
         ...state,
         isGetMeasurementStandardById: false,
-        measurementStandardById: actions.data || { results: [] },
+        measurementStandardById: actions.data || { items: [] },
         errors: {
           ...state.errors,
           getMeasurementStandardsById: "",

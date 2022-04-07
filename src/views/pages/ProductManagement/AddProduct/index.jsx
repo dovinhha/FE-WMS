@@ -283,7 +283,7 @@ const AddProduct = () => {
                                 setProductTypesValue({ ...e });
                                 setFieldValue("parentId", e ? e.value : "");
                               }}
-                              options={productTypes.results.map((item) => ({
+                              options={productTypes.items.map((item) => ({
                                 value: item.id,
                                 label: item.name,
                               }))}
@@ -363,12 +363,10 @@ const AddProduct = () => {
                                   );
                                 }
                               }}
-                              options={productParameters.results.map(
-                                (item) => ({
-                                  value: item.id,
-                                  label: item.name,
-                                })
-                              )}
+                              options={productParameters.items.map((item) => ({
+                                value: item.id,
+                                label: item.name,
+                              }))}
                               onInputChange={(value) => {
                                 setProductParameterSearch(value);
                               }}

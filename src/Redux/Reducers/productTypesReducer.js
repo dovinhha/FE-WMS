@@ -2,10 +2,10 @@ import TypeActions from "../TypeActions";
 
 const initialState = {
   productTypes: {
-    results: [],
+    items: [],
   },
   products: {
-    results: [],
+    items: [],
   },
   productById: {},
   isGetProducts: false,
@@ -38,21 +38,21 @@ export const productTypesReducer = (state = initialState, actions) => {
       return {
         ...state,
         isGetProductTypes: true,
-        productTypes: { results: [] },
+        productTypes: { items: [] },
         errors: { ...state.errors, getProductTypes: "" },
       };
     case TypeActions.GET_PRODUCT_TYPES_SUCCESS:
       return {
         ...state,
         isGetProductTypes: false,
-        productTypes: actions.data || { results: [] },
+        productTypes: actions.data || { items: [] },
         errors: { ...state.errors, getProductTypes: "" },
       };
     case TypeActions.GET_PRODUCT_TYPES_FAILED:
       return {
         ...state,
         isGetProductTypes: false,
-        productTypes: { results: [] },
+        productTypes: { items: [] },
         errors: { ...state.errors, getProductTypes: actions.error },
       };
 
@@ -127,21 +127,21 @@ export const productTypesReducer = (state = initialState, actions) => {
       return {
         ...state,
         isGetProducts: true,
-        products: { results: [] },
+        products: { items: [] },
         errors: { ...state.errors, getProducts: "" },
       };
     case TypeActions.GET_PRODUCTS_SUCCESS:
       return {
         ...state,
         isGetProducts: false,
-        products: actions.data || { results: [] },
+        products: actions.data || { items: [] },
         errors: { ...state.errors, getProducts: "" },
       };
     case TypeActions.GET_PRODUCTS_FAILED:
       return {
         ...state,
         isGetProducts: false,
-        products: { results: [] },
+        products: { items: [] },
         errors: { ...state.errors, getProducts: actions.error },
       };
 

@@ -168,7 +168,7 @@ const NormMaterials = () => {
           </div>
           <p className="mb-0 ml-3">
             Hiển thị từ {(page - 1) * rowsPerPage + 1} đến{" "}
-            {page * rowsPerPage > orders.results.length
+            {page * rowsPerPage > orders.items.length
               ? !isNaN(orders?.totalResults)
                 ? orders.totalResults
                 : 0
@@ -205,7 +205,7 @@ const NormMaterials = () => {
           <div className="col">
             <Card style={{ overflowX: "scroll" }}>
               <ToolkitProvider
-                data={orders.results}
+                data={orders.items}
                 keyField="id"
                 columns={columns}
                 search

@@ -2,7 +2,7 @@ import TypeActions from "../TypeActions";
 
 const initialState = {
   customers: {
-    results: [],
+    items: [],
   },
   customerById: {},
   isGetCustomers: false,
@@ -25,7 +25,7 @@ export const customerReducer = (state = initialState, actions) => {
       return {
         ...state,
         isGetCustomers: true,
-        customers: { results: [] },
+        customers: { items: [] },
         errors: {
           ...state.errors,
           getCustomers: "",
@@ -34,7 +34,7 @@ export const customerReducer = (state = initialState, actions) => {
     case TypeActions.GET_CUSTOMERS_SUCCESS:
       return {
         ...state,
-        customers: actions.data || { results: [] },
+        customers: actions.data || { items: [] },
         isGetCustomers: false,
         errors: {
           ...state.errors,
@@ -45,7 +45,7 @@ export const customerReducer = (state = initialState, actions) => {
       return {
         ...state,
         isGetCustomers: false,
-        customers: { results: [] },
+        customers: { items: [] },
         errors: {
           ...state.errors,
           getCustomer: actions.error,

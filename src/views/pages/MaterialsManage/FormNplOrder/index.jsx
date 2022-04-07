@@ -294,7 +294,7 @@ const FormNplOrder = ({
                             setOrderPlanValue({ ...e });
                             setFieldValue("orderPlanId", e ? e.value : "");
                           }}
-                          options={orderPlans.results
+                          options={orderPlans.items
                             .map(
                               (item) =>
                                 !_.isEmpty(item.orderId) && {

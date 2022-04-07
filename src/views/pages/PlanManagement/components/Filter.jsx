@@ -26,7 +26,7 @@ const Filter = ({
   setFilterValues,
 }) => {
   const dispatch = useDispatch();
-  const [orders, setOrders] = useState({ results: [] });
+  const [orders, setOrders] = useState({ items: [] });
   const [queryOrders, setQueryOrders] = useState({
     page: 1,
     limit: 10,
@@ -52,7 +52,7 @@ const Filter = ({
     );
   };
   const resetFilter = () => {
-    // if (_.isEmpty(ordersDefault.results)) return;
+    // if (_.isEmpty(ordersDefault.items)) return;
     setOrderValues([]);
     setFilterValues({ orderIds: [], provinceId: "", year: "" });
   };
@@ -136,7 +136,7 @@ const Filter = ({
                   });
                 }
               }}
-              options={orders.results.map((item) => ({
+              options={orders.items.map((item) => ({
                 value: item.id,
                 label: item.name,
               }))}
@@ -197,7 +197,7 @@ const Filter = ({
                 <option value="" hidden>
                   Chọn tỉnh
                 </option>
-                {provinces?.results.map((item) => {
+                {provinces?.items.map((item) => {
                   return <option value={item.id}>{item.provinceName}</option>;
                 })}
               </Input>

@@ -528,7 +528,7 @@ const CustomerInfor = ({ handleChangeTab }) => {
                       setIsGetCustomerById(true);
                       setCustomerValue({ ...e });
                     }}
-                    options={customers.results.map((item) => ({
+                    options={customers.items.map((item) => ({
                       label: item.name,
                       value: item.id,
                     }))}

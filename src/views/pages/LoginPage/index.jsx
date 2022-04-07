@@ -22,6 +22,7 @@ import { accountActions } from "Redux/Actions";
 import { emailRegex } from "common";
 import HelperText from "views/pages/components/HelperText";
 import LoadingButtonCustom from "views/pages/components/LoadingButtonCustom";
+import moment from "moment";
 
 const LoginPage = () => {
   const dispatch = useDispatch();
@@ -43,8 +44,8 @@ const LoginPage = () => {
     setEmail(e.target.value);
     if (e.target.value === "") {
       setEmailError("Email không được để trống!");
-    } else if (!emailRegex.test(e.target.value)) {
-      setEmailError("Vui lòng nhập đúng định dạng email!");
+      // } else if (!emailRegex.test(e.target.value)) {
+      //   setEmailError("Vui lòng nhập đúng định dạng email!");
     } else {
       setEmailError("");
     }
@@ -79,17 +80,18 @@ const LoginPage = () => {
       dispatch(
         accountActions.accountLogin(
           {
-            email,
+            phone: email,
             password,
           },
           {
             success: (data) => {
               setMessages("");
-              localStorage.setItem("expiresAt", data.tokens.access.expires);
-              localStorage.setItem("token", data.tokens.access.token);
-              localStorage.setItem("roleId", data.user.roleId);
-              localStorage.setItem("refreshtoken", data.tokens.refresh.token);
-              localStorage.setItem("id", data.user.id);
+              console.log("data: ", data);
+              localStorage.setItem("expiresAt", new Date().getTime() + 60000);
+              localStorage.setItem("token", data.data.token);
+              // localStorage.setItem("roleId", data.user.roleId);
+              localStorage.setItem("refreshToken", data.data.refreshToken);
+              // localStorage.setItem("id", data.user.id);
               history.push("/");
             },
             failed: (mess) => {
@@ -100,13 +102,6 @@ const LoginPage = () => {
       );
     } catch (error) {
       console.log("login error: ", error);
-    }
-  };
-
-  const selectAppLogin = (e) => {
-    if (0 === parseInt(e.target.value)) {
-      setValueAppLogin(1);
-      window.open("https://duan.fovina.vn/auth/login", "_blank");
     }
   };
 
@@ -154,8 +149,8 @@ const LoginPage = () => {
                       </InputGroupAddon>
                       <Input
                         value={email}
-                        placeholder="Email"
-                        type="email"
+                        placeholder="Số điện thoại"
+                        type="text"
                         onFocus={() => setFocusedEmail(true)}
                         onBlur={() => setFocusedEmail(false)}
                         onChange={handleChangeEmail}

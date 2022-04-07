@@ -59,7 +59,7 @@ const Materials = () => {
   });
   const [orderSearch, setOrderSearch] = useState("");
   const [orderValue, setOrderValue] = useState({});
-  const [orders, setOrders] = useState({ results: [] });
+  const [orders, setOrders] = useState({ items: [] });
 
   const boxAction = (cell, row) => {
     return (
@@ -206,7 +206,7 @@ const Materials = () => {
           </div>
           <p className="mb-0 ml-3">
             Hiển thị từ {(page - 1) * rowsPerPage + 1} đến{" "}
-            {page * rowsPerPage > nplOrders.results.length
+            {page * rowsPerPage > nplOrders.items.length
               ? !isNaN(nplOrders?.totalResults)
                 ? nplOrders.totalResults
                 : 0
@@ -233,10 +233,10 @@ const Materials = () => {
       orderActions.getOrders(queryString.stringify(queryOrders), {
         success: (data) => {
           setOrders(data);
-          if (!_.isEmpty(data?.results[0])) {
+          if (!_.isEmpty(data?.items[0])) {
             setOrderValue({
-              label: data.results[0].name,
-              value: data.results[0].id,
+              label: data.items[0].name,
+              value: data.items[0].id,
             });
           }
         },
@@ -357,7 +357,7 @@ const Materials = () => {
                     onChange={(e) => {
                       setOrderValue({ ...e });
                     }}
-                    options={orders.results.map((item) => ({
+                    options={orders.items.map((item) => ({
                       value: item.id,
                       label: item.name,
                     }))}
@@ -385,7 +385,7 @@ const Materials = () => {
                 >
                   Đề xuất NPL
                 </Button>
-                {nplOrders.results.length > 0 && (
+                {nplOrders.items.length > 0 && (
                   <Button
                     // onClick={toggle}
                     className="btn-neutral"
@@ -405,7 +405,7 @@ const Materials = () => {
           <div className="col">
             <Card style={{ overflowX: "scroll" }}>
               <ToolkitProvider
-                data={nplOrders.results}
+                data={nplOrders.items}
                 keyField="id"
                 columns={columns}
                 search

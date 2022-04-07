@@ -31,7 +31,7 @@ const CustomerManage = () => {
   const dispatch = useDispatch();
   const { isDeleteCustomer } = useSelector((state) => state.customerReducer);
   const [isGetCustomers, setIsGetCustomers] = useState(false);
-  const [customers, setCustomers] = useState({ results: [] });
+  const [customers, setCustomers] = useState({ items: [] });
   const [customerSearch, setCustomerSearch] = useState("");
   const [formModal, setFormModal] = useState(false);
   const [dataFormModal, setDataFormModal] = useState({});
@@ -154,7 +154,7 @@ const CustomerManage = () => {
         <Col>
           <p>
             Hiển thị từ {(page - 1) * rowsPerPage + 1} đến{" "}
-            {page * rowsPerPage > customers.results.length
+            {page * rowsPerPage > customers.items.length
               ? !isNaN(customers?.totalResults)
                 ? customers.totalResults
                 : 0
@@ -243,7 +243,7 @@ const CustomerManage = () => {
           formModal={formModal}
           setFormModal={setFormModal}
           customer={dataFormModal}
-          listCustomers={customers.results}
+          listCustomers={customers.items}
           closeModal={closeModal}
           notify={notify}
           notificationAlertRef={notificationAlertRef}
@@ -269,7 +269,7 @@ const CustomerManage = () => {
           <div className="col">
             <Card style={{ overflowX: "scroll" }}>
               <ToolkitProvider
-                data={customers.results}
+                data={customers.items}
                 keyField="id"
                 columns={columns}
                 search

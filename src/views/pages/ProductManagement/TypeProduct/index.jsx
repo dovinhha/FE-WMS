@@ -192,7 +192,7 @@ const TypeProduct = () => {
         <Col>
           <p>
             Hiển thị từ {(page - 1) * rowsPerPage + 1} đến{" "}
-            {page * rowsPerPage > productTypes.results.length
+            {page * rowsPerPage > productTypes.items.length
               ? !isNaN(productTypes?.totalResults)
                 ? productTypes.totalResults
                 : 0
@@ -360,7 +360,7 @@ const TypeProduct = () => {
                 <p className="h3 font-weight-500">Danh sách dòng sản phẩm</p>
               </CardHeader>
               <ToolkitProvider
-                data={[...productTypes.results]}
+                data={[...productTypes.items]}
                 keyField="id"
                 columns={columns}
                 search

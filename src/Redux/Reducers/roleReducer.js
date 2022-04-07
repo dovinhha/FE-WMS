@@ -2,10 +2,10 @@ import TypeActions from "../TypeActions";
 
 const initialState = {
   roles: {
-    results: [],
+    items: [],
   },
   roleById: {},
-  rolePermission: { results: [] },
+  rolePermission: { items: [] },
   isGetRoles: false,
   isGetRoleById: false,
   isCreateRole: false,
@@ -28,7 +28,7 @@ export const roleReducer = (state = initialState, actions) => {
       return {
         ...state,
         isGetRoles: true,
-        roles: { results: [] },
+        roles: { items: [] },
         errors: {
           ...state.errors,
           isGetRoles: "",
@@ -37,7 +37,7 @@ export const roleReducer = (state = initialState, actions) => {
     case TypeActions.GET_ROLES_SUCCESS:
       return {
         ...state,
-        roles: actions.data || { results: [] },
+        roles: actions.data || { items: [] },
         isGetRoles: false,
         errors: {
           ...state.errors,
@@ -48,7 +48,7 @@ export const roleReducer = (state = initialState, actions) => {
       return {
         ...state,
         isGetRoles: false,
-        roles: { results: [] },
+        roles: { items: [] },
         errors: {
           ...state.errors,
           getRoles: actions.error,
@@ -173,7 +173,7 @@ export const roleReducer = (state = initialState, actions) => {
     case TypeActions.GET_ROLE_PERMISSION_REQUEST:
       return {
         ...state,
-        rolePermission: { results: [] },
+        rolePermission: { items: [] },
         isGetRolePermission: true,
         errors: {
           ...state.errors,
@@ -183,7 +183,7 @@ export const roleReducer = (state = initialState, actions) => {
     case TypeActions.GET_ROLE_PERMISSION_SUCCESS:
       return {
         ...state,
-        rolePermission: actions.data || { results: [] },
+        rolePermission: actions.data || { items: [] },
         isGetRolePermission: false,
         errors: {
           ...state.errors,
@@ -193,7 +193,7 @@ export const roleReducer = (state = initialState, actions) => {
     case TypeActions.GET_ROLE_PERMISSION_FAILED:
       return {
         ...state,
-        rolePermission: { results: [] },
+        rolePermission: { items: [] },
         isGetRolePermission: false,
         errors: {
           ...state.errors,

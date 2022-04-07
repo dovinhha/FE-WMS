@@ -259,7 +259,7 @@ const AddMeasurementStandard = () => {
                                   setStandardSizes(tempStandardSize);
                                 }
                               }}
-                              options={products.results.map((item) => ({
+                              options={products.items.map((item) => ({
                                 label: item.name,
                                 value: item.id,
                                 standardSizes: item.productParameterIds,

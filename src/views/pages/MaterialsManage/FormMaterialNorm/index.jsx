@@ -36,7 +36,7 @@ const FormMaterialNorm = () => {
 
   const [materialNormById, setMaterialNormById] = useState({});
   const [materialNormByIdProduct, setMaterialNormByIdProduct] = useState({
-    results: [],
+    items: [],
   });
   const [selectProduct, setSelectProduct] = useState(-1);
   const [allProductInOrderCustom, setAllProductInOrderCustom] = useState([]);
@@ -113,12 +113,12 @@ const FormMaterialNorm = () => {
               setMaterialNormByIdProduct(data);
               console.log("data: ", data);
               // setArrNplValue(
-              //   data.results.map((item) => ({
+              //   data.items.map((item) => ({
               //     label: item.materialId.name,
               //     value: item.materialId.id,
               //   }))
               // );
-              setArrConfigNorm(data.results || { results: [] });
+              setArrConfigNorm(data.items || { items: [] });
             },
             failed: () => {},
           }
@@ -234,8 +234,8 @@ const FormMaterialNorm = () => {
   }, [orderId]);
 
   useEffect(() => {
-    if (!_.isEmpty(allProductInOrder.results)) {
-      setSelectProduct(allProductInOrder.results[0]._id);
+    if (!_.isEmpty(allProductInOrder.items)) {
+      setSelectProduct(allProductInOrder.items[0]._id);
     }
   }, [allProductInOrder]);
 
@@ -258,7 +258,7 @@ const FormMaterialNorm = () => {
                 <Row>
                   <Col style={{ borderRight: "1px solid gray" }} md="2">
                     <h3>Danh mục sản phẩm</h3>
-                    {allProductInOrder.results.map((item, index) => (
+                    {allProductInOrder.items.map((item, index) => (
                       <h5
                         key={index}
                         style={{
@@ -416,7 +416,7 @@ const RowTable = ({
   }, [item]);
 
   useEffect(() => {
-    allProductInOrder.results.every((val) => {
+    allProductInOrder.items.every((val) => {
       if (val._id === selectProduct) {
         setTotalQuota(val.totalQuota);
         return false;
@@ -452,7 +452,7 @@ const RowTable = ({
           onChange={(e) => {
             setNplValue({ ...e });
           }}
-          options={npls.results.map((item) => ({
+          options={npls.items.map((item) => ({
             label: item.name,
             value: item.id,
             color: item.color,

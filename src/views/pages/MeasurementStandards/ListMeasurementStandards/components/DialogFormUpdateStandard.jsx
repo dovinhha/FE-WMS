@@ -228,7 +228,7 @@ const DialogFormUpdateStandard = ({ open, toggle, data, handleUpdate }) => {
                                 setStandardSizes(temp);
                               }
                             }}
-                            options={products.results.map((item) => ({
+                            options={products.items.map((item) => ({
                               label: item.name,
                               value: item.id,
                               productParameterIds: item.productParameterIds,

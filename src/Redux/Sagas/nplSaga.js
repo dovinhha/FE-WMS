@@ -1,6 +1,6 @@
 import _ from "lodash";
 import { call, put, takeLatest } from "redux-saga/effects";
-import { DELETE, GET, PATCH, POST } from "Services/ServiceBase";
+import { DELETE, GET, PUT, POST } from "Services/ServiceBase";
 import ServiceURL from "Services/ServiceURL";
 import TypeActions from "../TypeActions";
 
@@ -18,9 +18,9 @@ export function* getNpls(data) {
     } else {
       yield put({
         type: TypeActions.GET_NPLS_SUCCESS,
-        data: res.data,
+        data: res.data.data,
       });
-      !!callback?.success && callback.success(res.data);
+      !!callback?.success && callback.success(res.data.data);
     }
   } catch (error) {
     yield put({
@@ -45,9 +45,9 @@ export function* getNplById(data) {
     } else {
       yield put({
         type: TypeActions.GET_NPL_BY_ID_SUCCESS,
-        data: res.data,
+        data: res.data.data,
       });
-      !!callback?.success && callback.success(res.data);
+      !!callback?.success && callback.success(res.data.data);
     }
   } catch (error) {
     yield put({
@@ -88,7 +88,7 @@ export function* updateNpl(data) {
   const url = ServiceURL.npls + "/" + data.params;
   const callback = data.callback;
   try {
-    const res = yield call(PATCH, url, data.body);
+    const res = yield call(PUT, url, data.body);
     if (res.message && !_.isEmpty(res.message)) {
       yield put({
         type: TypeActions.UPDATE_NPL_FAILED,
@@ -150,9 +150,9 @@ export function* getNplGroups(data) {
     } else {
       yield put({
         type: TypeActions.GET_NPL_GROUPS_SUCCESS,
-        data: res.data,
+        data: res.data.data,
       });
-      !!callback?.success && callback.success(res.data);
+      !!callback?.success && callback.success(res.data.data);
     }
   } catch (error) {
     yield put({
@@ -177,9 +177,9 @@ export function* getNplGroupById(data) {
     } else {
       yield put({
         type: TypeActions.GET_NPL_GROUP_BY_ID_SUCCESS,
-        data: res.data,
+        data: res.data.data,
       });
-      !!callback?.success && callback.success(res.data);
+      !!callback?.success && callback.success(res.data.data);
     }
   } catch (error) {
     yield put({
@@ -220,7 +220,7 @@ export function* updateNplGroup(data) {
   const url = ServiceURL.nplGroups + "/" + data.params;
   const callback = data.callback;
   try {
-    const res = yield call(PATCH, url, data.body);
+    const res = yield call(PUT, url, data.body);
     if (res.message && !_.isEmpty(res.message)) {
       yield put({
         type: TypeActions.UPDATE_NPL_GROUP_FAILED,

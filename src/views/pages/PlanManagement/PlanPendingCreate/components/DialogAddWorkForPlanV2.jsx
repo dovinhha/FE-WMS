@@ -304,7 +304,7 @@ const DialogAddWorkForPlanV2 = ({
                             setProductValue({ ...e });
                             setFieldValue("productTypeId", e ? e.value : "");
                           }}
-                          options={products.results.map((item) => ({
+                          options={products.items.map((item) => ({
                             value: item.id,
                             label: item.name,
                           }))}
@@ -362,7 +362,7 @@ const DialogAddWorkForPlanV2 = ({
                               );
                             }
                           }}
-                          options={customers.results.map((item) => ({
+                          options={customers.items.map((item) => ({
                             value: item.id,
                             label: item.name,
                           }))}
@@ -399,7 +399,7 @@ const DialogAddWorkForPlanV2 = ({
                             setProducerValue({ ...e });
                             setFieldValue("producerId", e ? e.value : "");
                           }}
-                          options={producers.results.map((item) => ({
+                          options={producers.items.map((item) => ({
                             value: item.id,
                             label: item.name,
                           }))}

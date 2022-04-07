@@ -287,7 +287,7 @@ const FormCustomer = ({
                               setCustomerValue({ ...e });
                               setFieldValue("parentId", e ? e.value : "");
                             }}
-                            options={customers.results.map((item) => ({
+                            options={customers.items.map((item) => ({
                               label: item.name,
                               value: item.id,
                             }))}
@@ -358,7 +358,7 @@ const FormCustomer = ({
                                 setProvinceValue({ ...e });
                                 setFieldValue("provinceId", e ? e.value : "");
                               }}
-                              options={provinces.results.map((item) => ({
+                              options={provinces.items.map((item) => ({
                                 label: item.provinceName,
                                 value: item.id,
                               }))}

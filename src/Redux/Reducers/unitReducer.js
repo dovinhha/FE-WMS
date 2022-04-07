@@ -2,7 +2,7 @@ import TypeActions from "../TypeActions";
 
 const initialState = {
   units: {
-    results: [],
+    items: [],
   },
   unitById: {},
   isGetUnits: false,
@@ -25,7 +25,7 @@ export const unitReducer = (state = initialState, actions) => {
       return {
         ...state,
         isGetUnits: true,
-        units: { results: [] },
+        units: { items: [] },
         errors: {
           ...state.errors,
           isGetUnits: "",
@@ -34,7 +34,7 @@ export const unitReducer = (state = initialState, actions) => {
     case TypeActions.GET_UNITS_SUCCESS:
       return {
         ...state,
-        units: actions.data || { results: [] },
+        units: actions.data || { items: [] },
         isGetUnits: false,
         errors: {
           ...state.errors,
@@ -45,7 +45,7 @@ export const unitReducer = (state = initialState, actions) => {
       return {
         ...state,
         isGetUnits: false,
-        units: { results: [] },
+        units: { items: [] },
         errors: {
           ...state.errors,
           getUnit: actions.error,

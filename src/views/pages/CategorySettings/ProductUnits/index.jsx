@@ -16,7 +16,7 @@ import SimpleHeader from "./components/Header";
 import ModalWarningCustom from "views/pages/components/ModalWarningCustom";
 import { EditSVG, DeleteSVG, ViewSVG } from "assets/svg";
 import { useDispatch, useSelector } from "react-redux";
-import { producerActions } from "Redux/Actions";
+import { unitActions } from "Redux/Actions";
 import queryString from "query-string";
 import _ from "lodash";
 import { notify } from "common";
@@ -24,12 +24,12 @@ import FormProductUnit from "./FormProductUnit";
 import ReactNotificationAlert from "react-notification-alert";
 const ProductUnits = () => {
   const dispatch = useDispatch();
-  const { producers, isDeleteProducer, isGetProducers } = useSelector(
-    (state) => state.producerReducer
+  const { units, isDeleteUnit, isGetUnits } = useSelector(
+    (state) => state.unitReducer
   );
 
   const notificationAlertRef = useRef(null);
-  const [producer, setProducer] = useState({});
+  const [unit, setUnit] = useState({});
   const [isModalAdd, setIsModalAdd] = useState(false);
   const [formModal, setFormModal] = useState(false);
   const [notificationModal, setNotificationModal] = useState(false);
@@ -54,7 +54,7 @@ const ProductUnits = () => {
           onClick={() => {
             // setFormModal(true);
             // setIsModalAdd(false);
-            // setProducer(row);
+            // setUnit(row);
           }}
         >
           <ViewSVG />
@@ -73,7 +73,7 @@ const ProductUnits = () => {
           onClick={() => {
             setFormModal(true);
             setIsModalAdd(false);
-            setProducer(row);
+            setUnit(row);
           }}
         >
           <EditSVG />
@@ -85,7 +85,7 @@ const ProductUnits = () => {
           id="delete"
           onClick={() => {
             setNotificationModal(true);
-            setProducer(row);
+            setUnit(row);
           }}
           style={{ padding: 0, border: "none", background: "none" }}
         >
@@ -107,22 +107,8 @@ const ProductUnits = () => {
       text: "Tên đơn vị",
     },
     {
-      dataField: "address",
+      dataField: "description",
       text: "Mô tả",
-    },
-    {
-      dataField: "createdAt",
-      text: "Ngày tạo",
-      formatter: (cell) => {
-        return "";
-      },
-    },
-    {
-      dataField: "updatedAt",
-      text: "Ngày sửa",
-      formatter: (cell) => {
-        return "";
-      },
     },
     {
       dataField: "actions",
@@ -144,7 +130,7 @@ const ProductUnits = () => {
       setQuery({ ...query, page: value });
     },
     sizePerPage: rowsPerPage,
-    totalSize: producers?.totalResults,
+    totalSize: units?.totalResults,
     showTotal: false,
     withFirstAndLast: true,
     alwaysShowAllBtns: true,
@@ -153,13 +139,12 @@ const ProductUnits = () => {
         <Col>
           <p>
             Hiển thị từ {(page - 1) * rowsPerPage + 1} đến{" "}
-            {page * rowsPerPage > producers.results.length
-              ? !isNaN(producers?.totalResults)
-                ? producers.totalResults
+            {page * rowsPerPage > units.items.length
+              ? !isNaN(units?.totalResults)
+                ? units.totalResults
                 : 0
               : page * rowsPerPage}{" "}
-            trong số{" "}
-            {!isNaN(producers?.totalResults) ? producers.totalResults : 0} bản
+            trong số {!isNaN(units?.totalResults) ? units.totalResults : 0} bản
             ghi
           </p>
         </Col>
@@ -169,7 +154,7 @@ const ProductUnits = () => {
 
   const handleDelete = () => {
     dispatch(
-      producerActions.deleteProducer(producer.id, {
+      unitActions.deleteProducer(unit.id, {
         success: () => {
           setNotificationModal(false);
           notify(
@@ -178,7 +163,7 @@ const ProductUnits = () => {
             "Thông báo",
             `Xóa đơn vị thành công!`
           );
-          handleGetProducers();
+          handleGetUnits();
         },
         failed: (mess) => {
           notify(
@@ -192,12 +177,12 @@ const ProductUnits = () => {
     );
   };
 
-  const handleGetProducers = () => {
-    dispatch(producerActions.getProducers(queryString.stringify(query)));
+  const handleGetUnits = () => {
+    dispatch(unitActions.getUnits(queryString.stringify(query)));
   };
 
   useEffect(() => {
-    handleGetProducers();
+    handleGetUnits();
   }, [query]);
 
   return (
@@ -211,7 +196,7 @@ const ProductUnits = () => {
           setNotificationModal={setNotificationModal}
           name="đơn vị"
           func={handleDelete}
-          isDelete={isDeleteProducer}
+          isDelete={isDeleteUnit}
         />
       )}
       {formModal && (
@@ -219,8 +204,8 @@ const ProductUnits = () => {
           isModalAdd={isModalAdd}
           formModal={formModal}
           setFormModal={setFormModal}
-          producer={producer}
-          handleGetProducers={handleGetProducers}
+          unit={unit}
+          handleGetUnits={handleGetUnits}
           notificationAlertRef={notificationAlertRef}
         />
       )}
@@ -229,21 +214,21 @@ const ProductUnits = () => {
         parentName="Quản lý"
         setFormModal={setFormModal}
         setIsModalAdd={setIsModalAdd}
-        setProducer={setProducer}
+        setUnit={setUnit}
       />
       <Container className="mt--6" fluid>
         <Row>
           <div className="col">
             <Card style={{ overflowX: "scroll" }}>
               <ToolkitProvider
-                data={producers.results}
+                data={units.items}
                 keyField="id"
                 columns={columns}
                 search
               >
                 {(props) => (
                   <>
-                    {isGetProducers ? (
+                    {isGetUnits ? (
                       <Row className="align-items-center ">
                         <Col
                           md="12"

@@ -1,6 +1,6 @@
 import _ from "lodash";
 import { call, put, takeLatest } from "redux-saga/effects";
-import { DELETE, GET, PATCH, POST } from "Services/ServiceBase";
+import { DELETE, GET, PUT, POST } from "Services/ServiceBase";
 import ServiceURL from "Services/ServiceURL";
 import TypeActions from "../TypeActions";
 
@@ -18,9 +18,9 @@ export function* getRoles(data) {
     } else {
       yield put({
         type: TypeActions.GET_ROLES_SUCCESS,
-        data: res.data,
+        data: res.data.data,
       });
-      !!callback?.success && callback.success(res.data);
+      !!callback?.success && callback.success(res.data.data);
     }
   } catch (error) {
     yield put({
@@ -45,9 +45,9 @@ export function* getRoleById(data) {
     } else {
       yield put({
         type: TypeActions.GET_ROLE_BY_ID_SUCCESS,
-        data: res.data,
+        data: res.data.data,
       });
-      !!callback?.success && callback.success(res.data);
+      !!callback?.success && callback.success(res.data.data);
     }
   } catch (error) {
     yield put({
@@ -88,7 +88,7 @@ export function* updateRole(data) {
   const url = ServiceURL.roles + "/" + data.params;
   const callback = data.callback;
   try {
-    const res = yield call(PATCH, url, data.body);
+    const res = yield call(PUT, url, data.body);
     if (res.message && !_.isEmpty(res.message)) {
       yield put({
         type: TypeActions.UPDATE_ROLE_FAILED,
@@ -149,9 +149,9 @@ export function* getRolePermission(data) {
     } else {
       yield put({
         type: TypeActions.GET_ROLE_PERMISSION_SUCCESS,
-        data: res.data,
+        data: res.data.data,
       });
-      !!callback?.success && callback.success(res.data);
+      !!callback?.success && callback.success(res.data.data);
     }
   } catch (error) {
     yield put({

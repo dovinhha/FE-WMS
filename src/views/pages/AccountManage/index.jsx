@@ -191,7 +191,7 @@ const AccountManage = () => {
         <Col>
           <p>
             Hiển thị từ {(page - 1) * rowsPerPage + 1} đến{" "}
-            {page * rowsPerPage > accounts.results.length
+            {page * rowsPerPage > accounts.items.length
               ? !isNaN(accounts?.totalResults)
                 ? accounts.totalResults
                 : 0
@@ -247,7 +247,7 @@ const AccountManage = () => {
           <div className="col">
             <Card style={{ overflowX: "scroll" }}>
               <ToolkitProvider
-                data={accounts.results}
+                data={accounts.items}
                 keyField="id"
                 columns={columns}
                 search

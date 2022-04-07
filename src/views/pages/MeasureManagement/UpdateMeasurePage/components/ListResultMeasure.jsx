@@ -233,7 +233,7 @@ function ListResultMeasure({ data, currentOrders }) {
         <Col>
           <p>
             Hiển thị từ {(page - 1) * rowsPerPage + 1} đến{" "}
-            {page * rowsPerPage > customersInOrder.results.length
+            {page * rowsPerPage > customersInOrder.items.length
               ? !isNaN(customersInOrder?.totalResults)
                 ? customersInOrder.totalResults
                 : 0
@@ -305,7 +305,7 @@ function ListResultMeasure({ data, currentOrders }) {
       </div>
       <ToolkitProvider
         bootstrap4
-        data={customersInOrder.results}
+        data={customersInOrder.items}
         keyField="id"
         columns={columns}
         search

@@ -16,7 +16,7 @@ axiosClient.interceptors.request.use(
     const expireAt = new Date(localStorage.getItem("expiresAt"));
     let token = localStorage.getItem("token");
     if (token && !_.isEmpty(token)) {
-      if (new Date().getTime() > expireAt.getTime() - 10 * 60 * 1000) {
+      if (new Date().getTime() > expireAt - 10 * 60) {
         const data = refreshToken();
         token = typeof data === "string" ? data : await data;
       }

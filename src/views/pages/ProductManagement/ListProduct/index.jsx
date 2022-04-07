@@ -200,7 +200,7 @@ const ListProduct = () => {
         <Col>
           <p>
             Hiển thị từ {(page - 1) * rowsPerPage + 1} đến{" "}
-            {page * rowsPerPage > products.results.length
+            {page * rowsPerPage > products.items.length
               ? !isNaN(products?.totalResults)
                 ? products.totalResults
                 : 0
@@ -257,7 +257,7 @@ const ListProduct = () => {
           <div className="col">
             <Card style={{ overflowX: "scroll" }}>
               <ToolkitProvider
-                data={products.results}
+                data={products.items}
                 keyField="id"
                 columns={columns}
                 search

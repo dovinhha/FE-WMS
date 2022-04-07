@@ -283,7 +283,7 @@ const FormNplGroup = ({
                                   e ? e.value : ""
                                 );
                               }}
-                              options={nplGroups.results.map((item) => ({
+                              options={nplGroups.items.map((item) => ({
                                 label: item.name,
                                 value: item.id,
                               }))}
@@ -366,7 +366,7 @@ const FormNplGroup = ({
                                 setUnitIdValue({ ...e });
                                 setFieldValue("unitId", e ? e.value : "");
                               }}
-                              options={units.results.map((item) => ({
+                              options={units.items.map((item) => ({
                                 label: item.name,
                                 value: item.id,
                               }))}

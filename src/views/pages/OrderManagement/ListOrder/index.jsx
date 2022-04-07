@@ -260,7 +260,7 @@ function ListOrder() {
         <Col>
           <p>
             Hiển thị từ {(page - 1) * rowsPerPage + 1} đến{" "}
-            {page * rowsPerPage > orders.results.length
+            {page * rowsPerPage > orders.items.length
               ? !isNaN(orders?.totalResults)
                 ? orders.totalResults
                 : 0
@@ -327,7 +327,7 @@ function ListOrder() {
             <Card style={{ overflowX: "scroll" }}>
               <ToolkitProvider
                 bootstrap4
-                data={orders.results}
+                data={orders.items}
                 keyField="id"
                 columns={columns}
                 search

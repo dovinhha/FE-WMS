@@ -42,7 +42,7 @@ function TableData({
   });
 
   const notificationAlertRef = useRef(null);
-  const [orderPlansData, setOrderPlansData] = useState({ results: [] });
+  const [orderPlansData, setOrderPlansData] = useState({ items: [] });
   const columns = [
     {
       dataField: "orderId.customerOrganizationId.name",
@@ -118,7 +118,7 @@ function TableData({
           </div>
           <p className="mb-0 ml-3">
             Hiển thị từ {(page - 1) * rowsPerPage + 1} đến{" "}
-            {page * rowsPerPage > orderPlansData.results.length
+            {page * rowsPerPage > orderPlansData.items.length
               ? !isNaN(orderPlansData?.totalResults)
                 ? orderPlansData.totalResults
                 : 0
@@ -153,10 +153,10 @@ function TableData({
       orderActions.getOrders(queryString.stringify(queryOrders), {
         success: (data) => {
           setOrders(data);
-          if (!_.isEmpty(data?.results[0])) {
+          if (!_.isEmpty(data?.items[0])) {
             setOrderValue({
-              label: data.results[0].name,
-              value: data.results[0].id,
+              label: data.items[0].name,
+              value: data.items[0].id,
             });
           }
         },
@@ -234,7 +234,7 @@ function TableData({
             notificationAlertRef,
             "danger",
             "Thông báo",
-            `Từ chối đơn hàng ${orders.results[0].name} thất bại. Lỗi: ${mess}!`
+            `Từ chối đơn hàng ${orders.items[0].name} thất bại. Lỗi: ${mess}!`
           );
         },
       })
@@ -274,7 +274,7 @@ function TableData({
         <ReactNotificationAlert ref={notificationAlertRef} />
       </div>
       <ToolkitProvider
-        data={orderPlansData.results}
+        data={orderPlansData.items}
         keyField="id"
         columns={columns}
         search
@@ -286,7 +286,7 @@ function TableData({
                 <Col md="6">
                   <h3 className="mb-0">Danh sách kế hoạch chờ duyệt</h3>
                 </Col>
-                {orderPlansData.results.length > 0 && (
+                {orderPlansData.items.length > 0 && (
                   <Col className="d-flex justify-content-end" md="6">
                     <Button color="warning" size="sm" onClick={handleReject}>
                       Từ chối

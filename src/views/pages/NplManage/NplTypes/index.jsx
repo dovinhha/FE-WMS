@@ -138,7 +138,7 @@ const NPLTypes = () => {
         <Col>
           <p>
             Hiển thị từ {(page - 1) * rowsPerPage + 1} đến{" "}
-            {page * rowsPerPage > nplGroups.results.length
+            {page * rowsPerPage > nplGroups.items.length
               ? !isNaN(nplGroups?.totalResults)
                 ? nplGroups.totalResults
                 : 0
@@ -374,7 +374,7 @@ const NPLTypes = () => {
               <Row className="mt-4">
                 <Col md={12} style={{ overflowX: "scroll" }}>
                   <ToolkitProvider
-                    data={nplGroups.results}
+                    data={nplGroups.items}
                     keyField="id"
                     columns={columns}
                     search

@@ -2,7 +2,7 @@ import TypeActions from "../TypeActions";
 
 const initialState = {
   producers: {
-    results: [],
+    items: [],
   },
   producerById: {},
   isGetProducers: false,
@@ -25,7 +25,7 @@ export const producerReducer = (state = initialState, actions) => {
       return {
         ...state,
         isGetProducers: true,
-        producers: { results: [] },
+        producers: { items: [] },
         errors: {
           ...state.errors,
           isGetProducers: "",
@@ -34,7 +34,7 @@ export const producerReducer = (state = initialState, actions) => {
     case TypeActions.GET_PRODUCERS_SUCCESS:
       return {
         ...state,
-        producers: actions.data || { results: [] },
+        producers: actions.data || { items: [] },
         isGetProducers: false,
         errors: {
           ...state.errors,
@@ -45,7 +45,7 @@ export const producerReducer = (state = initialState, actions) => {
       return {
         ...state,
         isGetProducers: false,
-        producers: { results: [] },
+        producers: { items: [] },
         errors: {
           ...state.errors,
           getProducer: actions.error,

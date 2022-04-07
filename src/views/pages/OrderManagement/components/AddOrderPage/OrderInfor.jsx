@@ -279,7 +279,7 @@ const OrderInfor = ({ handleChangeTab }) => {
                           setAccountValue({ ...e });
                           setFieldValue("manager", e ? e.value : "");
                         }}
-                        options={accounts.results.map((item) => ({
+                        options={accounts.items.map((item) => ({
                           label: item.name,
                           value: item.id,
                         }))}
@@ -315,7 +315,7 @@ const OrderInfor = ({ handleChangeTab }) => {
                             e ? e.value : ""
                           );
                         }}
-                        options={customers.results.map((item) => ({
+                        options={customers.items.map((item) => ({
                           label: item.name,
                           value: item.id,
                         }))}
@@ -387,7 +387,7 @@ const OrderInfor = ({ handleChangeTab }) => {
                                     ...values.products.slice(index + 1),
                                   ]);
                                 }}
-                                options={products.results.map((item) => ({
+                                options={products.items.map((item) => ({
                                   value: item.id,
                                   label: item.name,
                                 }))}

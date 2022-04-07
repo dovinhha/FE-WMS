@@ -2,7 +2,7 @@ import TypeActions from "../TypeActions";
 
 const initialState = {
   npls: {
-    results: [],
+    items: [],
   },
   nplById: {},
   isGetNpls: false,
@@ -12,7 +12,7 @@ const initialState = {
   isUpdateNpl: false,
   isDeleteNpl: false,
   nplGroups: {
-    results: [],
+    items: [],
   },
   nplGroupById: {},
   isGetNplGroups: false,
@@ -40,7 +40,7 @@ export const nplReducer = (state = initialState, actions) => {
       return {
         ...state,
         isGetNpls: true,
-        npls: { results: [] },
+        npls: { items: [] },
         errors: {
           ...state.errors,
           isGetNpls: "",
@@ -49,7 +49,7 @@ export const nplReducer = (state = initialState, actions) => {
     case TypeActions.GET_NPLS_SUCCESS:
       return {
         ...state,
-        npls: actions.data || { results: [] },
+        npls: actions.data || { items: [] },
         isGetNpls: false,
         errors: {
           ...state.errors,
@@ -60,7 +60,7 @@ export const nplReducer = (state = initialState, actions) => {
       return {
         ...state,
         isGetNpls: false,
-        npls: { results: [] },
+        npls: { items: [] },
         errors: {
           ...state.errors,
           getNpl: actions.error,
@@ -187,7 +187,7 @@ export const nplReducer = (state = initialState, actions) => {
       return {
         ...state,
         isGetNplGroups: true,
-        nplGroups: { results: [] },
+        nplGroups: { items: [] },
         errors: {
           ...state.errors,
           isGetNplGroups: "",
@@ -196,7 +196,7 @@ export const nplReducer = (state = initialState, actions) => {
     case TypeActions.GET_NPL_GROUPS_SUCCESS:
       return {
         ...state,
-        nplGroups: actions.data || { results: [] },
+        nplGroups: actions.data || { items: [] },
         isGetNplGroups: false,
         errors: {
           ...state.errors,
@@ -207,7 +207,7 @@ export const nplReducer = (state = initialState, actions) => {
       return {
         ...state,
         isGetNplGroups: false,
-        nplGroups: { results: [] },
+        nplGroups: { items: [] },
         errors: {
           ...state.errors,
           getNplGroup: actions.error,

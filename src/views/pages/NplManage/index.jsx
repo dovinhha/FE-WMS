@@ -152,7 +152,7 @@ const NPLManage = () => {
         <Col>
           <p>
             Hiển thị từ {(page - 1) * rowsPerPage + 1} đến{" "}
-            {page * rowsPerPage > npls.results.length
+            {page * rowsPerPage > npls.items.length
               ? !isNaN(npls?.totalResults)
                 ? npls.totalResults
                 : 0
@@ -241,7 +241,7 @@ const NPLManage = () => {
           <div className="col">
             <Card style={{ overflowX: "scroll" }}>
               <ToolkitProvider
-                data={npls.results}
+                data={npls.items}
                 keyField="id"
                 columns={columns}
                 search

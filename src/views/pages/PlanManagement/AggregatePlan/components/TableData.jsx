@@ -26,7 +26,7 @@ function TableData({
   const history = useHistory();
   const dispatch = useDispatch();
   const { isGetOrderPlans } = useSelector((state) => state.orderPlanReducer);
-  const [orderPlansData, setOrderPlansData] = useState({ results: [] });
+  const [orderPlansData, setOrderPlansData] = useState({ items: [] });
   const [page, setPage] = useState(1);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [query, setQuery] = useState({
@@ -108,7 +108,7 @@ function TableData({
         <Col>
           <p>
             Hiển thị từ {(page - 1) * rowsPerPage + 1} đến{" "}
-            {page * rowsPerPage > orderPlansData.results.length
+            {page * rowsPerPage > orderPlansData.items.length
               ? !isNaN(orderPlansData?.totalResults)
                 ? orderPlansData.totalResults
                 : 0
@@ -139,10 +139,10 @@ function TableData({
   //     orderActions.getOrders(queryString.stringify(queryOrders), {
   //       success: (data) => {
   //         setOrders(data);
-  //         if (!_.isEmpty(data?.results[0])) {
+  //         if (!_.isEmpty(data?.items[0])) {
   //           setOrderValue({
-  //             label: data.results[0].name,
-  //             value: data.results[0].id,
+  //             label: data.items[0].name,
+  //             value: data.items[0].id,
   //           });
   //         }
   //       },
@@ -205,7 +205,7 @@ function TableData({
   return (
     <>
       <ToolkitProvider
-        data={orderPlansData.results}
+        data={orderPlansData.items}
         keyField="id"
         columns={columns}
         search

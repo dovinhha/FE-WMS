@@ -5,7 +5,7 @@ import TableData from "./components/TableData";
 import { Style } from "../style";
 
 function PlanPendingApply() {
-  const [orders, setOrders] = useState({ results: [] });
+  const [orders, setOrders] = useState({ items: [] });
   const [orderSearch, setOrderSearch] = useState("");
   const [orderValue, setOrderValue] = useState({});
   return (

@@ -1,6 +1,6 @@
 import _ from "lodash";
 import { call, put, takeLatest } from "redux-saga/effects";
-import { DELETE, GET, PATCH, POST } from "Services/ServiceBase";
+import { DELETE, GET, PUT, POST } from "Services/ServiceBase";
 import ServiceURL from "Services/ServiceURL";
 import TypeActions from "../TypeActions";
 
@@ -18,9 +18,9 @@ export function* getMeasureSizes(data) {
     } else {
       yield put({
         type: TypeActions.GET_MEASURE_SIZES_SUCCESS,
-        data: res.data,
+        data: res.data.data,
       });
-      !!callback?.success && callback.success(res.data);
+      !!callback?.success && callback.success(res.data.data);
     }
   } catch (error) {
     yield put({
@@ -45,9 +45,9 @@ export function* getMeasureSizeById(data) {
     } else {
       yield put({
         type: TypeActions.GET_MEASURE_SIZE_BY_ID_SUCCESS,
-        data: res.data,
+        data: res.data.data,
       });
-      !!callback?.success && callback.success(res.data);
+      !!callback?.success && callback.success(res.data.data);
     }
   } catch (error) {
     yield put({
@@ -90,7 +90,7 @@ export function* updateMeasureSize(data) {
   let payload = { ...data.body };
   delete payload["id"];
   try {
-    const res = yield call(PATCH, url, payload);
+    const res = yield call(PUT, url, payload);
     if (res.message && !_.isEmpty(res.message)) {
       yield put({
         type: TypeActions.UPDATE_MEASURE_SIZE_FAILED,

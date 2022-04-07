@@ -2,7 +2,7 @@ import TypeActions from "../TypeActions";
 
 const initialState = {
   nplOrders: {
-    results: [],
+    items: [],
   },
   nplOrderById: {},
   isGetNplOrders: false,
@@ -25,7 +25,7 @@ export const nplOrderReducer = (state = initialState, actions) => {
       return {
         ...state,
         isGetNplOrders: true,
-        nplOrders: { results: [] },
+        nplOrders: { items: [] },
         errors: {
           ...state.errors,
           isGetNplOrders: "",
@@ -34,7 +34,7 @@ export const nplOrderReducer = (state = initialState, actions) => {
     case TypeActions.GET_NPL_ORDERS_SUCCESS:
       return {
         ...state,
-        nplOrders: actions.data || { results: [] },
+        nplOrders: actions.data || { items: [] },
         isGetNplOrders: false,
         errors: {
           ...state.errors,
@@ -45,7 +45,7 @@ export const nplOrderReducer = (state = initialState, actions) => {
       return {
         ...state,
         isGetNplOrders: false,
-        nplOrders: { results: [] },
+        nplOrders: { items: [] },
         errors: {
           ...state.errors,
           getNplOrder: actions.error,

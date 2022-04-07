@@ -153,7 +153,7 @@ const InventoryReport = () => {
         <Col>
           <p>
             Hiển thị từ {(page - 1) * rowsPerPage + 1} đến{" "}
-            {page * rowsPerPage > producers.results.length
+            {page * rowsPerPage > producers.items.length
               ? !isNaN(producers?.totalResults)
                 ? producers.totalResults
                 : 0
@@ -236,7 +236,7 @@ const InventoryReport = () => {
           <div className="col">
             <Card style={{ overflowX: "scroll" }}>
               <ToolkitProvider
-                data={producers.results}
+                data={producers.items}
                 keyField="id"
                 columns={columns}
                 search

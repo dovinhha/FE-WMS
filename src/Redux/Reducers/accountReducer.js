@@ -14,7 +14,7 @@ const initialState = {
   isDeleteAccount: false,
   isConfigPasswordAccount: false,
   isAccountChangePassword: false,
-  accounts: { results: [] },
+  accounts: { items: [] },
   currentAccount: {},
   account: {},
 
@@ -151,7 +151,7 @@ const accountReducer = (state = initialState, actions) => {
     case TypeActions.GET_ACCOUNTS_REQUEST:
       return {
         ...state,
-        accounts: { results: [] },
+        accounts: { items: [] },
         isGetAccounts: true,
         errors: {
           ...state.errors,
@@ -162,7 +162,7 @@ const accountReducer = (state = initialState, actions) => {
     case TypeActions.GET_ACCOUNTS_SUCCESS:
       return {
         ...state,
-        accounts: actions.data || { results: [] },
+        accounts: actions.data || { items: [] },
         isGetAccounts: false,
         errors: {
           ...state.errors,
@@ -173,7 +173,7 @@ const accountReducer = (state = initialState, actions) => {
     case TypeActions.GET_ACCOUNTS_FAILED:
       return {
         ...state,
-        accounts: { results: [] },
+        accounts: { items: [] },
         isGetAccounts: false,
         errors: {
           ...state.errors,

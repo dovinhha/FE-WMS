@@ -2,7 +2,7 @@ import TypeActions from "../TypeActions";
 
 const initialState = {
   measureSizes: {
-    results: [],
+    items: [],
   },
   measureSizeById: {},
   isGetMeasureSizes: false,
@@ -25,7 +25,7 @@ export const measureSizeReducer = (state = initialState, actions) => {
       return {
         ...state,
         isGetMeasureSizes: true,
-        measureSizes: { results: [] },
+        measureSizes: { items: [] },
         errors: {
           ...state.errors,
           getMeasureSizes: "",
@@ -34,7 +34,7 @@ export const measureSizeReducer = (state = initialState, actions) => {
     case TypeActions.GET_MEASURE_SIZES_SUCCESS:
       return {
         ...state,
-        measureSizes: actions.data || { results: [] },
+        measureSizes: actions.data || { items: [] },
         isGetMeasureSizes: false,
         errors: {
           ...state.errors,
@@ -45,7 +45,7 @@ export const measureSizeReducer = (state = initialState, actions) => {
       return {
         ...state,
         isGetMeasureSizes: false,
-        measureSizes: { results: [] },
+        measureSizes: { items: [] },
         errors: {
           ...state.errors,
           getMeasureSizes: actions.error,

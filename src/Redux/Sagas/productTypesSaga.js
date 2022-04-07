@@ -1,6 +1,6 @@
 import _ from "lodash";
 import { call, put, takeLatest } from "redux-saga/effects";
-import { DELETE, GET, PATCH, POST } from "Services/ServiceBase";
+import { DELETE, GET, PUT, POST } from "Services/ServiceBase";
 import ServiceURL from "Services/ServiceURL";
 import TypeActions from "../TypeActions";
 
@@ -18,9 +18,9 @@ export function* getProductTypes(data) {
     } else {
       yield put({
         type: TypeActions.GET_PRODUCT_TYPES_SUCCESS,
-        data: res.data,
+        data: res.data.data,
       });
-      !!callback?.success && callback.success(res.data);
+      !!callback?.success && callback.success(res.data.data);
     }
   } catch (error) {
     yield put({
@@ -45,9 +45,9 @@ export function* getProductTypeById(data) {
     } else {
       yield put({
         type: TypeActions.GET_PRODUCT_TYPE_BY_ID_SUCCESS,
-        data: res.data,
+        data: res.data.data,
       });
-      !!callback?.success && callback.success(res.data);
+      !!callback?.success && callback.success(res.data.data);
     }
   } catch (error) {
     yield put({
@@ -99,7 +99,7 @@ export function* updateProductType(data) {
     ...payload
   } = data.body;
   try {
-    const res = yield call(PATCH, url, payload);
+    const res = yield call(PUT, url, payload);
     if (res.message && !_.isEmpty(res.message)) {
       yield put({
         type: TypeActions.UPDATE_PRODUCT_TYPE_FAILED,

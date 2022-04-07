@@ -291,7 +291,7 @@ const EditProduct = ({
                                   // });
                                   setFieldValue("parentId", e ? e.value : "");
                                 }}
-                                options={productTypes.results.map((item) => ({
+                                options={productTypes.items.map((item) => ({
                                   value: item.id,
                                   label: item.name,
                                 }))}
@@ -371,7 +371,7 @@ const EditProduct = ({
                                     );
                                   }
                                 }}
-                                options={productParameters.results.map(
+                                options={productParameters.items.map(
                                   (item) => ({
                                     value: item.id,
                                     label: item.name,

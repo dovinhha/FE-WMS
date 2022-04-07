@@ -118,7 +118,7 @@ function TableData({ nameTable, data }) {
         <Col>
           <p>
             Hiển thị từ {(page - 1) * rowsPerPage + 1} đến{" "}
-            {page * rowsPerPage > orderPlans.results.length
+            {page * rowsPerPage > orderPlans.items.length
               ? !isNaN(orderPlans?.totalResults)
                 ? orderPlans.totalResults
                 : 0
@@ -179,7 +179,7 @@ function TableData({ nameTable, data }) {
   return (
     <>
       <ToolkitProvider
-        data={orderPlans.results}
+        data={orderPlans.items}
         keyField="id"
         columns={columns}
         search

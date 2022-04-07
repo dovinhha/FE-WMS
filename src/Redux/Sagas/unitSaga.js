@@ -1,15 +1,16 @@
 import _ from "lodash";
 import { call, put, takeLatest } from "redux-saga/effects";
-import { DELETE, GET, PATCH, POST } from "Services/ServiceBase";
+import { DELETE, GET, POST, PUT } from "Services/ServiceBase";
 import ServiceURL from "Services/ServiceURL";
 import TypeActions from "../TypeActions";
 
 export function* getUnits(data) {
-  const url = ServiceURL.units + "?" + data.query;
+  const url = ServiceURL.itemUnit + "?" + data.query;
   const callback = data.callback;
   try {
     const res = yield call(GET, url);
-    if (res.message && !_.isEmpty(res.message)) {
+    console.log("res.data: ", res.data);
+    if (res.data.code !== 200) {
       yield put({
         type: TypeActions.GET_UNITS_FAILED,
         error: res.error.response.data.message,
@@ -18,9 +19,9 @@ export function* getUnits(data) {
     } else {
       yield put({
         type: TypeActions.GET_UNITS_SUCCESS,
-        data: res.data,
+        data: res.data.data,
       });
-      !!callback?.success && callback.success(res.data);
+      !!callback?.success && callback.success(res.data.data);
     }
   } catch (error) {
     yield put({
@@ -32,7 +33,7 @@ export function* getUnits(data) {
 }
 
 export function* getUnitById(data) {
-  const url = ServiceURL.units + "/" + data.params;
+  const url = ServiceURL.itemUnit + "/" + data.params;
   const callback = data.callback;
   try {
     const res = yield call(GET, url);
@@ -45,9 +46,9 @@ export function* getUnitById(data) {
     } else {
       yield put({
         type: TypeActions.GET_UNIT_BY_ID_SUCCESS,
-        data: res.data,
+        data: res.data.data,
       });
-      !!callback?.success && callback.success(res.data);
+      !!callback?.success && callback.success(res.data.data);
     }
   } catch (error) {
     yield put({
@@ -59,7 +60,7 @@ export function* getUnitById(data) {
 }
 
 export function* createUnit(data) {
-  const url = ServiceURL.units;
+  const url = ServiceURL.itemUnit;
   const callback = data.callback;
   try {
     const res = yield call(POST, url, data.body);
@@ -85,10 +86,10 @@ export function* createUnit(data) {
 }
 
 export function* updateUnit(data) {
-  const url = ServiceURL.units + "/" + data.params;
+  const url = ServiceURL.itemUnit + "/" + data.params;
   const callback = data.callback;
   try {
-    const res = yield call(PATCH, url, data.body);
+    const res = yield call(PUT, url, data.body);
     if (res.message && !_.isEmpty(res.message)) {
       yield put({
         type: TypeActions.UPDATE_UNIT_FAILED,
@@ -110,7 +111,7 @@ export function* updateUnit(data) {
   }
 }
 export function* deleteUnit(data) {
-  const url = ServiceURL.units + "/" + data.params;
+  const url = ServiceURL.itemUnit + "/" + data.params;
   const callback = data.callback;
   try {
     const res = yield call(DELETE, url);

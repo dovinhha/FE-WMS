@@ -2,10 +2,10 @@ import TypeActions from "../TypeActions";
 
 const initialState = {
   products: {
-    results: [],
+    items: [],
   },
   productParameters: {
-    results: [],
+    items: [],
   },
   productById: {},
   isGetProducts: false,
@@ -30,7 +30,7 @@ export const productReducer = (state = initialState, actions) => {
       return {
         ...state,
         isGetProducts: true,
-        products: { results: [] },
+        products: { items: [] },
         errors: {
           ...state.errors,
           getProducts: "",
@@ -39,7 +39,7 @@ export const productReducer = (state = initialState, actions) => {
     case TypeActions.GET_PRODUCTS_SUCCESS:
       return {
         ...state,
-        products: actions.data || { results: [] },
+        products: actions.data || { items: [] },
         isGetProducts: false,
         errors: {
           ...state.errors,
@@ -50,7 +50,7 @@ export const productReducer = (state = initialState, actions) => {
       return {
         ...state,
         isGetProducts: false,
-        products: { results: [] },
+        products: { items: [] },
         errors: {
           ...state.errors,
           getProducts: actions.error,
@@ -61,7 +61,7 @@ export const productReducer = (state = initialState, actions) => {
       return {
         ...state,
         isGetProductParameters: true,
-        productParameters: { results: [] },
+        productParameters: { items: [] },
         errors: {
           ...state.errors,
           getProductParameters: "",
@@ -70,7 +70,7 @@ export const productReducer = (state = initialState, actions) => {
     case TypeActions.GET_PRODUCT_PARAMETERS_SUCCESS:
       return {
         ...state,
-        productParameters: actions.data || { results: [] },
+        productParameters: actions.data || { items: [] },
         isGetProductParameters: false,
         errors: {
           ...state.errors,
@@ -81,7 +81,7 @@ export const productReducer = (state = initialState, actions) => {
       return {
         ...state,
         isGetProductParameters: false,
-        productParameters: { results: [] },
+        productParameters: { items: [] },
         errors: {
           ...state.errors,
           getProductParameters: actions.error,

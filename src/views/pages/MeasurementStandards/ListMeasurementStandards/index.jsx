@@ -205,7 +205,7 @@ function ListMeasurementStandards() {
         <Col>
           <p>
             Hiển thị từ {(page - 1) * rowsPerPage + 1} đến{" "}
-            {page * rowsPerPage > measurementStandards.results.length
+            {page * rowsPerPage > measurementStandards.items.length
               ? !isNaN(measurementStandards?.totalResults)
                 ? measurementStandards.totalResults
                 : 0
@@ -287,7 +287,7 @@ function ListMeasurementStandards() {
           <div className="col">
             <Card style={{ overflowX: "scroll" }}>
               <ToolkitProvider
-                data={[...measurementStandards.results]}
+                data={[...measurementStandards.items]}
                 keyField="id"
                 columns={columns}
                 search
