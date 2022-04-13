@@ -16,20 +16,20 @@ import SimpleHeader from "./components/Header";
 import ModalWarningCustom from "views/pages/components/ModalWarningCustom";
 import { EditSVG, DeleteSVG, ViewSVG } from "assets/svg";
 import { useDispatch, useSelector } from "react-redux";
-import { producerActions } from "Redux/Actions";
+import { productActions } from "Redux/Actions";
 import queryString from "query-string";
 import _ from "lodash";
 import { notify } from "common";
 import FormProductDifinition from "./FormProductDifinition";
 import ReactNotificationAlert from "react-notification-alert";
-const ProductGroups = () => {
+const Products = () => {
   const dispatch = useDispatch();
-  const { producers, isDeleteProducer, isGetProducers } = useSelector(
-    (state) => state.producerReducer
+  const { products, isDeleteProduct, isGetProducts } = useSelector(
+    (state) => state.productReducer
   );
 
   const notificationAlertRef = useRef(null);
-  const [producer, setProducer] = useState({});
+  const [product, setProduct] = useState({});
   const [isModalAdd, setIsModalAdd] = useState(false);
   const [formModal, setFormModal] = useState(false);
   const [notificationModal, setNotificationModal] = useState(false);
@@ -43,7 +43,7 @@ const ProductGroups = () => {
   const boxAction = (cell, row) => {
     return (
       <>
-        <button
+        {/* <button
           style={{
             padding: 0,
             border: "none",
@@ -54,14 +54,14 @@ const ProductGroups = () => {
           onClick={() => {
             // setFormModal(true);
             // setIsModalAdd(false);
-            // setProducer(row);
+            // setProduct(row);
           }}
         >
           <ViewSVG />
         </button>
         <UncontrolledTooltip delay={1} placement="top" target="view">
           Xem chi tiết
-        </UncontrolledTooltip>
+        </UncontrolledTooltip> */}
         <button
           style={{
             padding: 0,
@@ -73,7 +73,7 @@ const ProductGroups = () => {
           onClick={() => {
             setFormModal(true);
             setIsModalAdd(false);
-            setProducer(row);
+            setProduct(row);
           }}
         >
           <EditSVG />
@@ -85,7 +85,7 @@ const ProductGroups = () => {
           id="delete"
           onClick={() => {
             setNotificationModal(true);
-            setProducer(row);
+            setProduct(row);
           }}
           style={{ padding: 0, border: "none", background: "none" }}
         >
@@ -111,30 +111,36 @@ const ProductGroups = () => {
       text: "Kiểu sản phẩm",
     },
     {
-      dataField: "name",
-      text: "Nhóm sản phẩm",
+      dataField: "price",
+      text: "Giá sản phẩm",
     },
     {
-      dataField: "name",
-      text: "Có chi tiết",
+      dataField: "itemUnit.name",
+      text: "Đơn vị tính",
     },
     {
-      dataField: "name",
-      text: "Đối tượng sản xuất",
+      dataField: "itemType.name",
+      text: "Kiểu sản phẩm",
     },
     {
-      dataField: "name",
-      text: "Đẫ tạo BOM",
+      dataField: "description",
+      text: "Mô tả",
     },
     {
       dataField: "actions",
       text: "Hành động",
       formatter: boxAction,
+      style: {
+        textAlign: "center",
+      },
+      headerStyle: {
+        textAlign: "center",
+      },
     },
-    {
-      dataField: "name",
-      text: "BOM",
-    },
+    // {
+    //   dataField: "name",
+    //   text: "BOM",
+    // },
   ];
 
   const onSizePerPageChange = (value) => {
@@ -150,7 +156,7 @@ const ProductGroups = () => {
       setQuery({ ...query, page: value });
     },
     sizePerPage: rowsPerPage,
-    totalSize: producers?.totalResults,
+    totalSize: products?.totalResults,
     showTotal: false,
     withFirstAndLast: true,
     alwaysShowAllBtns: true,
@@ -159,14 +165,13 @@ const ProductGroups = () => {
         <Col>
           <p>
             Hiển thị từ {(page - 1) * rowsPerPage + 1} đến{" "}
-            {page * rowsPerPage > producers.items.length
-              ? !isNaN(producers?.totalResults)
-                ? producers.totalResults
+            {page * rowsPerPage > products.items.length
+              ? !isNaN(products?.totalResults)
+                ? products.totalResults
                 : 0
               : page * rowsPerPage}{" "}
             trong số{" "}
-            {!isNaN(producers?.totalResults) ? producers.totalResults : 0} bản
-            ghi
+            {!isNaN(products?.totalResults) ? products.totalResults : 0} bản ghi
           </p>
         </Col>
       </>
@@ -175,7 +180,7 @@ const ProductGroups = () => {
 
   const handleDelete = () => {
     dispatch(
-      producerActions.deleteProducer(producer.id, {
+      productActions.deleteProduct(product.id, {
         success: () => {
           setNotificationModal(false);
           notify(
@@ -184,7 +189,7 @@ const ProductGroups = () => {
             "Thông báo",
             `Xóa sản phẩm thành công!`
           );
-          handleGetProducers();
+          handleGetProducts();
         },
         failed: (mess) => {
           notify(
@@ -198,12 +203,12 @@ const ProductGroups = () => {
     );
   };
 
-  const handleGetProducers = () => {
-    dispatch(producerActions.getProducers(queryString.stringify(query)));
+  const handleGetProducts = () => {
+    dispatch(productActions.getProducts(queryString.stringify(query)));
   };
 
   useEffect(() => {
-    handleGetProducers();
+    handleGetProducts();
   }, [query]);
 
   return (
@@ -217,7 +222,7 @@ const ProductGroups = () => {
           setNotificationModal={setNotificationModal}
           name="sản phẩm"
           func={handleDelete}
-          isDelete={isDeleteProducer}
+          isDelete={isDeleteProduct}
         />
       )}
       {formModal && (
@@ -225,8 +230,8 @@ const ProductGroups = () => {
           isModalAdd={isModalAdd}
           formModal={formModal}
           setFormModal={setFormModal}
-          producer={producer}
-          handleGetProducers={handleGetProducers}
+          product={product}
+          handleGetProducts={handleGetProducts}
           notificationAlertRef={notificationAlertRef}
         />
       )}
@@ -235,105 +240,92 @@ const ProductGroups = () => {
         parentName="Quản lý"
         setFormModal={setFormModal}
         setIsModalAdd={setIsModalAdd}
-        setProducer={setProducer}
+        setProduct={setProduct}
       />
       <Container className="mt--6" fluid>
         <Row>
           <div className="col">
             <Card style={{ overflowX: "scroll" }}>
               <ToolkitProvider
-                data={producers.items}
+                data={products.items}
                 keyField="id"
                 columns={columns}
                 search
               >
                 {(props) => (
                   <>
-                    {isGetProducers ? (
-                      <Row className="align-items-center ">
-                        <Col
-                          md="12"
-                          className="d-flex justify-content-center p-5"
-                        >
-                          <div className="spinner-border text-info" />
-                        </Col>
-                      </Row>
-                    ) : (
-                      <>
-                        <Row>
-                          <Col>
-                            <CardHeader>
-                              <h3 className="mb-0">Danh sách sản phẩm</h3>
-                            </CardHeader>
-                          </Col>
-                        </Row>
+                    <Row>
+                      <Col>
+                        <CardHeader>
+                          <h3 className="mb-0">Danh sách sản phẩm</h3>
+                        </CardHeader>
+                      </Col>
+                    </Row>
 
-                        <Row>
-                          <Col>
-                            <CardHeader>
-                              <div className="mb-0 d-flex align-items-center">
-                                <p className="mb-0">Hiển thị </p>
-                                {
-                                  <select
-                                    value={rowsPerPage}
-                                    name="datatable-basic_length"
-                                    aria-controls="datatable-basic"
-                                    className="form-control form-control-sm mx-2"
-                                    style={{ maxWidth: 60 }}
-                                    onChange={(e) =>
-                                      onSizePerPageChange(e.target.value)
-                                    }
-                                  >
-                                    <option value="10">10</option>
-                                    <option value="25">25</option>
-                                    <option value="50">50</option>
-                                    <option value="100">100</option>
-                                  </select>
-                                }{" "}
-                                <p className="mb-0">dòng</p>
-                              </div>
-                            </CardHeader>
-                          </Col>
-                          <Col className="d-flex align-items-center mr-4 justify-content-end">
-                            <Row style={{ width: "100%" }}>
-                              <Col
-                                md={6}
-                                className="d-flex align-items-center justify-content-end"
+                    <Row>
+                      <Col>
+                        <CardHeader>
+                          <div className="mb-0 d-flex align-items-center">
+                            <p className="mb-0">Hiển thị </p>
+                            {
+                              <select
+                                value={rowsPerPage}
+                                name="datatable-basic_length"
+                                aria-controls="datatable-basic"
+                                className="form-control form-control-sm mx-2"
+                                style={{ maxWidth: 60 }}
+                                onChange={(e) =>
+                                  onSizePerPageChange(e.target.value)
+                                }
                               >
-                                <h4 className="mb-0">Tìm kiếm tên sản phẩm</h4>
-                              </Col>
-                              <Col md={6} className="d-flex align-items-center">
-                                <Input
-                                  id="search-by-name"
-                                  placeholder="Nhập tên"
-                                  type="text"
-                                  onChange={() => {}}
-                                  // value={""}
-                                  className="py-0"
-                                  size="sm"
-                                />
-                              </Col>
-                            </Row>
+                                <option value="10">10</option>
+                                <option value="25">25</option>
+                                <option value="50">50</option>
+                                <option value="100">100</option>
+                              </select>
+                            }{" "}
+                            <p className="mb-0">dòng</p>
+                          </div>
+                        </CardHeader>
+                      </Col>
+                      <Col className="d-flex align-items-center mr-4 justify-content-end">
+                        <Row style={{ width: "100%" }}>
+                          <Col
+                            md={6}
+                            className="d-flex align-items-center justify-content-end"
+                          >
+                            <h4 className="mb-0">Tìm kiếm tên sản phẩm</h4>
+                          </Col>
+                          <Col md={6} className="d-flex align-items-center">
+                            <Input
+                              id="search-by-name"
+                              placeholder="Nhập tên"
+                              type="text"
+                              onChange={() => {}}
+                              // value={""}
+                              className="py-0"
+                              size="sm"
+                            />
                           </Col>
                         </Row>
-                        <BootstrapTable
-                          {...props.baseProps}
-                          noDataIndication={() => {
-                            return (
-                              <span className="font-weight-bold text-danger">
-                                Không có dữ liệu!
-                              </span>
-                            );
-                          }}
-                          hover
-                          remote
-                          filter={filterFactory()}
-                          bootstrap4={true}
-                          pagination={pagination}
-                          bordered={false}
-                        />
-                      </>
-                    )}
+                      </Col>
+                    </Row>
+                    <BootstrapTable
+                      {...props.baseProps}
+                      noDataIndication={() => {
+                        return (
+                          <span className="font-weight-bold text-danger">
+                            Không có dữ liệu!
+                          </span>
+                        );
+                      }}
+                      hover
+                      remote
+                      filter={filterFactory()}
+                      bootstrap4={true}
+                      pagination={pagination}
+                      bordered={false}
+                    />
                   </>
                 )}
               </ToolkitProvider>
@@ -345,4 +337,4 @@ const ProductGroups = () => {
   );
 };
 
-export default ProductGroups;
+export default Products;

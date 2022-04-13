@@ -152,6 +152,7 @@ const FormUnit = ({
                             <Row className="mt-2">
                               <Col md="6">
                                 <InputCustom
+                                  className="max-height-input-custom"
                                   label="Mã đơn vị"
                                   placeholder="Nhập mã"
                                   type="text"
@@ -168,6 +169,7 @@ const FormUnit = ({
                               </Col>
                               <Col md="6">
                                 <InputCustom
+                                  className="max-height-input-custom"
                                   label="Tên đơn vị"
                                   placeholder="Nhập tên"
                                   type="text"

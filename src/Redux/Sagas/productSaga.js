@@ -5,8 +5,7 @@ import ServiceURL from "Services/ServiceURL";
 import TypeActions from "../TypeActions";
 
 export function* getProducts(data) {
-  const url =
-    ServiceURL.productTypes + "/" + ServiceURL.product + "?" + data.params;
+  const url = ServiceURL.product + "?" + data.params;
   const callback = data.callback;
   try {
     const res = yield call(GET, url);
@@ -34,8 +33,7 @@ export function* getProducts(data) {
 }
 
 export function* getProductById(data) {
-  const url =
-    ServiceURL.productTypes + "/" + ServiceURL.product + "/" + data.params;
+  const url = ServiceURL.product + "/" + data.params;
   const callback = data.callback;
   try {
     const res = yield call(GET, url);
@@ -63,7 +61,7 @@ export function* getProductById(data) {
 }
 
 export function* createProduct(data) {
-  const url = ServiceURL.productTypes + "/" + ServiceURL.product;
+  const url = ServiceURL.product;
   const callback = data.callback;
   try {
     const res = yield call(POST, url, data.body);
@@ -90,8 +88,7 @@ export function* createProduct(data) {
 }
 
 export function* updateProduct(data) {
-  const url =
-    ServiceURL.productTypes + "/" + ServiceURL.product + "/" + data.params;
+  const url = ServiceURL.product + "/" + data.params;
   const callback = data.callback;
   try {
     const res = yield call(PUT, url, data.body);
@@ -117,8 +114,7 @@ export function* updateProduct(data) {
   }
 }
 export function* deleteProduct(data) {
-  const url =
-    ServiceURL.productTypes + "/" + ServiceURL.product + "/" + data.params;
+  const url = ServiceURL.product + "/" + data.params;
   const callback = data.callback;
   try {
     const res = yield call(DELETE, url);

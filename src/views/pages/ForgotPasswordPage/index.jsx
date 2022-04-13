@@ -93,7 +93,7 @@ const LoginPage = () => {
         <NotificationAlert ref={notificationAlertRef} />
       </div>
       <AuthHeader
-        title="Hệ thống quản lý quy trình đơn hàng"
+        title="Hệ thống quản lý kho"
         lead="Nhập Email cần cấp lại mật khẩu"
       />
       <Container className="mt--8 pb-5">

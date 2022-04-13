@@ -3,13 +3,7 @@ import PropTypes from "prop-types";
 import { Button, Container, Row, Col } from "reactstrap";
 import { useHistory } from "react-router-dom";
 
-function Header({
-  name,
-  parentName,
-  setFormModal,
-  setIsModalAdd,
-  setProducer,
-}) {
+function Header({ name, parentName, setFormModal, setIsModalAdd, setProduct }) {
   const history = useHistory();
   return (
     <>
@@ -27,7 +21,7 @@ function Header({
                   onClick={() => {
                     setFormModal(true);
                     setIsModalAdd(true);
-                    setProducer({});
+                    setProduct({});
                   }}
                   className="btn-neutral"
                   color="default"

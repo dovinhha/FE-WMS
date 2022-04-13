@@ -85,21 +85,11 @@ export function* createProductType(data) {
 }
 
 export function* updateProductType(data) {
-  const url = ServiceURL.productTypes + "/" + data.body.id;
+  const url = ServiceURL.productTypes + "/" + data.params;
   const callback = data.callback;
-  // let payload = { ...data.body };
-  // delete payload["id"];
-  const {
-    id,
-    childrentIds,
-    productTagIds,
-    productParameterIds,
-    level,
-    status,
-    ...payload
-  } = data.body;
+
   try {
-    const res = yield call(PUT, url, payload);
+    const res = yield call(PUT, url, data.body);
     if (res.message && !_.isEmpty(res.message)) {
       yield put({
         type: TypeActions.UPDATE_PRODUCT_TYPE_FAILED,

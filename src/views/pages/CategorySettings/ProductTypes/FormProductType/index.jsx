@@ -16,57 +16,47 @@ import { Formik } from "formik";
 import * as yup from "yup";
 import _ from "lodash";
 
-import { producerActions } from "Redux/Actions";
+import { productTypesActions } from "Redux/Actions";
 import { notify } from "common";
 
 const FormProducer = ({
   setFormModal,
   formModal,
   isModalAdd,
-  producer,
-  handleGetProducers,
+  productType,
+  handleGetProductTypes,
   notificationAlertRef,
 }) => {
-  const { isCreateProducer, isUpdateProducer } = useSelector(
-    (state) => state.producerReducer
+  const { isCreateProductType, isUpdateProductType } = useSelector(
+    (state) => state.productTypesReducer
   );
   const dispatch = useDispatch();
 
-  const producerSchema = yup.object().shape({
-    code: yup.string().required("Vui lòng mã nhà sản xuất!"),
-    name: yup.string().required("Vui lòng nhập tên nhà sản xuất!"),
-    address: yup.string().required("Vui lòng nhập địa chỉ nhà sản xuất!"),
-    phone: yup
-      .string()
-      .required("Số điện thoại không được để trống!")
-      .matches("0[1-9][0-9]{8}", "Vui lòng nhập đúng định dạng số điện thoại!"),
-    contactPerson: yup.string().required("Vui lòng nhập tên người liên hệ!"),
-    capacity: yup
-      .string()
-      .required("Vui lòng nhập công xuất gia công nhà sản xuất!"),
+  const productTypeSchema = yup.object().shape({
+    code: yup.string().required("Vui lòng mã kiểu sản phẩm!"),
+    name: yup.string().required("Vui lòng nhập tên kiểu sản phẩm!"),
+    // description: yup
+    //   .string()
+    //   .required("Vui lòng nhập mô tả kiểu sản phẩm!"),
   });
 
   // const notificationAlertRef = useRef(null);
-  const [producerInfo, setProducerInfo] = useState({
+  const [productTypeInfo, setProductTypeInfo] = useState({
     code: "",
     name: "",
-    address: "",
-    phone: "",
-    contactPerson: "",
-    capacity: "",
-    notes: "",
+    description: "",
   });
 
   useEffect(() => {
-    !_.isEmpty(producer) && setProducerInfo(producer);
-  }, [producer]);
+    !_.isEmpty(productType) && setProductTypeInfo(productType);
+  }, [productType]);
 
   const onSubmit = (values, actions) => {
     const body = { ...values };
     delete body.id;
     isModalAdd
       ? dispatch(
-          producerActions.createProducer(values, {
+          productTypesActions.createProductType(values, {
             success: () => {
               actions.resetForm();
               clearData();
@@ -74,9 +64,9 @@ const FormProducer = ({
                 notificationAlertRef,
                 "success",
                 "Thông báo",
-                `Thêm nhà sản xuất thành công!`
+                `Thêm kiểu sản phẩm thành công!`
               );
-              handleGetProducers();
+              handleGetProductTypes();
               setFormModal(false);
             },
             failed: (mess) => {
@@ -84,13 +74,13 @@ const FormProducer = ({
                 notificationAlertRef,
                 "danger",
                 "Thông báo",
-                `Thêm nhà sản xuất thất bại. Lỗi ${mess}!`
+                `Thêm kiểu sản phẩm thất bại. Lỗi ${mess}!`
               );
             },
           })
         )
       : dispatch(
-          producerActions.updateProducer(body, producer.id, {
+          productTypesActions.updateProductType(body, productType.id, {
             success: () => {
               actions.resetForm();
               clearData();
@@ -98,9 +88,9 @@ const FormProducer = ({
                 notificationAlertRef,
                 "success",
                 "Thông báo",
-                `Cập nhật nhà sản xuất thành công!`
+                `Cập nhật kiểu sản phẩm thành công!`
               );
-              handleGetProducers();
+              handleGetProductTypes();
               setFormModal(false);
             },
             failed: (mess) => {
@@ -108,7 +98,7 @@ const FormProducer = ({
                 notificationAlertRef,
                 "danger",
                 "Thông báo",
-                `Cập nhật nhà sản xuất thất bại. Lỗi ${mess}!`
+                `Cập nhật kiểu sản phẩm thất bại. Lỗi ${mess}!`
               );
             },
           })
@@ -116,21 +106,17 @@ const FormProducer = ({
   };
 
   const clearData = () => {
-    setProducerInfo({
+    setProductTypeInfo({
       code: "",
       name: "",
-      address: "",
-      phone: "",
-      contactPerson: "",
-      capacity: "",
-      notes: "",
+      description: "",
     });
   };
 
   return (
     <>
       <Modal
-        className="modal-dialog-centered"
+        className=" modal-dialog-centered"
         size="lg"
         isOpen={formModal}
         toggle={() => {
@@ -142,15 +128,15 @@ const FormProducer = ({
             <CardHeader className="bg-transparent pb-2">
               <h2 className="mb-0">
                 {isModalAdd
-                  ? "Thêm nhà sản xuất"
-                  : "Cập nhật thông tin nhà sản xuất"}
+                  ? "Thêm kiểu sản phẩm"
+                  : "Cập nhật thông tin kiểu sản phẩm"}
               </h2>
             </CardHeader>
             <Formik
-              initialValues={producerInfo}
+              initialValues={productTypeInfo}
               enableReinitialize
               onSubmit={onSubmit}
-              validationSchema={producerSchema}
+              validationSchema={productTypeSchema}
             >
               {({
                 values,
@@ -160,7 +146,6 @@ const FormProducer = ({
                 touched,
                 resetForm,
                 handleBlur,
-                setFieldTouched,
               }) => {
                 return (
                   <>
@@ -171,7 +156,8 @@ const FormProducer = ({
                             <Row className="mt-2">
                               <Col md="6">
                                 <InputCustom
-                                  label="Mã sản xuất"
+                                  className="max-height-input-custom"
+                                  label="Mã kiểu sản phẩm"
                                   placeholder="Nhập mã"
                                   type="text"
                                   id="code"
@@ -185,10 +171,10 @@ const FormProducer = ({
                                   value={values.code}
                                 />
                               </Col>
-                              <Col md="6" />
                               <Col md="6">
                                 <InputCustom
-                                  label="Tên nhà sản xuất"
+                                  className="max-height-input-custom"
+                                  label="Tên kiểu sản phẩm"
                                   placeholder="Nhập tên"
                                   type="text"
                                   id="name"
@@ -202,92 +188,26 @@ const FormProducer = ({
                                   value={values.name}
                                 />
                               </Col>
-                              <Col md="6">
+                              <Col md="12">
                                 <InputCustom
-                                  label="Điện thoại"
-                                  placeholder="Nhập số điện thoại"
-                                  type="text"
-                                  name="phone"
-                                  id="phone"
-                                  invalid={errors.phone && touched.phone}
-                                  onBlur={handleBlur}
-                                  onChange={(e) => {
-                                    setFieldValue("phone", e.target.value);
-                                  }}
-                                  value={values.phone}
-                                  messageInvalid={errors.phone}
-                                />
-                              </Col>
-                              <Col md="6">
-                                <InputCustom
-                                  label="Nhười liên hệ"
-                                  name="contactPerson"
-                                  placeholder="Nhập tên"
-                                  type="text"
-                                  id="contactPerson"
+                                  label="Mô tả"
+                                  placeholder="Nhập mô tả"
+                                  type="textarea"
+                                  rows="5"
+                                  name="description"
+                                  id="description"
                                   invalid={
-                                    errors.contactPerson &&
-                                    touched.contactPerson
+                                    errors.description && touched.description
                                   }
                                   onBlur={handleBlur}
                                   onChange={(e) => {
                                     setFieldValue(
-                                      "contactPerson",
+                                      "description",
                                       e.target.value
                                     );
                                   }}
-                                  value={values.contactPerson}
-                                  messageInvalid={errors.contactPerson}
-                                />
-                              </Col>
-                              <Col md="6">
-                                <InputCustom
-                                  label="Công xuất gia công"
-                                  name="capacity"
-                                  placeholder="Nhập công xuất gia công"
-                                  type="text"
-                                  id="capacity"
-                                  invalid={errors.capacity && touched.capacity}
-                                  onBlur={handleBlur}
-                                  onChange={(e) => {
-                                    setFieldValue("capacity", e.target.value);
-                                  }}
-                                  value={values.capacity}
-                                  messageInvalid={errors.capacity}
-                                />
-                              </Col>
-                              <Col md={12}>
-                                <InputCustom
-                                  label="Địa chỉ"
-                                  name="address"
-                                  placeholder="Nhập địa chỉ"
-                                  type="textarea"
-                                  rows="4"
-                                  id="address"
-                                  invalid={errors.address && touched.address}
-                                  onBlur={handleBlur}
-                                  onChange={(e) => {
-                                    setFieldValue("address", e.target.value);
-                                  }}
-                                  value={values.address}
-                                  messageInvalid={errors.address}
-                                />
-                              </Col>
-
-                              <Col md="12">
-                                <InputCustom
-                                  label="Ghi chú"
-                                  name="notes"
-                                  placeholder="Nhập ghi chú"
-                                  type="textarea"
-                                  rows="4"
-                                  id="notes"
-                                  invalid={errors.notes && touched.notes}
-                                  onChange={(e) => {
-                                    setFieldValue("notes", e.target.value);
-                                  }}
-                                  value={values.notes}
-                                  messageInvalid={errors.notes}
+                                  value={values.description}
+                                  messageInvalid={errors.description}
                                 />
                               </Col>
                             </Row>
@@ -297,7 +217,7 @@ const FormProducer = ({
                         <Row className="d-flex justify-content-center mt-2">
                           <Button
                             onClick={() => {
-                              if (isCreateProducer || isUpdateProducer) {
+                              if (isCreateProductType || isUpdateProductType) {
                                 return;
                               }
                               clearData();
@@ -311,7 +231,7 @@ const FormProducer = ({
                             Hủy
                           </Button>
                           <LoadingButtonCustom
-                            loading={isCreateProducer || isUpdateProducer}
+                            loading={isCreateProductType || isUpdateProductType}
                             onClick={handleSubmit}
                             color="primary"
                             size="md"
@@ -329,8 +249,6 @@ const FormProducer = ({
           </Card>
         </div>
       </Modal>
-
-      {/* </Container> */}
     </>
   );
 };
