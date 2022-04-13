@@ -112,10 +112,7 @@ const LoginPage = () => {
       <div className="rna-wrapper">
         <NotificationAlert ref={notificationAlertRef} />
       </div>
-      <AuthHeader
-        title="Hệ thống quản lý quy trình đơn hàng"
-        lead="Nhập mật khẩu mới"
-      />
+      <AuthHeader title="Hệ thống quản lý kho" lead="Nhập mật khẩu mới" />
       <Container className="mt--8 pb-5">
         <Row className="justify-content-center">
           <Col lg="5" md="8">

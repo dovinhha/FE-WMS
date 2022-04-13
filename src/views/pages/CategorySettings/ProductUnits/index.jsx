@@ -50,25 +50,6 @@ const ProductUnits = () => {
             marginRight: ".5rem",
             background: "none",
           }}
-          id="view"
-          onClick={() => {
-            // setFormModal(true);
-            // setIsModalAdd(false);
-            // setUnit(row);
-          }}
-        >
-          <ViewSVG />
-        </button>
-        <UncontrolledTooltip delay={1} placement="top" target="view">
-          Xem chi tiết
-        </UncontrolledTooltip>
-        <button
-          style={{
-            padding: 0,
-            border: "none",
-            marginRight: ".5rem",
-            background: "none",
-          }}
           id="edit"
           onClick={() => {
             setFormModal(true);
@@ -114,6 +95,12 @@ const ProductUnits = () => {
       dataField: "actions",
       text: "Hành động",
       formatter: boxAction,
+      style: {
+        textAlign: "center",
+      },
+      headerStyle: {
+        textAlign: "center",
+      },
     },
   ];
 
@@ -154,7 +141,7 @@ const ProductUnits = () => {
 
   const handleDelete = () => {
     dispatch(
-      unitActions.deleteProducer(unit.id, {
+      unitActions.deleteUnit(unit.id, {
         success: () => {
           setNotificationModal(false);
           notify(
@@ -228,91 +215,78 @@ const ProductUnits = () => {
               >
                 {(props) => (
                   <>
-                    {isGetUnits ? (
-                      <Row className="align-items-center ">
-                        <Col
-                          md="12"
-                          className="d-flex justify-content-center p-5"
-                        >
-                          <div className="spinner-border text-info" />
-                        </Col>
-                      </Row>
-                    ) : (
-                      <>
-                        <Row>
-                          <Col>
-                            <CardHeader>
-                              <h3 className="mb-0">Danh sách đơn vị</h3>
-                            </CardHeader>
-                          </Col>
-                        </Row>
+                    <Row>
+                      <Col>
+                        <CardHeader>
+                          <h3 className="mb-0">Danh sách đơn vị</h3>
+                        </CardHeader>
+                      </Col>
+                    </Row>
 
-                        <Row>
-                          <Col>
-                            <CardHeader>
-                              <div className="mb-0 d-flex align-items-center">
-                                <p className="mb-0">Hiển thị </p>
-                                {
-                                  <select
-                                    value={rowsPerPage}
-                                    name="datatable-basic_length"
-                                    aria-controls="datatable-basic"
-                                    className="form-control form-control-sm mx-2"
-                                    style={{ maxWidth: 60 }}
-                                    onChange={(e) =>
-                                      onSizePerPageChange(e.target.value)
-                                    }
-                                  >
-                                    <option value="10">10</option>
-                                    <option value="25">25</option>
-                                    <option value="50">50</option>
-                                    <option value="100">100</option>
-                                  </select>
-                                }{" "}
-                                <p className="mb-0">dòng</p>
-                              </div>
-                            </CardHeader>
-                          </Col>
-                          <Col className="d-flex align-items-center mr-4 justify-content-end">
-                            <Row style={{ width: "100%" }}>
-                              <Col
-                                md={6}
-                                className="d-flex align-items-center justify-content-end"
+                    <Row>
+                      <Col>
+                        <CardHeader>
+                          <div className="mb-0 d-flex align-items-center">
+                            <p className="mb-0">Hiển thị </p>
+                            {
+                              <select
+                                value={rowsPerPage}
+                                name="datatable-basic_length"
+                                aria-controls="datatable-basic"
+                                className="form-control form-control-sm mx-2"
+                                style={{ maxWidth: 60 }}
+                                onChange={(e) =>
+                                  onSizePerPageChange(e.target.value)
+                                }
                               >
-                                <h4 className="mb-0">Tìm kiếm tên đơn vị</h4>
-                              </Col>
-                              <Col md={6} className="d-flex align-items-center">
-                                <Input
-                                  id="search-by-name"
-                                  placeholder="Nhập tên"
-                                  type="text"
-                                  onChange={() => {}}
-                                  // value={""}
-                                  className="py-0"
-                                  size="sm"
-                                />
-                              </Col>
-                            </Row>
+                                <option value="10">10</option>
+                                <option value="25">25</option>
+                                <option value="50">50</option>
+                                <option value="100">100</option>
+                              </select>
+                            }{" "}
+                            <p className="mb-0">dòng</p>
+                          </div>
+                        </CardHeader>
+                      </Col>
+                      <Col className="d-flex align-items-center mr-4 justify-content-end">
+                        <Row style={{ width: "100%" }}>
+                          <Col
+                            md={6}
+                            className="d-flex align-items-center justify-content-end"
+                          >
+                            <h4 className="mb-0">Tìm kiếm tên đơn vị</h4>
+                          </Col>
+                          <Col md={6} className="d-flex align-items-center">
+                            <Input
+                              id="search-by-name"
+                              placeholder="Nhập tên"
+                              type="text"
+                              onChange={() => {}}
+                              // value={""}
+                              className="py-0"
+                              size="sm"
+                            />
                           </Col>
                         </Row>
-                        <BootstrapTable
-                          {...props.baseProps}
-                          noDataIndication={() => {
-                            return (
-                              <span className="font-weight-bold text-danger">
-                                Không có dữ liệu!
-                              </span>
-                            );
-                          }}
-                          hover
-                          remote
-                          filter={filterFactory()}
-                          bootstrap4={true}
-                          pagination={pagination}
-                          bordered={false}
-                        />
-                      </>
-                    )}
+                      </Col>
+                    </Row>
+                    <BootstrapTable
+                      {...props.baseProps}
+                      noDataIndication={() => {
+                        return (
+                          <span className="font-weight-bold text-danger">
+                            Không có dữ liệu!
+                          </span>
+                        );
+                      }}
+                      hover
+                      remote
+                      filter={filterFactory()}
+                      bootstrap4={true}
+                      pagination={pagination}
+                      bordered={false}
+                    />
                   </>
                 )}
               </ToolkitProvider>

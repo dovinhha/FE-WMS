@@ -81,8 +81,9 @@ function AdminNavbar({ theme, sidenavOpen, toggleSidenav }) {
         )}
       >
         <Container fluid alignItems="center">
-          <Collapse navbar onClick={toggleSidenav} isOpen={true}>
+          <Collapse navbar isOpen={true}>
             <div
+              onClick={toggleSidenav}
               className={classnames("sidenav-toggler d-none d-xl-block", {
                 active: true,
               })}
@@ -95,9 +96,7 @@ function AdminNavbar({ theme, sidenavOpen, toggleSidenav }) {
                 <i className="sidenav-toggler-line" />
               </div>
             </div>
-            <p className="navbar-top name">
-              Hệ thống quản lý quy trình đơn hàng
-            </p>
+            <p className="navbar-top name">Hệ thống quản lý kho</p>
 
             <Nav className="align-items-center ml-md-auto" navbar></Nav>
             <Nav className="align-items-center ml-auto ml-md-0" navbar>

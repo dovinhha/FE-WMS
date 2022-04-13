@@ -86,11 +86,10 @@ const LoginPage = () => {
           {
             success: (data) => {
               setMessages("");
-              console.log("data: ", data);
               localStorage.setItem("expiresAt", new Date().getTime() + 60000);
-              localStorage.setItem("token", data.data.token);
+              localStorage.setItem("token", data.token);
               // localStorage.setItem("roleId", data.user.roleId);
-              localStorage.setItem("refreshToken", data.data.refreshToken);
+              localStorage.setItem("refreshToken", data.refreshToken);
               // localStorage.setItem("id", data.user.id);
               history.push("/");
             },
@@ -108,7 +107,7 @@ const LoginPage = () => {
   return (
     <>
       <AuthHeader
-        title="Hệ thống quản lý quy trình đơn hàng"
+        title="Hệ thống quản lý kho"
         lead="Đăng nhập để sử dụng các chức năng của hệ thống"
       />
       <Container className="mt--8 pb-5">
