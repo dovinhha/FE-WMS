@@ -27,6 +27,7 @@ export const materialNorms = "materialNorms";
 export const getAllProductInOrder = "getAllProductInOrder";
 export const materialSuggests = "materialSuggests";
 export const itemUnit = "item-unit";
+export const warehouse = "warehouse";
 export default {
   BASE_URL,
   logIn,
@@ -56,4 +57,5 @@ export default {
   getAllProductInOrder,
   materialSuggests,
   itemUnit,
+  warehouse,
 };

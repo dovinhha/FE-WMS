@@ -15,6 +15,7 @@ import measureSizeSaga from "./measureSizeSaga";
 import unitSaga from "./unitSaga";
 import materialNormSaga from "./materialNormSaga";
 import nplOrderSaga from "./nplOrderSaga";
+import warehouseSaga from "./warehouseSaga";
 export function* rootSagas() {
   yield all([fork(accountSaga)]);
   yield all([fork(roleSaga)]);
@@ -31,5 +32,6 @@ export function* rootSagas() {
   yield all([fork(unitSaga)]);
   yield all([fork(materialNormSaga)]);
   yield all([fork(nplOrderSaga)]);
+  yield all([fork(warehouseSaga)]);
 }
 export default rootSagas;

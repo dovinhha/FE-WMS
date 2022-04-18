@@ -12,9 +12,9 @@ export function* getOrders(data) {
     if (res.message && !_.isEmpty(res.message)) {
       yield put({
         type: TypeActions.GET_ORDERS_FAILED,
-        error: res.error.response.data.message,
+        error: res?.data?.message,
       });
-      !!callback?.failed && callback.failed(res.error.response.data.message);
+      !!callback?.failed && callback.failed(res?.data?.message);
     } else {
       yield put({
         type: TypeActions.GET_ORDERS_SUCCESS,
@@ -39,9 +39,9 @@ export function* getOrderById(data) {
     if (res.message && !_.isEmpty(res.message)) {
       yield put({
         type: TypeActions.GET_ORDER_BY_ID_FAILED,
-        error: res.error.response.data.message,
+        error: res?.data?.message,
       });
-      !!callback?.failed && callback.failed(res.error.response.data.message);
+      !!callback?.failed && callback.failed(res?.data?.message);
     } else {
       yield put({
         type: TypeActions.GET_ORDER_BY_ID_SUCCESS,
@@ -66,9 +66,9 @@ export function* createOrder(data) {
     if (res.message && !_.isEmpty(res.message)) {
       yield put({
         type: TypeActions.CREATE_ORDER_FAILED,
-        error: res.error.response.data.message,
+        error: res?.data?.message,
       });
-      !!callback?.failed && callback.failed(res.error.response.data.message);
+      !!callback?.failed && callback.failed(res?.data?.message);
     } else {
       yield put({
         type: TypeActions.CREATE_ORDER_SUCCESS,
@@ -92,9 +92,9 @@ export function* updateOrder(data) {
     if (res.message && !_.isEmpty(res.message)) {
       yield put({
         type: TypeActions.UPDATE_ORDER_FAILED,
-        error: res.error.response.data.message,
+        error: res?.data?.message,
       });
-      !!callback?.failed && callback.failed(res.error.response.data.message);
+      !!callback?.failed && callback.failed(res?.data?.message);
     } else {
       yield put({
         type: TypeActions.UPDATE_ORDER_SUCCESS,
@@ -118,9 +118,9 @@ export function* deleteOrder(data) {
     if (res.message && !_.isEmpty(res.message)) {
       yield put({
         type: TypeActions.DELETE_ORDER_FAILED,
-        error: res.error.response.data.message,
+        error: res?.data?.message,
       });
-      !!callback?.failed && callback.failed(res.error.response.data.message);
+      !!callback?.failed && callback.failed(res?.data?.message);
     } else {
       yield put({
         type: TypeActions.DELETE_ORDER_SUCCESS,
@@ -144,9 +144,9 @@ export function* getCustomerInOrders(data) {
     if (res.message && !_.isEmpty(res.message)) {
       yield put({
         type: TypeActions.GET_CUSTOMERS_IN_ORDER_FAILED,
-        error: res.error.response.data.message,
+        error: res?.data?.message,
       });
-      !!callback?.failed && callback.failed(res.error.response.data.message);
+      !!callback?.failed && callback.failed(res?.data?.message);
     } else {
       yield put({
         type: TypeActions.GET_CUSTOMERS_IN_ORDER_SUCCESS,
@@ -171,9 +171,9 @@ export function* getCustomerInOrder(data) {
     if (res.message && !_.isEmpty(res.message)) {
       yield put({
         type: TypeActions.GET_CUSTOMER_IN_ORDER_FAILED,
-        error: res.error.response.data.message,
+        error: res?.data?.message,
       });
-      !!callback?.failed && callback.failed(res.error.response.data.message);
+      !!callback?.failed && callback.failed(res?.data?.message);
     } else {
       yield put({
         type: TypeActions.GET_CUSTOMER_IN_ORDER_SUCCESS,
@@ -198,9 +198,9 @@ export function* convertMeasureSize(data) {
     if (res.message && !_.isEmpty(res.message)) {
       yield put({
         type: TypeActions.CONVERT_MEASURE_SIZE_FAILED,
-        error: res.error.response.data.message,
+        error: res?.data?.message,
       });
-      !!callback?.failed && callback.failed(res.error.response.data.message);
+      !!callback?.failed && callback.failed(res?.data?.message);
     } else {
       yield put({
         type: TypeActions.CONVERT_MEASURE_SIZE_SUCCESS,
@@ -227,9 +227,9 @@ export function* uploadCustomerOrder(data) {
     if (res.message && !_.isEmpty(res.message)) {
       yield put({
         type: TypeActions.UPLOAD_CUSTOMER_ORDER_FAILED,
-        error: res.error.response.data.message,
+        error: res?.data?.message,
       });
-      !!callback?.failed && callback.failed(res.error.response.data.message);
+      !!callback?.failed && callback.failed(res?.data?.message);
     } else {
       yield put({
         type: TypeActions.UPLOAD_CUSTOMER_ORDER_SUCCESS,
@@ -254,9 +254,9 @@ export function* approveOrder(data) {
       console.log("failed: ", res.message);
       yield put({
         type: TypeActions.APPROVE_ORDER_FAILED,
-        error: res.error.response.data.message,
+        error: res?.data?.message,
       });
-      !!callback?.failed && callback.failed(res.error.response.data.message);
+      !!callback?.failed && callback.failed(res?.data?.message);
     } else {
       yield put({
         type: TypeActions.APPROVE_ORDER_SUCCESS,
@@ -281,9 +281,9 @@ export function* addSewMeasureSize(data) {
     if (res.message && !_.isEmpty(res.message)) {
       yield put({
         type: TypeActions.ADD_SEW_MEASURE_SIZE_FAILED,
-        error: res.error.response.data.message,
+        error: res?.data?.message,
       });
-      !!callback?.failed && callback.failed(res.error.response.data.message);
+      !!callback?.failed && callback.failed(res?.data?.message);
     } else {
       yield put({
         type: TypeActions.ADD_SEW_MEASURE_SIZE_SUCCESS,
@@ -307,9 +307,9 @@ export function* updateCustomerInOrder(data) {
     if (res.message && !_.isEmpty(res.message)) {
       yield put({
         type: TypeActions.UPDATE_CUSTOMER_IN_ORDER_FAILED,
-        error: res.error.response.data.message,
+        error: res?.data?.message,
       });
-      !!callback?.failed && callback.failed(res.error.response.data.message);
+      !!callback?.failed && callback.failed(res?.data?.message);
     } else {
       yield put({
         type: TypeActions.UPDATE_CUSTOMER_IN_ORDER_SUCCESS,
@@ -333,9 +333,9 @@ export function* getOrdersConvert(data) {
     if (res.message && !_.isEmpty(res.message)) {
       yield put({
         type: TypeActions.GET_ORDERS_CONVERT_FAILED,
-        error: res.error.response.data.message,
+        error: res?.data?.message,
       });
-      !!callback?.failed && callback.failed(res.error.response.data.message);
+      !!callback?.failed && callback.failed(res?.data?.message);
     } else {
       yield put({
         type: TypeActions.GET_ORDERS_CONVERT_SUCCESS,
@@ -361,9 +361,9 @@ export function* approveAllCustomerInOrder(data) {
     if (res.message && !_.isEmpty(res.message)) {
       yield put({
         type: TypeActions.APPROVE_ALL_CUSTOMER_IN_ORDER_FAILED,
-        error: res.error.response.data.message,
+        error: res?.data?.message,
       });
-      !!callback?.failed && callback.failed(res.error.response.data.message);
+      !!callback?.failed && callback.failed(res?.data?.message);
     } else {
       yield put({
         type: TypeActions.APPROVE_ALL_CUSTOMER_IN_ORDER_SUCCESS,
@@ -388,9 +388,9 @@ export function* approveManyCustomerInOrder(data) {
     if (res.message && !_.isEmpty(res.message)) {
       yield put({
         type: TypeActions.APPROVE_MANY_CUSTOMER_IN_ORDER_FAILED,
-        error: res.error.response.data.message,
+        error: res?.data?.message,
       });
-      !!callback?.failed && callback.failed(res.error.response.data.message);
+      !!callback?.failed && callback.failed(res?.data?.message);
     } else {
       yield put({
         type: TypeActions.APPROVE_MANY_CUSTOMER_IN_ORDER_SUCCESS,
@@ -413,9 +413,9 @@ export function* getUnusualList(data) {
     if (res.message && !_.isEmpty(res.message)) {
       yield put({
         type: TypeActions.GET_UNUSUAL_LIST_FAILED,
-        error: res.error.response.data.message,
+        error: res?.data?.message,
       });
-      !!callback?.failed && callback.failed(res.error.response.data.message);
+      !!callback?.failed && callback.failed(res?.data?.message);
     } else {
       yield put({
         type: TypeActions.GET_UNUSUAL_LIST_SUCCESS,
@@ -444,9 +444,9 @@ export function* getAllProductsInOrder(data) {
     if (res.message && !_.isEmpty(res.message)) {
       yield put({
         type: TypeActions.GET_ALL_PRODUCT_IN_ORDER_FAILED,
-        error: res.error.response.data.message,
+        error: res?.data?.message,
       });
-      !!callback?.failed && callback.failed(res.error.response.data.message);
+      !!callback?.failed && callback.failed(res?.data?.message);
     } else {
       yield put({
         type: TypeActions.GET_ALL_PRODUCT_IN_ORDER_SUCCESS,
@@ -471,9 +471,9 @@ export function* checkUnusualList(data) {
     if (res.message && !_.isEmpty(res.message)) {
       yield put({
         type: TypeActions.CHECK_UNUSUAL_SIZE_FAILED,
-        error: res.error.response.data.message,
+        error: res?.data?.message,
       });
-      !!callback?.failed && callback.failed(res.error.response.data.message);
+      !!callback?.failed && callback.failed(res?.data?.message);
     } else {
       yield put({
         type: TypeActions.CHECK_UNUSUAL_SIZE_SUCCESS,

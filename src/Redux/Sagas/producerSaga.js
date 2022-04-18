@@ -12,9 +12,9 @@ export function* getProducers(data) {
     if (res.message && !_.isEmpty(res.message)) {
       yield put({
         type: TypeActions.GET_PRODUCERS_FAILED,
-        error: res.error.response.data.message,
+        error: res?.data?.message,
       });
-      !!callback?.failed && callback.failed(res.error.response.data.message);
+      !!callback?.failed && callback.failed(res?.data?.message);
     } else {
       yield put({
         type: TypeActions.GET_PRODUCERS_SUCCESS,
@@ -39,9 +39,9 @@ export function* getProducerById(data) {
     if (res.message && !_.isEmpty(res.message)) {
       yield put({
         type: TypeActions.GET_PRODUCER_BY_ID_FAILED,
-        error: res.error.response.data.message,
+        error: res?.data?.message,
       });
-      !!callback?.failed && callback.failed(res.error.response.data.message);
+      !!callback?.failed && callback.failed(res?.data?.message);
     } else {
       yield put({
         type: TypeActions.GET_PRODUCER_BY_ID_SUCCESS,
@@ -66,9 +66,9 @@ export function* createProducer(data) {
     if (res.message && !_.isEmpty(res.message)) {
       yield put({
         type: TypeActions.CREATE_PRODUCER_FAILED,
-        error: res.error.response.data.message,
+        error: res?.data?.message,
       });
-      !!callback?.failed && callback.failed(res.error.response.data.message);
+      !!callback?.failed && callback.failed(res?.data?.message);
     } else {
       yield put({
         type: TypeActions.CREATE_PRODUCER_SUCCESS,
@@ -92,9 +92,9 @@ export function* updateProducer(data) {
     if (res.message && !_.isEmpty(res.message)) {
       yield put({
         type: TypeActions.UPDATE_PRODUCER_FAILED,
-        error: res.error.response.data.message,
+        error: res?.data?.message,
       });
-      !!callback?.failed && callback.failed(res.error.response.data.message);
+      !!callback?.failed && callback.failed(res?.data?.message);
     } else {
       yield put({
         type: TypeActions.UPDATE_PRODUCER_SUCCESS,
@@ -117,9 +117,9 @@ export function* deleteProducer(data) {
     if (res.message && !_.isEmpty(res.message)) {
       yield put({
         type: TypeActions.DELETE_PRODUCER_FAILED,
-        error: res.error.response.data.message,
+        error: res?.data?.message,
       });
-      !!callback?.failed && callback.failed(res.error.response.data.message);
+      !!callback?.failed && callback.failed(res?.data?.message);
     } else {
       yield put({
         type: TypeActions.DELETE_PRODUCER_SUCCESS,

@@ -12,9 +12,9 @@ export function* getNplOrders(data) {
     if (res.message && !_.isEmpty(res.message)) {
       yield put({
         type: TypeActions.GET_NPL_ORDERS_FAILED,
-        error: res.error.response.data.message,
+        error: res?.data?.message,
       });
-      !!callback?.failed && callback.failed(res.error.response.data.message);
+      !!callback?.failed && callback.failed(res?.data?.message);
     } else {
       yield put({
         type: TypeActions.GET_NPL_ORDERS_SUCCESS,
@@ -40,9 +40,9 @@ export function* getNplOrderById(data) {
     if (res.message && !_.isEmpty(res.message)) {
       yield put({
         type: TypeActions.GET_NPL_ORDER_BY_ID_FAILED,
-        error: res.error.response.data.message,
+        error: res?.data?.message,
       });
-      !!callback?.failed && callback.failed(res.error.response.data.message);
+      !!callback?.failed && callback.failed(res?.data?.message);
     } else {
       yield put({
         type: TypeActions.GET_NPL_ORDER_BY_ID_SUCCESS,
@@ -67,9 +67,9 @@ export function* createNplOrder(data) {
     if (res.message && !_.isEmpty(res.message)) {
       yield put({
         type: TypeActions.CREATE_NPL_ORDER_FAILED,
-        error: res.error.response.data.message,
+        error: res?.data?.message,
       });
-      !!callback?.failed && callback.failed(res.error.response.data.message);
+      !!callback?.failed && callback.failed(res?.data?.message);
     } else {
       yield put({
         type: TypeActions.CREATE_NPL_ORDER_SUCCESS,
@@ -93,9 +93,9 @@ export function* updateNplOrder(data) {
     if (res.message && !_.isEmpty(res.message)) {
       yield put({
         type: TypeActions.UPDATE_NPL_ORDER_FAILED,
-        error: res.error.response.data.message,
+        error: res?.data?.message,
       });
-      !!callback?.failed && callback.failed(res.error.response.data.message);
+      !!callback?.failed && callback.failed(res?.data?.message);
     } else {
       yield put({
         type: TypeActions.UPDATE_NPL_ORDER_SUCCESS,
@@ -118,9 +118,9 @@ export function* deleteNplOrder(data) {
     if (res.message && !_.isEmpty(res.message)) {
       yield put({
         type: TypeActions.DELETE_NPL_ORDER_FAILED,
-        error: res.error.response.data.message,
+        error: res?.data?.message,
       });
-      !!callback?.failed && callback.failed(res.error.response.data.message);
+      !!callback?.failed && callback.failed(res?.data?.message);
     } else {
       yield put({
         type: TypeActions.DELETE_NPL_ORDER_SUCCESS,

@@ -9,13 +9,12 @@ export function* getUnits(data) {
   const callback = data.callback;
   try {
     const res = yield call(GET, url);
-    console.log("res.data: ", res.data);
-    if (res.data.code !== 200) {
+    if (res?.data?.code !== 200) {
       yield put({
         type: TypeActions.GET_UNITS_FAILED,
-        error: res.error.response.data.message,
+        error: res?.data?.message,
       });
-      !!callback?.failed && callback.failed(res.error.response.data.message);
+      !!callback?.failed && callback.failed(res?.data?.message);
     } else {
       yield put({
         type: TypeActions.GET_UNITS_SUCCESS,
@@ -37,12 +36,12 @@ export function* getUnitById(data) {
   const callback = data.callback;
   try {
     const res = yield call(GET, url);
-    if (res.message && !_.isEmpty(res.message)) {
+    if (res?.data?.code !== 200) {
       yield put({
         type: TypeActions.GET_UNIT_BY_ID_FAILED,
-        error: res.error.response.data.message,
+        error: res?.data?.message,
       });
-      !!callback?.failed && callback.failed(res.error.response.data.message);
+      !!callback?.failed && callback.failed(res?.data?.message);
     } else {
       yield put({
         type: TypeActions.GET_UNIT_BY_ID_SUCCESS,
@@ -64,12 +63,12 @@ export function* createUnit(data) {
   const callback = data.callback;
   try {
     const res = yield call(POST, url, data.body);
-    if (res.message && !_.isEmpty(res.message)) {
+    if (res?.data?.code !== 201) {
       yield put({
         type: TypeActions.CREATE_UNIT_FAILED,
-        error: res.error.response.data.message,
+        error: res?.data?.message,
       });
-      !!callback?.failed && callback.failed(res.error.response.data.message);
+      !!callback?.failed && callback.failed(res?.data?.message);
     } else {
       yield put({
         type: TypeActions.CREATE_UNIT_SUCCESS,
@@ -90,12 +89,12 @@ export function* updateUnit(data) {
   const callback = data.callback;
   try {
     const res = yield call(PUT, url, data.body);
-    if (res.message && !_.isEmpty(res.message)) {
+    if (res?.data?.code !== 200) {
       yield put({
         type: TypeActions.UPDATE_UNIT_FAILED,
-        error: res.error.response.data.message,
+        error: res?.data?.message,
       });
-      !!callback?.failed && callback.failed(res.error.response.data.message);
+      !!callback?.failed && callback.failed(res?.data?.message);
     } else {
       yield put({
         type: TypeActions.UPDATE_UNIT_SUCCESS,
@@ -115,12 +114,12 @@ export function* deleteUnit(data) {
   const callback = data.callback;
   try {
     const res = yield call(DELETE, url);
-    if (res.message && !_.isEmpty(res.message)) {
+    if (res?.data?.code !== 200) {
       yield put({
         type: TypeActions.DELETE_UNIT_FAILED,
-        error: res.error.response.data.message,
+        error: res?.data?.message,
       });
-      !!callback?.failed && callback.failed(res.error.response.data.message);
+      !!callback?.failed && callback.failed(res?.data?.message);
     } else {
       yield put({
         type: TypeActions.DELETE_UNIT_SUCCESS,

@@ -1,146 +1,144 @@
 import _ from "lodash";
 import { call, put, takeLatest } from "redux-saga/effects";
-import { DELETE, GET, PUT, POST } from "Services/ServiceBase";
+import { DELETE, GET, POST, PUT } from "Services/ServiceBase";
 import ServiceURL from "Services/ServiceURL";
 import TypeActions from "../TypeActions";
 
-export function* getProductTypes(data) {
-  const url = ServiceURL.productTypes + "?" + data.params;
+export function* getWarehouses(data) {
+  const url = ServiceURL.warehouse + "?" + data.query;
   const callback = data.callback;
   try {
     const res = yield call(GET, url);
     if (res?.data?.code !== 200) {
       yield put({
-        type: TypeActions.GET_PRODUCT_TYPES_FAILED,
+        type: TypeActions.GET_WAREHOUSES_FAILED,
         error: res?.data?.message,
       });
       !!callback?.failed && callback.failed(res?.data?.message);
     } else {
       yield put({
-        type: TypeActions.GET_PRODUCT_TYPES_SUCCESS,
+        type: TypeActions.GET_WAREHOUSES_SUCCESS,
         data: res.data.data,
       });
       !!callback?.success && callback.success(res.data.data);
     }
   } catch (error) {
     yield put({
-      type: TypeActions.GET_PRODUCT_TYPES_FAILED,
+      type: TypeActions.GET_WAREHOUSES_FAILED,
       error: error?.response?.data?.message,
     });
     !!callback?.failed && callback.failed(error?.response?.data?.message);
   }
 }
 
-export function* getProductTypeById(data) {
-  const url = ServiceURL.productTypes + "/" + data.params;
+export function* getWarehouseById(data) {
+  const url = ServiceURL.warehouse + "/" + data.params;
   const callback = data.callback;
   try {
     const res = yield call(GET, url);
     if (res?.data?.code !== 200) {
       yield put({
-        type: TypeActions.GET_PRODUCT_TYPE_BY_ID_FAILED,
+        type: TypeActions.GET_WAREHOUSE_BY_ID_FAILED,
         error: res?.data?.message,
       });
       !!callback?.failed && callback.failed(res?.data?.message);
     } else {
       yield put({
-        type: TypeActions.GET_PRODUCT_TYPE_BY_ID_SUCCESS,
+        type: TypeActions.GET_WAREHOUSE_BY_ID_SUCCESS,
         data: res.data.data,
       });
       !!callback?.success && callback.success(res.data.data);
     }
   } catch (error) {
     yield put({
-      type: TypeActions.GET_PRODUCT_TYPE_BY_ID_FAILED,
+      type: TypeActions.GET_WAREHOUSE_BY_ID_FAILED,
       error: error?.response?.data?.message,
     });
     !!callback?.failed && callback.failed(error?.response?.data?.message);
   }
 }
 
-export function* createProductType(data) {
-  const url = ServiceURL.productTypes;
+export function* createWarehouse(data) {
+  const url = ServiceURL.warehouse;
   const callback = data.callback;
   try {
     const res = yield call(POST, url, data.body);
     if (res?.data?.code !== 201) {
       yield put({
-        type: TypeActions.CREATE_PRODUCT_TYPE_FAILED,
+        type: TypeActions.CREATE_WAREHOUSE_FAILED,
         error: res?.data?.message,
       });
       !!callback?.failed && callback.failed(res?.data?.message);
     } else {
       yield put({
-        type: TypeActions.CREATE_PRODUCT_TYPE_SUCCESS,
+        type: TypeActions.CREATE_WAREHOUSE_SUCCESS,
       });
       !!callback?.success && callback.success();
     }
   } catch (error) {
     yield put({
-      type: TypeActions.CREATE_PRODUCT_TYPE_FAILED,
+      type: TypeActions.CREATE_WAREHOUSE_FAILED,
       error: error?.response?.data?.message,
     });
     !!callback?.failed && callback.failed(error?.response?.data?.message);
   }
 }
 
-export function* updateProductType(data) {
-  const url = ServiceURL.productTypes + "/" + data.params;
+export function* updateWarehouse(data) {
+  const url = ServiceURL.warehouse + "/" + data.params;
   const callback = data.callback;
-
   try {
     const res = yield call(PUT, url, data.body);
     if (res?.data?.code !== 200) {
       yield put({
-        type: TypeActions.UPDATE_PRODUCT_TYPE_FAILED,
+        type: TypeActions.UPDATE_WAREHOUSE_FAILED,
         error: res?.data?.message,
       });
       !!callback?.failed && callback.failed(res?.data?.message);
     } else {
       yield put({
-        type: TypeActions.UPDATE_PRODUCT_TYPE_SUCCESS,
+        type: TypeActions.UPDATE_WAREHOUSE_SUCCESS,
       });
       !!callback?.success && callback.success();
     }
   } catch (error) {
     yield put({
-      type: TypeActions.UPDATE_PRODUCT_TYPE_FAILED,
+      type: TypeActions.UPDATE_WAREHOUSE_FAILED,
       error: error?.response?.data?.message,
     });
     !!callback?.failed && callback.failed(error?.response?.data?.message);
   }
 }
-export function* deleteProductType(data) {
-  const url = ServiceURL.productTypes + "/" + data.params;
+export function* deleteWarehouse(data) {
+  const url = ServiceURL.warehouse + "/" + data.params;
   const callback = data.callback;
   try {
     const res = yield call(DELETE, url);
     if (res?.data?.code !== 200) {
       yield put({
-        type: TypeActions.DELETE_PRODUCT_FAILED,
+        type: TypeActions.DELETE_WAREHOUSE_FAILED,
         error: res?.data?.message,
       });
       !!callback?.failed && callback.failed(res?.data?.message);
     } else {
       yield put({
-        type: TypeActions.DELETE_PRODUCT_SUCCESS,
+        type: TypeActions.DELETE_WAREHOUSE_SUCCESS,
       });
-
       !!callback?.success && callback.success();
     }
   } catch (error) {
     yield put({
-      type: TypeActions.DELETE_PRODUCT_FAILED,
+      type: TypeActions.DELETE_WAREHOUSE_FAILED,
       error: error?.response?.data?.message,
     });
     !!callback?.failed && callback.failed(error?.response?.data?.message);
   }
 }
 
-export default function* productTypesSaga() {
-  yield takeLatest(TypeActions.CREATE_PRODUCT_TYPE_REQUEST, createProductType);
-  yield takeLatest(TypeActions.GET_PRODUCT_TYPES_REQUEST, getProductTypes);
-  yield takeLatest(TypeActions.GET_PRODUCT_BY_ID_REQUEST, getProductTypeById);
-  yield takeLatest(TypeActions.UPDATE_PRODUCT_TYPE_REQUEST, updateProductType);
-  yield takeLatest(TypeActions.DELETE_PRODUCT_TYPE_REQUEST, deleteProductType);
+export default function* unitSaga() {
+  yield takeLatest(TypeActions.GET_WAREHOUSES_REQUEST, getWarehouses);
+  yield takeLatest(TypeActions.GET_WAREHOUSE_BY_ID_REQUEST, getWarehouseById);
+  yield takeLatest(TypeActions.CREATE_WAREHOUSE_REQUEST, createWarehouse);
+  yield takeLatest(TypeActions.UPDATE_WAREHOUSE_REQUEST, updateWarehouse);
+  yield takeLatest(TypeActions.DELETE_WAREHOUSE_REQUEST, deleteWarehouse);
 }

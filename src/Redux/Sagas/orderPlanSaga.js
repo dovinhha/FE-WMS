@@ -12,9 +12,9 @@ export function* getOrderPlans(data) {
     if (res.message && !_.isEmpty(res.message)) {
       yield put({
         type: TypeActions.GET_ORDER_PLANS_FAILED,
-        error: res.error.response.data.message,
+        error: res?.data?.message,
       });
-      !!callback?.failed && callback.failed(res.error.response.data.message);
+      !!callback?.failed && callback.failed(res?.data?.message);
     } else {
       yield put({
         type: TypeActions.GET_ORDER_PLANS_SUCCESS,
@@ -39,9 +39,9 @@ export function* getOrderPlanById(data) {
     if (res.message && !_.isEmpty(res.message)) {
       yield put({
         type: TypeActions.GET_ORDER_PLAN_BY_ID_FAILED,
-        error: res.error.response.data.message,
+        error: res?.data?.message,
       });
-      !!callback?.failed && callback.failed(res.error.response.data.message);
+      !!callback?.failed && callback.failed(res?.data?.message);
     } else {
       yield put({
         type: TypeActions.GET_ORDER_PLAN_BY_ID_SUCCESS,
@@ -66,9 +66,9 @@ export function* createOrderPlan(data) {
     if (res.message && !_.isEmpty(res.message)) {
       yield put({
         type: TypeActions.CREATE_ORDER_PLAN_FAILED,
-        error: res.error.response.data.message,
+        error: res?.data?.message,
       });
-      !!callback?.failed && callback.failed(res.error.response.data.message);
+      !!callback?.failed && callback.failed(res?.data?.message);
     } else {
       yield put({
         type: TypeActions.CREATE_ORDER_PLAN_SUCCESS,
@@ -92,9 +92,9 @@ export function* updateOrderPlan(data) {
     if (res.message && !_.isEmpty(res.message)) {
       yield put({
         type: TypeActions.UPDATE_ORDER_PLAN_FAILED,
-        error: res.error.response.data.message,
+        error: res?.data?.message,
       });
-      !!callback?.failed && callback.failed(res.error.response.data.message);
+      !!callback?.failed && callback.failed(res?.data?.message);
     } else {
       yield put({
         type: TypeActions.UPDATE_ORDER_PLAN_SUCCESS,
@@ -118,9 +118,9 @@ export function* deleteOrderPlan(data) {
     if (res.message && !_.isEmpty(res.message)) {
       yield put({
         type: TypeActions.DELETE_ORDER_PLAN_FAILED,
-        error: res.error.response.data.message,
+        error: res?.data?.message,
       });
-      !!callback?.failed && callback.failed(res.error.response.data.message);
+      !!callback?.failed && callback.failed(res?.data?.message);
     } else {
       yield put({
         type: TypeActions.DELETE_ORDER_PLAN_SUCCESS,

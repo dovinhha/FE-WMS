@@ -13,6 +13,7 @@ import * as measureSizeActions from "./measureSizeActions";
 import * as unitActions from "./unitActions";
 import * as materialNormActions from "./materialNormActions";
 import * as nplOrderActions from "./nplOrderActions";
+import * as warehouseActions from "./warehouseActions";
 export {
   accountActions,
   roleActions,
@@ -29,4 +30,5 @@ export {
   unitActions,
   materialNormActions,
   nplOrderActions,
+  warehouseActions,
 };

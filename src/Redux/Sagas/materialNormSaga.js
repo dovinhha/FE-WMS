@@ -12,9 +12,9 @@ export function* getMaterialNorms(data) {
     if (res.message && !_.isEmpty(res.message)) {
       yield put({
         type: TypeActions.GET_MATERIAL_NORMS_FAILED,
-        error: res.error.response.data.message,
+        error: res?.data?.message,
       });
-      !!callback?.failed && callback.failed(res.error.response.data.message);
+      !!callback?.failed && callback.failed(res?.data?.message);
     } else {
       yield put({
         type: TypeActions.GET_MATERIAL_NORMS_SUCCESS,
@@ -39,9 +39,9 @@ export function* getMaterialNormById(data) {
     if (res.message && !_.isEmpty(res.message)) {
       yield put({
         type: TypeActions.GET_MATERIAL_NORM_BY_ID_FAILED,
-        error: res.error.response.data.message,
+        error: res?.data?.message,
       });
-      !!callback?.failed && callback.failed(res.error.response.data.message);
+      !!callback?.failed && callback.failed(res?.data?.message);
     } else {
       yield put({
         type: TypeActions.GET_MATERIAL_NORM_BY_ID_SUCCESS,
@@ -66,9 +66,9 @@ export function* createMaterialNorm(data) {
     if (res.message && !_.isEmpty(res.message)) {
       yield put({
         type: TypeActions.CREATE_MATERIAL_NORM_FAILED,
-        error: res.error.response.data.message,
+        error: res?.data?.message,
       });
-      !!callback?.failed && callback.failed(res.error.response.data.message);
+      !!callback?.failed && callback.failed(res?.data?.message);
     } else {
       yield put({
         type: TypeActions.CREATE_MATERIAL_NORM_SUCCESS,
@@ -92,9 +92,9 @@ export function* updateMaterialNorm(data) {
     if (res.message && !_.isEmpty(res.message)) {
       yield put({
         type: TypeActions.UPDATE_MATERIAL_NORM_FAILED,
-        error: res.error.response.data.message,
+        error: res?.data?.message,
       });
-      !!callback?.failed && callback.failed(res.error.response.data.message);
+      !!callback?.failed && callback.failed(res?.data?.message);
     } else {
       yield put({
         type: TypeActions.UPDATE_MATERIAL_NORM_SUCCESS,
@@ -117,9 +117,9 @@ export function* deleteMaterialNorm(data) {
     if (res.message && !_.isEmpty(res.message)) {
       yield put({
         type: TypeActions.DELETE_MATERIAL_NORM_FAILED,
-        error: res.error.response.data.message,
+        error: res?.data?.message,
       });
-      !!callback?.failed && callback.failed(res.error.response.data.message);
+      !!callback?.failed && callback.failed(res?.data?.message);
     } else {
       yield put({
         type: TypeActions.DELETE_MATERIAL_NORM_SUCCESS,
@@ -150,9 +150,9 @@ export function* getAllProductInOrder(data) {
     if (res.message && !_.isEmpty(res.message)) {
       yield put({
         type: TypeActions.GET_ALL_PRODUCT_IN_ORDER_FAILED,
-        error: res.error.response.data.message,
+        error: res?.data?.message,
       });
-      !!callback?.failed && callback.failed(res.error.response.data.message);
+      !!callback?.failed && callback.failed(res?.data?.message);
     } else {
       yield put({
         type: TypeActions.GET_ALL_PRODUCT_IN_ORDER_SUCCESS,

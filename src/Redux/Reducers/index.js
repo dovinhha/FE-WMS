@@ -14,6 +14,7 @@ import measureSizeReducer from "./measureSizeReducer";
 import unitReducer from "./unitReducer";
 import materialNormReducer from "./materialNormReducer";
 import nplOrderReducer from "./nplOrderReducer";
+import warehouseReducer from "./warehouseReducer";
 const rootReducers = combineReducers({
   accountReducer,
   roleReducer,
@@ -30,5 +31,6 @@ const rootReducers = combineReducers({
   unitReducer,
   materialNormReducer,
   nplOrderReducer,
+  warehouseReducer,
 });
 export default rootReducers;

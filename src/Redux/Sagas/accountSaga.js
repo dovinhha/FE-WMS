@@ -10,12 +10,13 @@ export function* accountLogIn(data) {
   const callback = data.callback;
   try {
     const res = yield call(POST, url, data.body);
-    if (res.data.code !== 200) {
+    if (res?.data?.code !== 200) {
+      console.log("res: ", res);
       yield put({
         type: TypeActions.ACCOUNT_LOGIN_FAILED,
-        error: res.error.response.data.message,
+        error: res?.data?.message,
       });
-      !!callback?.failed && callback.failed(res.error.response.data.message);
+      !!callback?.failed && callback.failed(res?.data?.message);
     } else {
       yield put({
         type: TypeActions.ACCOUNT_LOGIN_SUCCESS,
@@ -42,7 +43,7 @@ export function* accountLogOut(data) {
     if (res.message && !_.isEmpty(res?.message)) {
       yield put({
         type: TypeActions.ACCOUNT_LOGOUT_FAILED,
-        error: res.error.response.data.message,
+        error: res?.data?.message,
       });
     } else {
       yield put({
@@ -65,9 +66,9 @@ export function* forgotPassword(data) {
     if (res.message && !_.isEmpty(res?.message)) {
       yield put({
         type: TypeActions.ACCOUNT_FORGOT_PASSWORD_FAILED,
-        error: res.error.response.data.message,
+        error: res?.data?.message,
       });
-      !!callback?.failed && callback.failed(res.error.response.data.message);
+      !!callback?.failed && callback.failed(res?.data?.message);
     } else {
       yield put({
         type: TypeActions.ACCOUNT_FORGOT_PASSWORD_SUCCESS,
@@ -91,9 +92,9 @@ export function* resetPassword(data) {
     if (res.message && !_.isEmpty(res?.message)) {
       yield put({
         type: TypeActions.ACCOUNT_RESET_PASSWORD_FAILED,
-        error: res.error.response.data.message,
+        error: res?.data?.message,
       });
-      !!callback?.failed && callback.failed(res.error.response.data.message);
+      !!callback?.failed && callback.failed(res?.data?.message);
     } else {
       yield put({
         type: TypeActions.ACCOUNT_RESET_PASSWORD_SUCCESS,
@@ -118,9 +119,9 @@ export function* getAccounts(data) {
     if (res.message && !_.isEmpty(res?.message)) {
       yield put({
         type: TypeActions.GET_ACCOUNTS_FAILED,
-        error: res.error.response.data.message,
+        error: res?.data?.message,
       });
-      !!callback?.failed && callback.failed(res.error.response.data.message);
+      !!callback?.failed && callback.failed(res?.data?.message);
     } else {
       yield put({
         type: TypeActions.GET_ACCOUNTS_SUCCESS,
@@ -145,9 +146,9 @@ export function* getCurrentAccount(data) {
     if (res.message && !_.isEmpty(res?.message)) {
       yield put({
         type: TypeActions.GET_CURRENT_ACCOUNT_FAILED,
-        error: res.error.response.data.message,
+        error: res?.data?.message,
       });
-      !!callback?.failed && callback.failed(res.error.response.data.message);
+      !!callback?.failed && callback.failed(res?.data?.message);
     } else {
       yield put({
         type: TypeActions.GET_CURRENT_ACCOUNT_SUCCESS,
@@ -172,9 +173,9 @@ export function* getAccountById(data) {
     if (res.message && !_.isEmpty(res?.message)) {
       yield put({
         type: TypeActions.GET_ACCOUNT_BY_ID_FAILED,
-        error: res.error.response.data.message,
+        error: res?.data?.message,
       });
-      !!callback?.failed && callback.failed(res.error.response.data.message);
+      !!callback?.failed && callback.failed(res?.data?.message);
     } else {
       yield put({
         type: TypeActions.GET_ACCOUNT_BY_ID_SUCCESS,
@@ -187,7 +188,7 @@ export function* getAccountById(data) {
       type: TypeActions.GET_ACCOUNT_BY_ID_FAILED,
       error: error?.response?.data?.message,
     });
-    callback.failed && callback.failed(error?.response?.data?.message);
+    callback.failed && callback.failed(error);
   }
 }
 
@@ -199,9 +200,9 @@ export function* createAccount(data) {
     if (res.message && !_.isEmpty(res?.message)) {
       yield put({
         type: TypeActions.CREATE_ACCOUNT_FAILED,
-        error: res.error.response.data.message,
+        error: res?.data?.message,
       });
-      !!callback?.failed && callback.failed(res.error.response.data.message);
+      !!callback?.failed && callback.failed(res?.data?.message);
     } else {
       yield put({
         type: TypeActions.CREATE_ACCOUNT_SUCCESS,
@@ -225,9 +226,9 @@ export function* updateAccount(data) {
     if (res.message && !_.isEmpty(res?.message)) {
       yield put({
         type: TypeActions.UPDATE_ACCOUNT_FAILED,
-        error: res.error.response.data.message,
+        error: res?.data?.message,
       });
-      !!callback?.failed && callback.failed(res.error.response.data.message);
+      !!callback?.failed && callback.failed(res?.data?.message);
     } else {
       yield put({
         type: TypeActions.UPDATE_ACCOUNT_SUCCESS,
@@ -251,9 +252,9 @@ export function* deleteAccount(data) {
     if (res.message && !_.isEmpty(res?.message)) {
       yield put({
         type: TypeActions.DELETE_ACCOUNT_FAILED,
-        error: res.error.response.data.message,
+        error: res?.data?.message,
       });
-      callback.failed && callback.failed(res.error.response.data.message);
+      callback.failed && callback.failed(res?.data?.message);
     } else {
       yield put({
         type: TypeActions.DELETE_ACCOUNT_SUCCESS,
@@ -265,7 +266,7 @@ export function* deleteAccount(data) {
       type: TypeActions.DELETE_ACCOUNT_FAILED,
       error: error?.response?.data?.message,
     });
-    callback.failed && callback.failed(error?.response?.data?.message);
+    callback.failed && callback.failed(error);
   }
 }
 
@@ -277,9 +278,9 @@ export function* configPasswordAccount(data) {
     if (res.message && !_.isEmpty(res?.message)) {
       yield put({
         type: TypeActions.CONFIG_PASSWORD_ACCOUNT_FAILED,
-        error: res.error.response.data.message,
+        error: res?.data?.message,
       });
-      !!callback?.failed && callback.failed(res.error.response.data.message);
+      !!callback?.failed && callback.failed(res?.data?.message);
     } else {
       yield put({
         type: TypeActions.CONFIG_PASSWORD_ACCOUNT_SUCCESS,
@@ -304,9 +305,9 @@ export function* accountChangePassword(data) {
     if (res.message && !_.isEmpty(res?.message)) {
       yield put({
         type: TypeActions.ACCOUNT_CHANGE_PASSWORD_FAILED,
-        error: res.error.response.data.message,
+        error: res?.data?.message,
       });
-      !!callback?.failed && callback.failed(res.error.response.data.message);
+      !!callback?.failed && callback.failed(res?.data?.message);
     } else {
       yield put({
         type: TypeActions.ACCOUNT_CHANGE_PASSWORD_SUCCESS,
