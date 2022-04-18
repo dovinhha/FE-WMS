@@ -16,7 +16,7 @@ import SimpleHeader from "./components/Header";
 import ModalWarningCustom from "views/pages/components/ModalWarningCustom";
 import { EditSVG, DeleteSVG, ViewSVG } from "assets/svg";
 import { useDispatch, useSelector } from "react-redux";
-import { producerActions } from "Redux/Actions";
+import { warehouseActions } from "Redux/Actions";
 import queryString from "query-string";
 import _ from "lodash";
 import { notify } from "common";
@@ -24,12 +24,12 @@ import FormWarehouseDefinition from "./FormWarehouseDefinition";
 import ReactNotificationAlert from "react-notification-alert";
 const WarehouseDefinition = () => {
   const dispatch = useDispatch();
-  const { producers, isDeleteProducer, isGetProducers } = useSelector(
-    (state) => state.producerReducer
+  const { warehouses, isDeleteWarehouse, isGetWarehouses } = useSelector(
+    (state) => state.warehouseReducer
   );
 
   const notificationAlertRef = useRef(null);
-  const [producer, setProducer] = useState({});
+  const [warehouse, setWarehouse] = useState({});
   const [isModalAdd, setIsModalAdd] = useState(false);
   const [formModal, setFormModal] = useState(false);
   const [notificationModal, setNotificationModal] = useState(false);
@@ -51,11 +51,7 @@ const WarehouseDefinition = () => {
             background: "none",
           }}
           id="view"
-          onClick={() => {
-            // setFormModal(true);
-            // setIsModalAdd(false);
-            // setProducer(row);
-          }}
+          onClick={() => {}}
         >
           <ViewSVG />
         </button>
@@ -73,7 +69,7 @@ const WarehouseDefinition = () => {
           onClick={() => {
             setFormModal(true);
             setIsModalAdd(false);
-            setProducer(row);
+            setWarehouse(row);
           }}
         >
           <EditSVG />
@@ -85,7 +81,7 @@ const WarehouseDefinition = () => {
           id="delete"
           onClick={() => {
             setNotificationModal(true);
-            setProducer(row);
+            setWarehouse(row);
           }}
           style={{ padding: 0, border: "none", background: "none" }}
         >
@@ -111,30 +107,12 @@ const WarehouseDefinition = () => {
       text: "Loại kho",
     },
     {
-      dataField: "address",
+      dataField: "description",
       text: "Mô tả kho",
     },
     {
       dataField: "address",
-      text: "Nhà máy",
-    },
-    {
-      dataField: "address",
       text: "Địa chỉ",
-    },
-    {
-      dataField: "createdAt",
-      text: "Ngày tạo",
-      formatter: (cell) => {
-        return "";
-      },
-    },
-    {
-      dataField: "updatedAt",
-      text: "Ngày sửa",
-      formatter: (cell) => {
-        return "";
-      },
     },
     {
       dataField: "actions",
@@ -156,7 +134,7 @@ const WarehouseDefinition = () => {
       setQuery({ ...query, page: value });
     },
     sizePerPage: rowsPerPage,
-    totalSize: producers?.totalResults,
+    totalSize: warehouses?.totalResults,
     showTotal: false,
     withFirstAndLast: true,
     alwaysShowAllBtns: true,
@@ -165,13 +143,13 @@ const WarehouseDefinition = () => {
         <Col>
           <p>
             Hiển thị từ {(page - 1) * rowsPerPage + 1} đến{" "}
-            {page * rowsPerPage > producers.items.length
-              ? !isNaN(producers?.totalResults)
-                ? producers.totalResults
+            {page * rowsPerPage > warehouses.items.length
+              ? !isNaN(warehouses?.totalResults)
+                ? warehouses.totalResults
                 : 0
               : page * rowsPerPage}{" "}
             trong số{" "}
-            {!isNaN(producers?.totalResults) ? producers.totalResults : 0} bản
+            {!isNaN(warehouses?.totalResults) ? warehouses.totalResults : 0} bản
             ghi
           </p>
         </Col>
@@ -181,7 +159,7 @@ const WarehouseDefinition = () => {
 
   const handleDelete = () => {
     dispatch(
-      producerActions.deleteProducer(producer.id, {
+      warehouseActions.deleteWarehouse(warehouse.id, {
         success: () => {
           setNotificationModal(false);
           notify(
@@ -190,7 +168,7 @@ const WarehouseDefinition = () => {
             "Thông báo",
             `Xóa định nghĩa kho thành công!`
           );
-          handleGetProducers();
+          handleGetWarehouses();
         },
         failed: (mess) => {
           notify(
@@ -204,12 +182,12 @@ const WarehouseDefinition = () => {
     );
   };
 
-  const handleGetProducers = () => {
-    dispatch(producerActions.getProducers(queryString.stringify(query)));
+  const handleGetWarehouses = () => {
+    dispatch(warehouseActions.getWarehouses(queryString.stringify(query)));
   };
 
   useEffect(() => {
-    handleGetProducers();
+    handleGetWarehouses();
   }, [query]);
 
   return (
@@ -223,7 +201,7 @@ const WarehouseDefinition = () => {
           setNotificationModal={setNotificationModal}
           name="định nghĩa kho"
           func={handleDelete}
-          isDelete={isDeleteProducer}
+          isDelete={isDeleteWarehouse}
         />
       )}
       {formModal && (
@@ -231,8 +209,8 @@ const WarehouseDefinition = () => {
           isModalAdd={isModalAdd}
           formModal={formModal}
           setFormModal={setFormModal}
-          producer={producer}
-          handleGetProducers={handleGetProducers}
+          warehouse={warehouse}
+          handleGetWarehouses={handleGetWarehouses}
           notificationAlertRef={notificationAlertRef}
         />
       )}
@@ -241,21 +219,21 @@ const WarehouseDefinition = () => {
         parentName="Quản lý"
         setFormModal={setFormModal}
         setIsModalAdd={setIsModalAdd}
-        setProducer={setProducer}
+        setWarehouse={setWarehouse}
       />
       <Container className="mt--6" fluid>
         <Row>
           <div className="col">
             <Card style={{ overflowX: "scroll" }}>
               <ToolkitProvider
-                data={producers.items}
+                data={warehouses.items}
                 keyField="id"
                 columns={columns}
                 search
               >
                 {(props) => (
                   <>
-                    {isGetProducers ? (
+                    {isGetWarehouses ? (
                       <Row className="align-items-center ">
                         <Col
                           md="12"

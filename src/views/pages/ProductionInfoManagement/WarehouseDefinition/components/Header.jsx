@@ -8,7 +8,7 @@ function Header({
   parentName,
   setFormModal,
   setIsModalAdd,
-  setProducer,
+  setWarehouse,
 }) {
   const history = useHistory();
   return (
@@ -27,7 +27,7 @@ function Header({
                   onClick={() => {
                     setFormModal(true);
                     setIsModalAdd(true);
-                    setProducer({});
+                    setWarehouse({});
                   }}
                   className="btn-neutral"
                   color="default"
