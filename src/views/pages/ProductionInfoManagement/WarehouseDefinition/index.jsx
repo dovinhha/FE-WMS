@@ -103,10 +103,6 @@ const WarehouseDefinition = () => {
       text: "Tên kho",
     },
     {
-      dataField: "address",
-      text: "Loại kho",
-    },
-    {
       dataField: "description",
       text: "Mô tả kho",
     },
@@ -209,7 +205,7 @@ const WarehouseDefinition = () => {
           isModalAdd={isModalAdd}
           formModal={formModal}
           setFormModal={setFormModal}
-          warehouse={warehouse}
+          id={warehouse?.id}
           handleGetWarehouses={handleGetWarehouses}
           notificationAlertRef={notificationAlertRef}
         />
@@ -296,7 +292,7 @@ const WarehouseDefinition = () => {
                                   onChange={() => {}}
                                   // value={""}
                                   className="py-0"
-                                  size="sm"
+                                  bsSize="sm"
                                 />
                               </Col>
                             </Row>

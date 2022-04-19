@@ -31,11 +31,11 @@ const FormWarehouse = ({
   setFormModal,
   formModal,
   isModalAdd,
-  warehouse,
   handleGetWarehouses,
   notificationAlertRef,
+  id,
 }) => {
-  const { isCreateWarehouse, isUpdateWarehouse } = useSelector(
+  const { isCreateWarehouse, isUpdateWarehouse, warehouseById } = useSelector(
     (state) => state.warehouseReducer
   );
   const { products } = useSelector((state) => state.productReducer);
@@ -95,10 +95,6 @@ const FormWarehouse = ({
     {
       dataField: "name",
       text: "Tên sản phẩm",
-    },
-    {
-      dataField: "code",
-      text: "Kiểu sản phẩm",
     },
     {
       dataField: "price",
@@ -172,23 +168,36 @@ const FormWarehouse = ({
   });
 
   useEffect(() => {
-    if (!_.isEmpty(warehouse)) {
+    if (!_.isEmpty(warehouseById)) {
       setWarehouseInfo({
-        code: warehouse.code,
-        name: warehouse.name,
-        address: warehouse.address,
-        description: warehouse.description,
+        code: warehouseById.code,
+        name: warehouseById.name,
+        address: warehouseById.address,
+        description: warehouseById.description,
       });
-      setProductsOfWarehouse(warehouse.items);
+      setProductsOfWarehouse(warehouseById.items);
     }
-  }, [warehouse]);
+  }, [warehouseById]);
+
+  useEffect(() => {
+    if (!isModalAdd) {
+      handleGetWarehouseById();
+    }
+  }, [isModalAdd]);
+
+  const handleGetWarehouseById = () => {
+    dispatch(warehouseActions.getWarehouseById(id));
+  };
 
   const onSubmit = (values, actions) => {
     if (productsOfWarehouse.length === 0) return;
     isModalAdd
       ? dispatch(
           warehouseActions.createWarehouse(
-            { ...values, items: productsOfWarehouse.map((item) => item.id) },
+            {
+              ...values,
+              items: productsOfWarehouse.map((item) => ({ itemId: item.id })),
+            },
             {
               success: () => {
                 actions.resetForm();
@@ -215,8 +224,11 @@ const FormWarehouse = ({
         )
       : dispatch(
           warehouseActions.updateWarehouse(
-            { ...values, items: productsOfWarehouse.map((item) => item.id) },
-            warehouse.id,
+            {
+              ...values,
+              items: productsOfWarehouse.map((item) => ({ itemId: item.id })),
+            },
+            warehouseById.id,
             {
               success: () => {
                 actions.resetForm();
@@ -455,7 +467,7 @@ const FormWarehouse = ({
                               <Col md="12">
                                 <ToolkitProvider
                                   data={productsOfWarehouse}
-                                  keyField="id"
+                                  keyField="value"
                                   columns={columns}
                                   search
                                 >

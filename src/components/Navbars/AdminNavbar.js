@@ -80,7 +80,7 @@ function AdminNavbar({ theme, sidenavOpen, toggleSidenav }) {
           { "navbar-light bg-secondary": theme === "light" }
         )}
       >
-        <Container fluid alignItems="center">
+        <Container fluid>
           <Collapse navbar isOpen={true}>
             <div
               onClick={toggleSidenav}
