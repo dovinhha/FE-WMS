@@ -10,8 +10,7 @@ export function* accountLogIn(data) {
   const callback = data.callback;
   try {
     const res = yield call(POST, url, data.body);
-    if (res?.data?.code !== 200) {
-      console.log("res: ", res);
+    if (res?.data?.statusCode !== 200) {
       yield put({
         type: TypeActions.ACCOUNT_LOGIN_FAILED,
         error: res?.data?.message,

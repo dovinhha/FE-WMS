@@ -9,7 +9,7 @@ export function* getProducts(data) {
   const callback = data.callback;
   try {
     const res = yield call(GET, url);
-    if (res?.data?.code !== 200) {
+    if (res?.data?.statusCode !== 200) {
       yield put({
         type: TypeActions.GET_PRODUCTS_FAILED,
         error: res?.data?.message,
@@ -36,7 +36,7 @@ export function* getProductById(data) {
   const callback = data.callback;
   try {
     const res = yield call(GET, url);
-    if (res?.data?.code !== 200) {
+    if (res?.data?.statusCode !== 200) {
       yield put({
         type: TypeActions.GET_PRODUCT_BY_ID_FAILED,
         error: res?.data?.message,
@@ -63,7 +63,7 @@ export function* createProduct(data) {
   const callback = data.callback;
   try {
     const res = yield call(POST, url, data.body);
-    if (res?.data?.code !== 201) {
+    if (res?.data?.statusCode !== 201) {
       yield put({
         type: TypeActions.CREATE_PRODUCT_FAILED,
         error: res?.data?.message,
@@ -89,7 +89,7 @@ export function* updateProduct(data) {
   const callback = data.callback;
   try {
     const res = yield call(PUT, url, data.body);
-    if (res?.data?.code !== 200) {
+    if (res?.data?.statusCode !== 200) {
       yield put({
         type: TypeActions.UPDATE_PRODUCT_FAILED,
         error: res?.data?.message,
@@ -114,7 +114,7 @@ export function* deleteProduct(data) {
   const callback = data.callback;
   try {
     const res = yield call(DELETE, url);
-    if (res?.data?.code !== 200) {
+    if (res?.data?.statusCode !== 200) {
       yield put({
         type: TypeActions.DELETE_PRODUCT_FAILED,
         error: res?.data?.message,

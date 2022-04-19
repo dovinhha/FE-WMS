@@ -1,4 +1,5 @@
 export const BASE_URL = process.env.REACT_APP_BASE_URL;
+// export const BASE_URL = "http://192.168.30.106:5000/api";
 
 export const logIn = "auth/login";
 export const logOut = "auth/logout";
