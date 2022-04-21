@@ -29,6 +29,7 @@ export const getAllProductInOrder = "getAllProductInOrder";
 export const materialSuggests = "materialSuggests";
 export const itemUnit = "item-unit";
 export const warehouse = "warehouse";
+export const profile = "auth/profile";
 export default {
   BASE_URL,
   logIn,
@@ -59,4 +60,5 @@ export default {
   materialSuggests,
   itemUnit,
   warehouse,
+  profile,
 };

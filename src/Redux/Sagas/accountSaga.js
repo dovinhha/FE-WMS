@@ -138,7 +138,7 @@ export function* getAccounts(data) {
 }
 
 export function* getCurrentAccount(data) {
-  const url = ServiceURL.accounts + "/" + data.params + "?" + data.query;
+  const url = ServiceURL.profile;
   const callback = data.callback;
   try {
     const res = yield call(GET, url);

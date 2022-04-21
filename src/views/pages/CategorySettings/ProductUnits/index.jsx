@@ -265,7 +265,7 @@ const ProductUnits = () => {
                               onChange={() => {}}
                               // value={""}
                               className="py-0"
-                              size="sm"
+                              bsSize="sm"
                             />
                           </Col>
                         </Row>

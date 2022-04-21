@@ -99,22 +99,17 @@ function Admin() {
   };
 
   useEffect(() => {
-    // dispatch(
-    //   accountActions.getCurrentAccount(
-    //     localStorage.getItem("id"),
-    //     queryString.stringify({ populate: "roleId" })
-    //   )
-    // );
+    dispatch(accountActions.getCurrentAccount());
   }, []);
-  useEffect(() => {
-    // if (
-    //   !!currentAccount &&
-    //   currentAccount.isPasswordChange === false &&
-    //   tab !== "change-password"
-    // ) {
-    //   history.push(`/account-info/${localStorage.getItem("id")}/1`);
-    // }
-  }, [window.location.href, currentAccount]);
+  // useEffect(() => {
+  //   if (
+  //     !!currentAccount &&
+  //     currentAccount.isPasswordChange === false &&
+  //     tab !== "change-password"
+  //   ) {
+  //     history.push(`/account-info/${localStorage.getItem("id")}/1`);
+  //   }
+  // }, [window.location.href, currentAccount]);
   if (
     !localStorage.getItem("token") ||
     localStorage.getItem("token") === "" ||

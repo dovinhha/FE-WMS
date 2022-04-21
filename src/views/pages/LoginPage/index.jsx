@@ -86,7 +86,7 @@ const LoginPage = () => {
           {
             success: (data) => {
               setMessages("");
-              localStorage.setItem("expiresAt", new Date().getTime() + 60000);
+              localStorage.setItem("expiresAt", moment().unix() + 6000);
               localStorage.setItem("token", data.token);
               // localStorage.setItem("roleId", data.user.roleId);
               localStorage.setItem("refreshToken", data.refreshToken);
