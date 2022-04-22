@@ -78,33 +78,29 @@ const LoginPage = () => {
       token: window.location.href.split("token=")[1],
     });
 
-    try {
-      dispatch(
-        accountActions.resetPassword({ password: newPassword }, query, {
-          success: () => {
-            notify(
-              notificationAlertRef,
-              "success",
-              "Thông báo",
-              `Thiết lập mật khẩu thành công. Vui lòng đăng nhập!`
-            );
-            setTimeout(() => {
-              history.push("auth/login");
-            }, 5000);
-          },
-          failed: (mess) => {
-            notify(
-              notificationAlertRef,
-              "danger",
-              "Thông báo",
-              `Thao tác thất bại!. Lỗi: ${mess !== undefined ? mess : ""}.`
-            );
-          },
-        })
-      );
-    } catch (error) {
-      console.log("reset password error: ", error);
-    }
+    dispatch(
+      accountActions.resetPassword({ password: newPassword }, query, {
+        success: () => {
+          notify(
+            notificationAlertRef,
+            "success",
+            "Thông báo",
+            `Thiết lập mật khẩu thành công. Vui lòng đăng nhập!`
+          );
+          setTimeout(() => {
+            history.push("auth/login");
+          }, 5000);
+        },
+        failed: (mess) => {
+          notify(
+            notificationAlertRef,
+            "danger",
+            "Thông báo",
+            `Thao tác thất bại!. Lỗi: ${mess !== undefined ? mess : ""}.`
+          );
+        },
+      })
+    );
   };
 
   return (
@@ -112,13 +108,18 @@ const LoginPage = () => {
       <div className="rna-wrapper">
         <NotificationAlert ref={notificationAlertRef} />
       </div>
-      <AuthHeader title="Hệ thống quản lý kho" lead="Nhập mật khẩu mới" />
+      <AuthHeader
+        title="Hệ thống quản lý quy trình đơn hàng"
+        lead="Nhập mật khẩu mới"
+      />
       <Container className="mt--8 pb-5">
         <Row className="justify-content-center">
           <Col lg="5" md="8">
             <Card className="bg-secondary border-0 mb-0">
               <CardBody className="px-lg-5 py-lg-5">
-                <h1 className="text-center text-uppercase">Thay đổ mật khẩu</h1>
+                <h1 className="text-center text-uppercase">
+                  Thay đổi mật khẩu
+                </h1>
                 <Form role="form">
                   <FormGroup
                     className={classnames({
@@ -174,7 +175,7 @@ const LoginPage = () => {
                       outline={false}
                       block={false}
                     >
-                      Đăng nhập
+                      Xác nhận
                     </LoadingButtonCustom>
                     {/* <Button
                       onClick={handleSubmit}

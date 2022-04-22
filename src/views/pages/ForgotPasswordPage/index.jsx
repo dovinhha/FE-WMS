@@ -53,38 +53,35 @@ const LoginPage = () => {
       return;
     }
     if (isForgotPassword) return;
-    try {
-      dispatch(
-        accountActions.forgotPassword(
-          {
-            email,
+
+    dispatch(
+      accountActions.forgotPassword(
+        {
+          email,
+        },
+        {
+          success: () => {
+            notify(
+              notificationAlertRef,
+              "success",
+              "Thông báo",
+              `Mật khẩu mới đã được gửi vào email ${email}. Vui lòng kiểm tra để đăng nhập!`
+            );
+            setTimeout(() => {
+              history.push("auth/login");
+            }, 5000);
           },
-          {
-            success: () => {
-              notify(
-                notificationAlertRef,
-                "success",
-                "Thông báo",
-                `Mật khẩu mới đã được gửi vào email ${email}. Vui lòng kiểm tra để đăng nhập!`
-              );
-              setTimeout(() => {
-                history.push("auth/login");
-              }, 5000);
-            },
-            failed: (mess) => {
-              notify(
-                notificationAlertRef,
-                "danger",
-                "Thông báo",
-                `Thao tác thất bại!. Lỗi: ${mess !== undefined ? mess : ""}.`
-              );
-            },
-          }
-        )
-      );
-    } catch (error) {
-      console.log("forgot password error: ", error);
-    }
+          failed: (mess) => {
+            notify(
+              notificationAlertRef,
+              "danger",
+              "Thông báo",
+              `Thao tác thất bại!. Lỗi: ${mess !== undefined ? mess : ""}.`
+            );
+          },
+        }
+      )
+    );
   };
 
   return (
@@ -93,7 +90,7 @@ const LoginPage = () => {
         <NotificationAlert ref={notificationAlertRef} />
       </div>
       <AuthHeader
-        title="Hệ thống quản lý kho"
+        title="Hệ thống quản lý quy trình đơn hàng"
         lead="Nhập Email cần cấp lại mật khẩu"
       />
       <Container className="mt--8 pb-5">
@@ -135,7 +132,7 @@ const LoginPage = () => {
                       outline={false}
                       block={false}
                     >
-                      Đăng nhập
+                      Gửi
                     </LoadingButtonCustom>
                     {/* <Button
                       onClick={handleSubmit}

@@ -16,20 +16,19 @@ import SimpleHeader from "./components/Header";
 import ModalWarningCustom from "views/pages/components/ModalWarningCustom";
 import { EditSVG, DeleteSVG, ViewSVG } from "assets/svg";
 import { useDispatch, useSelector } from "react-redux";
-import { producerActions } from "Redux/Actions";
+import { purchaseOrderActions } from "Redux/Actions";
 import queryString from "query-string";
 import _ from "lodash";
 import { notify } from "common";
-import FormProductGroup from "./FormPurchaseOrderDefinition";
+import FormPurchaseOrderDefinition from "./FormPurchaseOrderDefinition";
 import ReactNotificationAlert from "react-notification-alert";
 const PurchaseOrderDefinition = () => {
   const dispatch = useDispatch();
-  const { producers, isDeleteProducer, isGetProducers } = useSelector(
-    (state) => state.producerReducer
-  );
+  const { purchaseOrders, isDeletePurchaseOrder, isGetPurchaseOrders } =
+    useSelector((state) => state.purchaseOrderReducer);
 
   const notificationAlertRef = useRef(null);
-  const [producer, setProducer] = useState({});
+  const [purchaseOrder, setPurchaseOrder] = useState({});
   const [isModalAdd, setIsModalAdd] = useState(false);
   const [formModal, setFormModal] = useState(false);
   const [notificationModal, setNotificationModal] = useState(false);
@@ -54,7 +53,7 @@ const PurchaseOrderDefinition = () => {
           onClick={() => {
             // setFormModal(true);
             // setIsModalAdd(false);
-            // setProducer(row);
+            // setPurchaseOrder(row);
           }}
         >
           <ViewSVG />
@@ -73,7 +72,7 @@ const PurchaseOrderDefinition = () => {
           onClick={() => {
             setFormModal(true);
             setIsModalAdd(false);
-            setProducer(row);
+            setPurchaseOrder(row);
           }}
         >
           <EditSVG />
@@ -85,7 +84,7 @@ const PurchaseOrderDefinition = () => {
           id="delete"
           onClick={() => {
             setNotificationModal(true);
-            setProducer(row);
+            setPurchaseOrder(row);
           }}
           style={{ padding: 0, border: "none", background: "none" }}
         >
@@ -107,24 +106,8 @@ const PurchaseOrderDefinition = () => {
       text: "Tên đơn đặt",
     },
     {
-      dataField: "address",
-      text: "Loại giao dịch",
-    },
-    {
-      dataField: "createdAt",
-      text: "Tên nhà cung cấp",
-    },
-    {
-      dataField: "status",
-      text: "Trạng thái",
-    },
-    {
-      dataField: "status",
-      text: "Ngày tạo",
-    },
-    {
-      dataField: "status",
-      text: "Ngày giao dịch",
+      dataField: "description",
+      text: "Mô tả",
     },
     {
       dataField: "actions",
@@ -146,7 +129,7 @@ const PurchaseOrderDefinition = () => {
       setQuery({ ...query, page: value });
     },
     sizePerPage: rowsPerPage,
-    totalSize: producers?.totalResults,
+    totalSize: purchaseOrders?.totalResults,
     showTotal: false,
     withFirstAndLast: true,
     alwaysShowAllBtns: true,
@@ -155,14 +138,16 @@ const PurchaseOrderDefinition = () => {
         <Col>
           <p>
             Hiển thị từ {(page - 1) * rowsPerPage + 1} đến{" "}
-            {page * rowsPerPage > producers.items.length
-              ? !isNaN(producers?.totalResults)
-                ? producers.totalResults
+            {page * rowsPerPage > purchaseOrders.items.length
+              ? !isNaN(purchaseOrders?.totalResults)
+                ? purchaseOrders.totalResults
                 : 0
               : page * rowsPerPage}{" "}
             trong số{" "}
-            {!isNaN(producers?.totalResults) ? producers.totalResults : 0} bản
-            ghi
+            {!isNaN(purchaseOrders?.totalResults)
+              ? purchaseOrders.totalResults
+              : 0}{" "}
+            bản ghi
           </p>
         </Col>
       </>
@@ -171,7 +156,7 @@ const PurchaseOrderDefinition = () => {
 
   const handleDelete = () => {
     dispatch(
-      producerActions.deleteProducer(producer.id, {
+      purchaseOrderActions.deletePurchaseOrder(purchaseOrder.id, {
         success: () => {
           setNotificationModal(false);
           notify(
@@ -180,7 +165,7 @@ const PurchaseOrderDefinition = () => {
             "Thông báo",
             `Xóa đơn đặt hàng thành công!`
           );
-          handleGetProducers();
+          handleGetPurchaseOrders();
         },
         failed: (mess) => {
           notify(
@@ -194,12 +179,14 @@ const PurchaseOrderDefinition = () => {
     );
   };
 
-  const handleGetProducers = () => {
-    dispatch(producerActions.getProducers(queryString.stringify(query)));
+  const handleGetPurchaseOrders = () => {
+    dispatch(
+      purchaseOrderActions.getPurchaseOrders(queryString.stringify(query))
+    );
   };
 
   useEffect(() => {
-    handleGetProducers();
+    // handleGetPurchaseOrders();
   }, [query]);
 
   return (
@@ -213,16 +200,16 @@ const PurchaseOrderDefinition = () => {
           setNotificationModal={setNotificationModal}
           name="đơn đặt hàng"
           func={handleDelete}
-          isDelete={isDeleteProducer}
+          isDelete={isDeletePurchaseOrder}
         />
       )}
       {formModal && (
-        <FormProductGroup
+        <FormPurchaseOrderDefinition
           isModalAdd={isModalAdd}
           formModal={formModal}
           setFormModal={setFormModal}
-          producer={producer}
-          handleGetProducers={handleGetProducers}
+          purchaseOrder={purchaseOrder}
+          handleGetPurchaseOrders={handleGetPurchaseOrders}
           notificationAlertRef={notificationAlertRef}
         />
       )}
@@ -231,21 +218,21 @@ const PurchaseOrderDefinition = () => {
         parentName="Quản lý"
         setFormModal={setFormModal}
         setIsModalAdd={setIsModalAdd}
-        setProducer={setProducer}
+        setPurchaseOrder={setPurchaseOrder}
       />
       <Container className="mt--6" fluid>
         <Row>
           <div className="col">
             <Card style={{ overflowX: "scroll" }}>
               <ToolkitProvider
-                data={producers.items}
+                data={purchaseOrders.items}
                 keyField="id"
                 columns={columns}
                 search
               >
                 {(props) => (
                   <>
-                    {isGetProducers ? (
+                    {isGetPurchaseOrders ? (
                       <Row className="align-items-center ">
                         <Col
                           md="12"
@@ -308,7 +295,7 @@ const PurchaseOrderDefinition = () => {
                                   onChange={() => {}}
                                   // value={""}
                                   className="py-0"
-                                  size="sm"
+                                  bsSize="sm"
                                 />
                               </Col>
                             </Row>

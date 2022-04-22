@@ -3,6 +3,7 @@ import queryString from "query-string";
 import refreshToken from "Redux/Sagas/refreshToken";
 import { BASE_URL } from "./ServiceURL";
 import _ from "lodash";
+import moment from "moment";
 
 const axiosClient = axios.create({
   baseURL: BASE_URL,
@@ -13,10 +14,10 @@ const axiosClient = axios.create({
 axiosClient.interceptors.request.use(
   async (config) => {
     config.headers.authorization = `Bearer ${localStorage.getItem("token")}`;
-    const expireAt = new Date(localStorage.getItem("expiresAt"));
+    const expiresAt = localStorage.getItem("expiresAt");
     let token = localStorage.getItem("token");
     if (token && !_.isEmpty(token)) {
-      if (new Date().getTime() > expireAt - 10 * 60) {
+      if (moment().unix() > expiresAt - 15 * 60) {
         const data = refreshToken();
         token = typeof data === "string" ? data : await data;
       }
@@ -39,13 +40,14 @@ const axiosClientPdf = axios.create({
 axiosClientPdf.interceptors.request.use(
   async (config) => {
     config.headers.authorization = `Bearer ${localStorage.getItem("token")}`;
-    const expireAt = new Date(localStorage.getItem("expiresAt"));
+    const expiresAt = localStorage.getItem("expiresAt");
     let token = localStorage.getItem("token");
-    if (token && !_.isEmpty(token))
-      if (new Date().getTime() > expireAt.getTime()) {
+    if (token && !_.isEmpty(token)) {
+      if (moment().unix() > expiresAt - 15 * 60) {
         const data = refreshToken();
         token = typeof data === "string" ? data : await data;
       }
+    }
     // setting updated token
     localStorage.setItem("token", token);
     config.responseType = "blob";

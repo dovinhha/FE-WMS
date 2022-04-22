@@ -38,13 +38,14 @@ import {
   Col,
 } from "reactstrap";
 import { accountActions } from "Redux/Actions";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 
 function AdminNavbar({ theme, sidenavOpen, toggleSidenav }) {
   // function that on mobile devices makes the search open
   const history = useHistory();
   const dispatch = useDispatch();
+  const { currentAccount } = useSelector((state) => state.accountReducer);
   const openSearch = () => {
     document.body.classList.add("g-navbar-search-showing");
     setTimeout(function () {
@@ -113,7 +114,7 @@ function AdminNavbar({ theme, sidenavOpen, toggleSidenav }) {
                     </span>
                     <Media className="ml-2 d-none d-lg-block">
                       <span className="mb-0 text-sm font-weight-bold">
-                        Admin
+                        {currentAccount?.fullname}
                       </span>
                     </Media>
                   </Media>
@@ -126,11 +127,12 @@ function AdminNavbar({ theme, sidenavOpen, toggleSidenav }) {
                   <DropdownItem divider />
                   <DropdownItem
                     onClick={() => {
-                      dispatch(
-                        accountActions.accountLogOut({
-                          refreshToken: localStorage.getItem("refreshToken"),
-                        })
-                      );
+                      // dispatch(
+                      //   accountActions.accountLogOut({
+                      //     refreshToken: localStorage.getItem("refreshToken"),
+                      //   })
+                      // );
+                      localStorage.clear();
                       history.push("/auth/login");
                     }}
                   >

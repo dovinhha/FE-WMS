@@ -1,9 +1,9 @@
 import TypeActions from "../TypeActions";
 
-export const getCustomers = (params, callback) => {
+export const getCustomers = (query, callback) => {
   return {
     type: TypeActions.GET_CUSTOMERS_REQUEST,
-    params,
+    query,
     callback,
   };
 };
