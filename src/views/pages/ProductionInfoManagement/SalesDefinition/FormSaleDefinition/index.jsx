@@ -17,7 +17,7 @@ import * as yup from "yup";
 import _ from "lodash";
 import Select from "react-select";
 import {
-  purchaseOrderActions,
+  saleOrderActions,
   productActions,
   warehouseActions,
 } from "Redux/Actions";
@@ -25,28 +25,28 @@ import { notify } from "common";
 import queryString from "query-string";
 import { AddSVG } from "assets/svg";
 
-const FormPurchaseOrder = ({
+const FormSaleOrder = ({
   setFormModal,
   formModal,
   isModalAdd,
-  purchaseOrder,
-  handleGetPurchaseOrders,
+  saleOrder,
+  handleGetSaleOrders,
   notificationAlertRef,
 }) => {
-  const { isCreatePurchaseOrder, isUpdatePurchaseOrder } = useSelector(
-    (state) => state.purchaseOrderReducer
+  const { isCreateSaleOrder, isUpdateSaleOrder } = useSelector(
+    (state) => state.saleOrderReducer
   );
   const { products } = useSelector((state) => state.productReducer);
   const { warehouses } = useSelector((state) => state.warehouseReducer);
   const dispatch = useDispatch();
 
-  const purchaseOrderSchema = yup.object().shape({
+  const saleOrderSchema = yup.object().shape({
     code: yup.string().required("Vui lòng mã nhà đơn!"),
     name: yup.string().required("Vui lòng nhập tên nhà đơn!"),
   });
 
   // const notificationAlertRef = useRef(null);
-  const [purchaseOrderInfo, setPurchaseOrderInfo] = useState({
+  const [saleOrderInfo, setSaleOrderInfo] = useState({
     code: "",
     name: "",
     description: "",
@@ -66,8 +66,8 @@ const FormPurchaseOrder = ({
   const [warehouseSearch, setWarehouseSearch] = useState("");
 
   useEffect(() => {
-    !_.isEmpty(purchaseOrder) && setPurchaseOrderInfo(purchaseOrder);
-  }, [purchaseOrder]);
+    !_.isEmpty(saleOrder) && setSaleOrderInfo(saleOrder);
+  }, [saleOrder]);
 
   const onSubmit = (values, actions) => {
     const tempItems = _.cloneDeep(values.items);
@@ -77,7 +77,7 @@ const FormPurchaseOrder = ({
     });
     isModalAdd
       ? dispatch(
-          purchaseOrderActions.createPurchaseOrder(
+          saleOrderActions.createSaleOrder(
             { ...values, items: [...tempItems] },
             {
               success: () => {
@@ -87,9 +87,9 @@ const FormPurchaseOrder = ({
                   notificationAlertRef,
                   "success",
                   "Thông báo",
-                  `Thêm đơn đặt hàng thành công!`
+                  `Thêm đơn bán hàng thành công!`
                 );
-                handleGetPurchaseOrders();
+                handleGetSaleOrders();
                 setFormModal(false);
               },
               failed: (mess) => {
@@ -97,16 +97,16 @@ const FormPurchaseOrder = ({
                   notificationAlertRef,
                   "danger",
                   "Thông báo",
-                  `Thêm đơn đặt hàng thất bại. Lỗi ${mess}!`
+                  `Thêm đơn bán hàng thất bại. Lỗi ${mess}!`
                 );
               },
             }
           )
         )
       : dispatch(
-          purchaseOrderActions.updatePurchaseOrder(
+          saleOrderActions.updateSaleOrder(
             { ...values, items: [...tempItems] },
-            purchaseOrder.id,
+            saleOrder.id,
             {
               success: () => {
                 actions.resetForm();
@@ -115,9 +115,9 @@ const FormPurchaseOrder = ({
                   notificationAlertRef,
                   "success",
                   "Thông báo",
-                  `Cập nhật đơn đặt hàng thành công!`
+                  `Cập nhật đơn bán hàng thành công!`
                 );
-                handleGetPurchaseOrders();
+                handleGetSaleOrders();
                 setFormModal(false);
               },
               failed: (mess) => {
@@ -125,7 +125,7 @@ const FormPurchaseOrder = ({
                   notificationAlertRef,
                   "danger",
                   "Thông báo",
-                  `Cập nhật đơn đặt hàng thất bại. Lỗi ${mess}!`
+                  `Cập nhật đơn bán hàng thất bại. Lỗi ${mess}!`
                 );
               },
             }
@@ -178,7 +178,7 @@ const FormPurchaseOrder = ({
   }, [warehouseSearch]);
 
   const clearData = () => {
-    setPurchaseOrderInfo({
+    setSaleOrderInfo({
       code: "",
       name: "",
       description: "",
@@ -210,15 +210,15 @@ const FormPurchaseOrder = ({
             <CardHeader className="bg-transparent pb-2">
               <h2 className="mb-0">
                 {isModalAdd
-                  ? "Thêm đơn đặt hàng"
-                  : "Cập nhật thông tin đơn đặt hàng"}
+                  ? "Thêm đơn bán hàng"
+                  : "Cập nhật thông tin đơn bán hàng"}
               </h2>
             </CardHeader>
             <Formik
-              initialValues={purchaseOrderInfo}
+              initialValues={saleOrderInfo}
               enableReinitialize
               onSubmit={onSubmit}
-              validationSchema={purchaseOrderSchema}
+              validationSchema={saleOrderSchema}
             >
               {({
                 values,
@@ -295,7 +295,7 @@ const FormPurchaseOrder = ({
                             <Row>
                               <Col className="mt-3" md="12">
                                 <h3 className="m-0" htmlFor="itemId">
-                                  Chi tiết đơn đặt hàng
+                                  Chi tiết đơn bán hàng
                                 </h3>
                               </Col>
                             </Row>
@@ -449,10 +449,7 @@ const FormPurchaseOrder = ({
                         <Row className="d-flex justify-content-center mt-2">
                           <Button
                             onClick={() => {
-                              if (
-                                isCreatePurchaseOrder ||
-                                isUpdatePurchaseOrder
-                              ) {
+                              if (isCreateSaleOrder || isUpdateSaleOrder) {
                                 return;
                               }
                               clearData();
@@ -466,9 +463,7 @@ const FormPurchaseOrder = ({
                             Hủy
                           </Button>
                           <LoadingButtonCustom
-                            loading={
-                              isCreatePurchaseOrder || isUpdatePurchaseOrder
-                            }
+                            loading={isCreateSaleOrder || isUpdateSaleOrder}
                             onClick={handleSubmit}
                             color="primary"
                             size="md"
@@ -492,4 +487,4 @@ const FormPurchaseOrder = ({
   );
 };
 
-export default FormPurchaseOrder;
+export default FormSaleOrder;

@@ -14,6 +14,8 @@ import * as unitActions from "./unitActions";
 import * as materialNormActions from "./materialNormActions";
 import * as nplOrderActions from "./nplOrderActions";
 import * as warehouseActions from "./warehouseActions";
+import * as purchaseOrderActions from "./purchaseOrderActions";
+import * as saleOrderActions from "./saleOrderActions";
 export {
   accountActions,
   roleActions,
@@ -31,4 +33,6 @@ export {
   materialNormActions,
   nplOrderActions,
   warehouseActions,
+  purchaseOrderActions,
+  saleOrderActions,
 };

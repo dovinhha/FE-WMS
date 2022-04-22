@@ -333,3 +333,23 @@ export const CheckSpaceSVG = `<svg style="width: 20px" class="mr-3" xmlns="http:
         <path d="M10.5,13.5h2a1,1,0,0,0,1-1v-2" style="fill: none;stroke: #000000;stroke-linecap: round;stroke-linejoin: round"></path>
         <path d="M.5,10.5v2a1,1,0,0,0,1,1h2" style="fill: none;stroke: #000000;stroke-linecap: round;stroke-linejoin: round"></path>
       </g></g></svg>`;
+
+export const PhoneSVG = () => (
+  <IconComponent
+    svg={`<svg style="width:20px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
+  
+    <g transform="matrix(3.4285714285714284,0,0,3.4285714285714284,0,0)"><path d="M8.76,13a3.19,3.19,0,0,0,4-.44l.45-.44a1.08,1.08,0,0,0,0-1.51L11.3,8.72a1.07,1.07,0,0,0-1.5,0h0a1.08,1.08,0,0,1-1.51,0l-3-3a1.06,1.06,0,0,1,0-1.51h0a1.07,1.07,0,0,0,0-1.5L3.39.81a1.08,1.08,0,0,0-1.51,0l-.44.45a3.19,3.19,0,0,0-.44,4A28.94,28.94,0,0,0,8.76,13Z" style="fill: none;stroke: #8898aa;stroke-linecap: round;stroke-linejoin: round"></path></g></svg>`}
+  />
+);
+
+export const PasswordSVG = () => (
+  <IconComponent
+    svg={`<svg style="width:20px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
+  
+    <g transform="matrix(3.4285714285714284,0,0,3.4285714285714284,0,0)"><g>
+        <polyline points="5.62 7.38 11.5 1.5 13.5 3.5" style="fill: none;stroke: #8898aa;stroke-linecap: round;stroke-linejoin: round"></polyline>
+        <line x1="9.25" y1="3.75" x2="11" y2="5.5" style="fill: none;stroke: #8898aa;stroke-linecap: round;stroke-linejoin: round"></line>
+        <circle cx="3.5" cy="9.5" r="3" style="fill: none;stroke: #8898aa;stroke-linecap: round;stroke-linejoin: round"></circle>
+      </g></g></svg>`}
+  />
+);

@@ -26,7 +26,7 @@ function AdminFooter() {
       <Container fluid>
         <footer className="footer pt-0">
           <Row className="align-items-center justify-content-lg-between">
-            <Col lg="6">
+            {/* <Col lg="6">
               <div className="copyright text-center text-lg-left text-muted">
                 Provided by{" "}
                 <a
@@ -37,7 +37,7 @@ function AdminFooter() {
                   BFD
                 </a>
               </div>
-            </Col>
+            </Col> */}
             {/* <Col lg="6">
               <Nav className="nav-footer justify-content-center justify-content-lg-end">
                 <NavItem>

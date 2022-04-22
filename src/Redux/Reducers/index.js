@@ -15,6 +15,8 @@ import unitReducer from "./unitReducer";
 import materialNormReducer from "./materialNormReducer";
 import nplOrderReducer from "./nplOrderReducer";
 import warehouseReducer from "./warehouseReducer";
+import purchaseOrderReducer from "./purchaseOrderReducer";
+import saleOrderReducer from "./saleOrderReducer";
 const rootReducers = combineReducers({
   accountReducer,
   roleReducer,
@@ -32,5 +34,7 @@ const rootReducers = combineReducers({
   materialNormReducer,
   nplOrderReducer,
   warehouseReducer,
+  purchaseOrderReducer,
+  saleOrderReducer,
 });
 export default rootReducers;

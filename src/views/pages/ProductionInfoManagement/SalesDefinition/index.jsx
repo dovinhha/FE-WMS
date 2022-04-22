@@ -16,20 +16,20 @@ import SimpleHeader from "./components/Header";
 import ModalWarningCustom from "views/pages/components/ModalWarningCustom";
 import { EditSVG, DeleteSVG, ViewSVG } from "assets/svg";
 import { useDispatch, useSelector } from "react-redux";
-import { producerActions } from "Redux/Actions";
+import { saleOrderActions } from "Redux/Actions";
 import queryString from "query-string";
 import _ from "lodash";
 import { notify } from "common";
-import FormSalseDefinition from "./FormSalseDefinition";
+import FormSaleDefinition from "./FormSaleDefinition";
 import ReactNotificationAlert from "react-notification-alert";
-const SalesDefinition = () => {
+const SaleOrderDefinition = () => {
   const dispatch = useDispatch();
-  const { producers, isDeleteProducer, isGetProducers } = useSelector(
-    (state) => state.producerReducer
+  const { saleOrders, isDeleteSaleOrder, isGetSaleOrders } = useSelector(
+    (state) => state.saleOrderReducer
   );
 
   const notificationAlertRef = useRef(null);
-  const [producer, setProducer] = useState({});
+  const [saleOrder, setSaleOrder] = useState({});
   const [isModalAdd, setIsModalAdd] = useState(false);
   const [formModal, setFormModal] = useState(false);
   const [notificationModal, setNotificationModal] = useState(false);
@@ -54,7 +54,7 @@ const SalesDefinition = () => {
           onClick={() => {
             // setFormModal(true);
             // setIsModalAdd(false);
-            // setProducer(row);
+            // setSaleOrder(row);
           }}
         >
           <ViewSVG />
@@ -73,7 +73,7 @@ const SalesDefinition = () => {
           onClick={() => {
             setFormModal(true);
             setIsModalAdd(false);
-            setProducer(row);
+            setSaleOrder(row);
           }}
         >
           <EditSVG />
@@ -85,7 +85,7 @@ const SalesDefinition = () => {
           id="delete"
           onClick={() => {
             setNotificationModal(true);
-            setProducer(row);
+            setSaleOrder(row);
           }}
           style={{ padding: 0, border: "none", background: "none" }}
         >
@@ -100,37 +100,15 @@ const SalesDefinition = () => {
   const columns = [
     {
       dataField: "code",
-      text: "Mã lệnh",
+      text: "Mã đơn đặt",
     },
     {
       dataField: "name",
-      text: "Tên lệnh",
+      text: "Tên đơn đặt",
     },
     {
-      dataField: "address",
-      text: "Loại giao dịch",
-    },
-    {
-      dataField: "address",
+      dataField: "description",
       text: "Mô tả",
-    },
-    {
-      dataField: "status",
-      text: "Trạng thái",
-    },
-    {
-      dataField: "createdAt",
-      text: "Ngày tạo",
-      formatter: (cell) => {
-        return "";
-      },
-    },
-    {
-      dataField: "updatedAt",
-      text: "Ngày giao hàng",
-      formatter: (cell) => {
-        return "";
-      },
     },
     {
       dataField: "actions",
@@ -152,7 +130,7 @@ const SalesDefinition = () => {
       setQuery({ ...query, page: value });
     },
     sizePerPage: rowsPerPage,
-    totalSize: producers?.totalResults,
+    totalSize: saleOrders?.totalResults,
     showTotal: false,
     withFirstAndLast: true,
     alwaysShowAllBtns: true,
@@ -161,13 +139,13 @@ const SalesDefinition = () => {
         <Col>
           <p>
             Hiển thị từ {(page - 1) * rowsPerPage + 1} đến{" "}
-            {page * rowsPerPage > producers.items.length
-              ? !isNaN(producers?.totalResults)
-                ? producers.totalResults
+            {page * rowsPerPage > saleOrders.items.length
+              ? !isNaN(saleOrders?.totalResults)
+                ? saleOrders.totalResults
                 : 0
               : page * rowsPerPage}{" "}
             trong số{" "}
-            {!isNaN(producers?.totalResults) ? producers.totalResults : 0} bản
+            {!isNaN(saleOrders?.totalResults) ? saleOrders.totalResults : 0} bản
             ghi
           </p>
         </Col>
@@ -177,7 +155,7 @@ const SalesDefinition = () => {
 
   const handleDelete = () => {
     dispatch(
-      producerActions.deleteProducer(producer.id, {
+      saleOrderActions.deleteSaleOrder(saleOrder.id, {
         success: () => {
           setNotificationModal(false);
           notify(
@@ -186,7 +164,7 @@ const SalesDefinition = () => {
             "Thông báo",
             `Xóa đơn bán hàng thành công!`
           );
-          handleGetProducers();
+          handleGetSaleOrders();
         },
         failed: (mess) => {
           notify(
@@ -200,12 +178,12 @@ const SalesDefinition = () => {
     );
   };
 
-  const handleGetProducers = () => {
-    dispatch(producerActions.getProducers(queryString.stringify(query)));
+  const handleGetSaleOrders = () => {
+    dispatch(saleOrderActions.getSaleOrders(queryString.stringify(query)));
   };
 
   useEffect(() => {
-    handleGetProducers();
+    // handleGetSaleOrders();
   }, [query]);
 
   return (
@@ -219,16 +197,16 @@ const SalesDefinition = () => {
           setNotificationModal={setNotificationModal}
           name="đơn bán hàng"
           func={handleDelete}
-          isDelete={isDeleteProducer}
+          isDelete={isDeleteSaleOrder}
         />
       )}
       {formModal && (
-        <FormSalseDefinition
+        <FormSaleDefinition
           isModalAdd={isModalAdd}
           formModal={formModal}
           setFormModal={setFormModal}
-          producer={producer}
-          handleGetProducers={handleGetProducers}
+          saleOrder={saleOrder}
+          handleGetSaleOrders={handleGetSaleOrders}
           notificationAlertRef={notificationAlertRef}
         />
       )}
@@ -237,21 +215,21 @@ const SalesDefinition = () => {
         parentName="Quản lý"
         setFormModal={setFormModal}
         setIsModalAdd={setIsModalAdd}
-        setProducer={setProducer}
+        setSaleOrder={setSaleOrder}
       />
       <Container className="mt--6" fluid>
         <Row>
           <div className="col">
             <Card style={{ overflowX: "scroll" }}>
               <ToolkitProvider
-                data={producers.items}
+                data={saleOrders.items}
                 keyField="id"
                 columns={columns}
                 search
               >
                 {(props) => (
                   <>
-                    {isGetProducers ? (
+                    {isGetSaleOrders ? (
                       <Row className="align-items-center ">
                         <Col
                           md="12"
@@ -349,4 +327,4 @@ const SalesDefinition = () => {
   );
 };
 
-export default SalesDefinition;
+export default SaleOrderDefinition;

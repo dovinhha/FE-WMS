@@ -4,142 +4,142 @@ import { DELETE, GET, PUT, POST } from "Services/ServiceBase";
 import ServiceURL from "Services/ServiceURL";
 import TypeActions from "../TypeActions";
 
-export function* getCustomers(data) {
-  const url = ServiceURL.customer + "?" + data.query;
+export function* getSaleOrders(data) {
+  const url = ServiceURL.saleOrder + "?" + data.query;
   const callback = data.callback;
   try {
     const res = yield call(GET, url);
     if (res.message && !_.isEmpty(res.message)) {
       yield put({
-        type: TypeActions.GET_CUSTOMERS_FAILED,
+        type: TypeActions.GET_SALE_ORDERS_FAILED,
         error: res?.data?.message,
       });
       !!callback?.failed && callback.failed(res?.data?.message);
     } else {
       yield put({
-        type: TypeActions.GET_CUSTOMERS_SUCCESS,
+        type: TypeActions.GET_SALE_ORDERS_SUCCESS,
         data: res.data.data,
       });
       !!callback?.success && callback.success(res.data.data);
     }
   } catch (error) {
     yield put({
-      type: TypeActions.GET_CUSTOMERS_FAILED,
+      type: TypeActions.GET_SALE_ORDERS_FAILED,
       error: error?.response?.data?.message,
     });
     !!callback?.failed && callback.failed(error?.response?.data?.message);
   }
 }
 
-export function* getCustomerById(data) {
-  const url = ServiceURL.customer + "/" + data.params + "?" + data.query;
+export function* getSaleOrderById(data) {
+  const url = ServiceURL.saleOrder + "/" + data.params + "?" + data.query;
   const callback = data.callback;
   try {
     const res = yield call(GET, url);
     if (res.message && !_.isEmpty(res.message)) {
       yield put({
-        type: TypeActions.GET_CUSTOMER_BY_ID_FAILED,
+        type: TypeActions.GET_SALE_ORDER_BY_ID_FAILED,
         error: res?.data?.message,
       });
       !!callback?.failed && callback.failed(res?.data?.message);
     } else {
       yield put({
-        type: TypeActions.GET_CUSTOMER_BY_ID_SUCCESS,
+        type: TypeActions.GET_SALE_ORDER_BY_ID_SUCCESS,
         data: res.data.data,
       });
       !!callback?.success && callback.success(res.data.data);
     }
   } catch (error) {
     yield put({
-      type: TypeActions.GET_CUSTOMER_BY_ID_FAILED,
+      type: TypeActions.GET_SALE_ORDER_BY_ID_FAILED,
       error: error?.response?.data?.message,
     });
     !!callback?.failed && callback.failed(error?.response?.data?.message);
   }
 }
 
-export function* createCustomer(data) {
-  const url = ServiceURL.customer;
+export function* createSaleOrder(data) {
+  const url = ServiceURL.saleOrder;
   const callback = data.callback;
   try {
     const res = yield call(POST, url, data.body);
     if (res.message && !_.isEmpty(res.message)) {
       yield put({
-        type: TypeActions.CREATE_CUSTOMER_FAILED,
+        type: TypeActions.CREATE_SALE_ORDER_FAILED,
         error: res?.data?.message,
       });
       !!callback?.failed && callback.failed(res?.data?.message);
     } else {
       yield put({
-        type: TypeActions.CREATE_CUSTOMER_SUCCESS,
+        type: TypeActions.CREATE_SALE_ORDER_SUCCESS,
       });
       !!callback?.success && callback.success();
     }
   } catch (error) {
     yield put({
-      type: TypeActions.CREATE_CUSTOMER_FAILED,
+      type: TypeActions.CREATE_SALE_ORDER_FAILED,
       error: error?.response?.data?.message,
     });
     !!callback?.failed && callback.failed(error?.response?.data?.message);
   }
 }
 
-export function* updateCustomer(data) {
-  const url = ServiceURL.customer + "/" + data.params;
+export function* updateSaleOrder(data) {
+  const url = ServiceURL.saleOrder + "/" + data.params;
   const callback = data.callback;
   try {
     const res = yield call(PUT, url, data.body);
     if (res.message && !_.isEmpty(res.message)) {
       yield put({
-        type: TypeActions.UPDATE_CUSTOMER_FAILED,
+        type: TypeActions.UPDATE_SALE_ORDER_FAILED,
         error: res?.data?.message,
       });
       !!callback?.failed && callback.failed(res?.data?.message);
     } else {
       yield put({
-        type: TypeActions.UPDATE_CUSTOMER_SUCCESS,
+        type: TypeActions.UPDATE_SALE_ORDER_SUCCESS,
       });
       !!callback?.success && callback.success();
     }
   } catch (error) {
     yield put({
-      type: TypeActions.UPDATE_CUSTOMER_FAILED,
+      type: TypeActions.UPDATE_SALE_ORDER_FAILED,
       error: error?.response?.data?.message,
     });
     !!callback?.failed && callback.failed(error?.response?.data?.message);
   }
 }
-export function* deleteCustomer(data) {
-  const url = ServiceURL.customer + "/" + data.params;
+export function* deleteSaleOrder(data) {
+  const url = ServiceURL.saleOrder + "/" + data.params;
   const callback = data.callback;
   try {
     const res = yield call(DELETE, url);
     if (res.message && !_.isEmpty(res.message)) {
       yield put({
-        type: TypeActions.DELETE_CUSTOMER_FAILED,
+        type: TypeActions.DELETE_SALE_ORDER_FAILED,
         error: res?.data?.message,
       });
       !!callback?.failed && callback.failed(res?.data?.message);
     } else {
       yield put({
-        type: TypeActions.DELETE_CUSTOMER_SUCCESS,
+        type: TypeActions.DELETE_SALE_ORDER_SUCCESS,
       });
 
       !!callback?.success && callback.success();
     }
   } catch (error) {
     yield put({
-      type: TypeActions.DELETE_CUSTOMER_FAILED,
+      type: TypeActions.DELETE_SALE_ORDER_FAILED,
       error: error?.response?.data?.message,
     });
     !!callback?.failed && callback.failed(error?.response?.data?.message);
   }
 }
 
-export default function* customerSaga() {
-  yield takeLatest(TypeActions.GET_CUSTOMERS_REQUEST, getCustomers);
-  yield takeLatest(TypeActions.GET_CUSTOMER_BY_ID_REQUEST, getCustomerById);
-  yield takeLatest(TypeActions.CREATE_CUSTOMER_REQUEST, createCustomer);
-  yield takeLatest(TypeActions.UPDATE_CUSTOMER_REQUEST, updateCustomer);
-  yield takeLatest(TypeActions.DELETE_CUSTOMER_REQUEST, deleteCustomer);
+export default function* saleOrderSaga() {
+  yield takeLatest(TypeActions.GET_SALE_ORDERS_REQUEST, getSaleOrders);
+  yield takeLatest(TypeActions.GET_SALE_ORDER_BY_ID_REQUEST, getSaleOrderById);
+  yield takeLatest(TypeActions.CREATE_SALE_ORDER_REQUEST, createSaleOrder);
+  yield takeLatest(TypeActions.UPDATE_SALE_ORDER_REQUEST, updateSaleOrder);
+  yield takeLatest(TypeActions.DELETE_SALE_ORDER_REQUEST, deleteSaleOrder);
 }

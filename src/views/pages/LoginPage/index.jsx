@@ -23,6 +23,7 @@ import { emailRegex } from "common";
 import HelperText from "views/pages/components/HelperText";
 import LoadingButtonCustom from "views/pages/components/LoadingButtonCustom";
 import moment from "moment";
+import { PhoneSVG, PasswordSVG } from "assets/svg";
 
 const LoginPage = () => {
   const dispatch = useDispatch();
@@ -143,7 +144,8 @@ const LoginPage = () => {
                     <InputGroup className="input-group-merge input-group-alternative mb-0">
                       <InputGroupAddon addonType="prepend">
                         <InputGroupText>
-                          <i className="ni ni-email-83" />
+                          {/* <i className="ni ni-email-83" /> */}
+                          <PhoneSVG />
                         </InputGroupText>
                       </InputGroupAddon>
                       <Input
@@ -165,7 +167,8 @@ const LoginPage = () => {
                     <InputGroup className="input-group-merge input-group-alternative">
                       <InputGroupAddon addonType="prepend">
                         <InputGroupText>
-                          <i className="ni ni-lock-circle-open" />
+                          {/* <i className="ni ni-lock-circle-open" /> */}
+                          <PasswordSVG />
                         </InputGroupText>
                       </InputGroupAddon>
                       <Input

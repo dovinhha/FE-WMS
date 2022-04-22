@@ -30,6 +30,10 @@ export const materialSuggests = "materialSuggests";
 export const itemUnit = "item-unit";
 export const warehouse = "warehouse";
 export const profile = "auth/profile";
+export const customer = "customer";
+export const purchaseOrder = "purchase-order";
+export const saleOrder = "sale-order";
+
 export default {
   BASE_URL,
   logIn,
@@ -61,4 +65,7 @@ export default {
   itemUnit,
   warehouse,
   profile,
+  customer,
+  purchaseOrder,
+  saleOrder,
 };
